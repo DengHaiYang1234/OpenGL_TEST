@@ -1,0 +1,1555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF4F963D28D593DD001411C8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F963C28D593DD001411C8 /* main.cpp */; };
+		BF4F964128D594A7001411C8 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BF4F964228D594AF001411C8 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BF4F964328D594B2001411C8 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BF4F964628D5968E001411C8 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BF4F964E28D5A6FD001411C8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F964D28D5A6FD001411C8 /* main.cpp */; };
+		BF4F965228D5A703001411C8 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BF4F965328D5A707001411C8 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BF4F965428D5A70C001411C8 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BF4F965528D5A70C001411C8 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BF4F965D28D8AA92001411C8 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BF4F965E28D8AAA4001411C8 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BFDA861F28CDAC02000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA861E28CDAC02000C70E1 /* main.cpp */; };
+		BFDA863128CDAFEF000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA863228CDAFF9000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA863328CDB001000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; };
+		BFDA863D28CDBA21000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA863C28CDBA21000C70E1 /* main.cpp */; };
+		BFDA864328CDC70F000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; };
+		BFDA864428CDC725000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA864528CDC72D000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA864D28CDCC18000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA864C28CDCC18000C70E1 /* main.cpp */; };
+		BFDA865328CDCCA5000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; };
+		BFDA865428CDCCA8000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA865528CDCCB0000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA865D28CED384000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA865C28CED384000C70E1 /* main.cpp */; };
+		BFDA866128CED397000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA866428CED3A0000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA866628CED3A6000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; platformFilter = maccatalyst; };
+		BFDA866828CED3B1000C70E1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDA867728CF20D4000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA867828CF20D4000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA867928CF20D4000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA867A28CF20D4000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA868528CF2ABC000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA868428CF2ABC000C70E1 /* main.cpp */; };
+		BFDA868928CF2B1B000C70E1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDA868A28CF2B3D000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA868B28CF2B42000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA868C28CF2B47000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; };
+		BFDA868D28CF2B66000C70E1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDA868E28CF2B66000C70E1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDA869928CF30C2000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA86A328CF3F97000C70E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA86A228CF3F97000C70E1 /* main.cpp */; };
+		BFDA86A728CF400F000C70E1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862A28CDAE52000C70E1 /* OpenGL.framework */; };
+		BFDA86B228CF403C000C70E1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDA86B328CF403C000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDA86B428CF4046000C70E1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFDA86B528CF4049000C70E1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFF5C83728DC9BB9008893A1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF5C83628DC9BB9008893A1 /* main.cpp */; };
+		BFF5C83B28DC9BC2008893A1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFF5C83C28DC9BC5008893A1 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BFF5C83D28DC9BD0008893A1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFF5C83E28DC9BD0008893A1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFF5C83F28DC9CB5008893A1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFF5C84B28DDB4F9008893A1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF5C84A28DDB4F9008893A1 /* main.cpp */; };
+		BFF5C84F28DDB50A008893A1 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFF5C85028DDB50D008893A1 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFF5C85128DDB51B008893A1 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BFF5C85228DDB520008893A1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFF5C85328DDB520008893A1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF4F963828D593DD001411C8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BF4F964928D5A6FD001411C8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA861928CDAC02000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA863828CDBA21000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA864828CDCC17000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA865828CED384000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA868028CF2ABC000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDA869E28CF3F97000C70E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFF5C83228DC9BB9008893A1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFF5C84628DDB4F9008893A1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BF4F963A28D593DD001411C8 /* 6.坐标系统 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "6.坐标系统"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF4F963C28D593DD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BF4F964428D5963A001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BF4F964528D5963A001411C8 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF4F964B28D5A6FD001411C8 /* 7.摄像机 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "7.摄像机"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF4F964D28D5A6FD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BF4F965628D5A7BA001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BF4F965728D5A7BA001411C8 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF4F965B28D8AA92001411C8 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		BF4F965C28D8AA92001411C8 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		BFDA861B28CDAC02000C70E1 /* OpenGL_TEST */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_TEST; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA861E28CDAC02000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/Cellar/glfw/3.3.6/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../usr/local/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
+		BFDA862A28CDAE52000C70E1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		BFDA863A28CDBA21000C70E1 /* 1.你好，窗口 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "1.你好，窗口"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA863C28CDBA21000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA864A28CDCC17000C70E1 /* 2.你好，三角形 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "2.你好，三角形"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA864C28CDCC18000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA865A28CED384000C70E1 /* 3.着色器 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "3.着色器"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA865C28CED384000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA866728CED3B1000C70E1 /* glad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = glad.c; path = includes/glad/src/glad.c; sourceTree = "<group>"; };
+		BFDA867528CF20D4000C70E1 /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		BFDA867628CF20D4000C70E1 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		BFDA867C28CF23C4000C70E1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BFDA867D28CF23C4000C70E1 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BFDA868228CF2ABC000C70E1 /* 4.纹理 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "4.纹理"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA868428CF2ABC000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA868F28CF2BB1000C70E1 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BFDA869028CF2BB1000C70E1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BFDA869228CF2C08000C70E1 /* wall.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpeg; sourceTree = "<group>"; };
+		BFDA869828CF2F70000C70E1 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stb_image.h; path = includes/tool/stb_image.h; sourceTree = "<group>"; };
+		BFDA869A28CF31B6000C70E1 /* container.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = container.jpeg; sourceTree = "<group>"; };
+		BFDA869B28CF3C2D000C70E1 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
+		BFDA86A028CF3F97000C70E1 /* 5.变换 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "5.变换"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDA86A228CF3F97000C70E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDA86B628CF45DE000C70E1 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BFDA86B728CF45DE000C70E1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BFF5C83428DC9BB9008893A1 /* 8.颜色 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "8.颜色"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF5C83628DC9BB9008893A1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFF5C84028DC9DB9008893A1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BFF5C84128DC9DB9008893A1 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BFF5C84228DDABC8008893A1 /* lampFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lampFragment.glsl; sourceTree = "<group>"; };
+		BFF5C84328DDAE81008893A1 /* lampVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lampVertex.glsl; sourceTree = "<group>"; };
+		BFF5C84828DDB4F9008893A1 /* 9.基础光照 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "9.基础光照"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF5C84A28DDB4F9008893A1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF4F963728D593DD001411C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F964328D594B2001411C8 /* libglfw.3.3.dylib in Frameworks */,
+				BF4F964228D594AF001411C8 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF4F964828D5A6FD001411C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F965528D5A70C001411C8 /* libglfw.3.3.dylib in Frameworks */,
+				BF4F965428D5A70C001411C8 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA861828CDAC02000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA863328CDB001000C70E1 /* OpenGL.framework in Frameworks */,
+				BFDA863128CDAFEF000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDA863228CDAFF9000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA863728CDBA21000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA864328CDC70F000C70E1 /* OpenGL.framework in Frameworks */,
+				BFDA864428CDC725000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+				BFDA864528CDC72D000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA864728CDCC17000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA865328CDCCA5000C70E1 /* OpenGL.framework in Frameworks */,
+				BFDA865428CDCCA8000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDA865528CDCCB0000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA865728CED384000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA866128CED397000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+				BFDA866428CED3A0000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDA866628CED3A6000C70E1 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA867F28CF2ABC000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA868C28CF2B47000C70E1 /* OpenGL.framework in Frameworks */,
+				BFDA868A28CF2B3D000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDA868B28CF2B42000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA869D28CF3F97000C70E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA86B228CF403C000C70E1 /* libglfw.3.3.dylib in Frameworks */,
+				BFDA86B328CF403C000C70E1 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDA86A728CF400F000C70E1 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFF5C83128DC9BB9008893A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF5C83D28DC9BD0008893A1 /* libglfw.3.3.dylib in Frameworks */,
+				BFF5C83E28DC9BD0008893A1 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFF5C84528DDB4F9008893A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF5C85228DDB520008893A1 /* libglfw.3.3.dylib in Frameworks */,
+				BFF5C85328DDB520008893A1 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF4F963B28D593DD001411C8 /* 6.坐标系统 */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F964428D5963A001411C8 /* fragment.glsl */,
+				BF4F964528D5963A001411C8 /* vertex.glsl */,
+				BF4F963C28D593DD001411C8 /* main.cpp */,
+			);
+			path = "6.坐标系统";
+			sourceTree = "<group>";
+		};
+		BF4F964C28D5A6FD001411C8 /* 7.摄像机 */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F965628D5A7BA001411C8 /* fragment.glsl */,
+				BF4F965728D5A7BA001411C8 /* vertex.glsl */,
+				BF4F964D28D5A6FD001411C8 /* main.cpp */,
+			);
+			path = "7.摄像机";
+			sourceTree = "<group>";
+		};
+		BFDA861228CDAC02000C70E1 = {
+			isa = PBXGroup;
+			children = (
+				BFDA869828CF2F70000C70E1 /* stb_image.h */,
+				BFDA866728CED3B1000C70E1 /* glad.c */,
+				BFDA861D28CDAC02000C70E1 /* OpenGL_TEST */,
+				BFDA863B28CDBA21000C70E1 /* 1.你好，窗口 */,
+				BFDA864B28CDCC18000C70E1 /* 2.你好，三角形 */,
+				BFDA865B28CED384000C70E1 /* 3.着色器 */,
+				BFDA868328CF2ABC000C70E1 /* 4.纹理 */,
+				BFDA86A128CF3F97000C70E1 /* 5.变换 */,
+				BF4F963B28D593DD001411C8 /* 6.坐标系统 */,
+				BF4F964C28D5A6FD001411C8 /* 7.摄像机 */,
+				BFF5C83528DC9BB9008893A1 /* 8.颜色 */,
+				BFF5C84928DDB4F9008893A1 /* 9.基础光照 */,
+				BFDA861C28CDAC02000C70E1 /* Products */,
+				BFDA862528CDAE2B000C70E1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BFDA861C28CDAC02000C70E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA861B28CDAC02000C70E1 /* OpenGL_TEST */,
+				BFDA863A28CDBA21000C70E1 /* 1.你好，窗口 */,
+				BFDA864A28CDCC17000C70E1 /* 2.你好，三角形 */,
+				BFDA865A28CED384000C70E1 /* 3.着色器 */,
+				BFDA868228CF2ABC000C70E1 /* 4.纹理 */,
+				BFDA86A028CF3F97000C70E1 /* 5.变换 */,
+				BF4F963A28D593DD001411C8 /* 6.坐标系统 */,
+				BF4F964B28D5A6FD001411C8 /* 7.摄像机 */,
+				BFF5C83428DC9BB9008893A1 /* 8.颜色 */,
+				BFF5C84828DDB4F9008893A1 /* 9.基础光照 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFDA861D28CDAC02000C70E1 /* OpenGL_TEST */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA869128CF2BF5000C70E1 /* Texture */,
+				BFDA861E28CDAC02000C70E1 /* main.cpp */,
+				BFDA867528CF20D4000C70E1 /* Shader.cpp */,
+				BFDA867628CF20D4000C70E1 /* Shader.hpp */,
+				BF4F965B28D8AA92001411C8 /* Camera.cpp */,
+				BF4F965C28D8AA92001411C8 /* Camera.hpp */,
+			);
+			path = OpenGL_TEST;
+			sourceTree = "<group>";
+		};
+		BFDA862528CDAE2B000C70E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA862A28CDAE52000C70E1 /* OpenGL.framework */,
+				BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */,
+				BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFDA863B28CDBA21000C70E1 /* 1.你好，窗口 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA863C28CDBA21000C70E1 /* main.cpp */,
+			);
+			path = "1.你好，窗口";
+			sourceTree = "<group>";
+		};
+		BFDA864B28CDCC18000C70E1 /* 2.你好，三角形 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA864C28CDCC18000C70E1 /* main.cpp */,
+			);
+			path = "2.你好，三角形";
+			sourceTree = "<group>";
+		};
+		BFDA865B28CED384000C70E1 /* 3.着色器 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA867C28CF23C4000C70E1 /* fragment.glsl */,
+				BFDA867D28CF23C4000C70E1 /* vertex.glsl */,
+				BFDA865C28CED384000C70E1 /* main.cpp */,
+			);
+			path = "3.着色器";
+			sourceTree = "<group>";
+		};
+		BFDA868328CF2ABC000C70E1 /* 4.纹理 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA869028CF2BB1000C70E1 /* fragment.glsl */,
+				BFDA868F28CF2BB1000C70E1 /* vertex.glsl */,
+				BFDA868428CF2ABC000C70E1 /* main.cpp */,
+			);
+			path = "4.纹理";
+			sourceTree = "<group>";
+		};
+		BFDA869128CF2BF5000C70E1 /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA869B28CF3C2D000C70E1 /* awesomeface.png */,
+				BFDA869A28CF31B6000C70E1 /* container.jpeg */,
+				BFDA869228CF2C08000C70E1 /* wall.jpeg */,
+			);
+			name = Texture;
+			sourceTree = "<group>";
+		};
+		BFDA86A128CF3F97000C70E1 /* 5.变换 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA86B728CF45DE000C70E1 /* fragment.glsl */,
+				BFDA86B628CF45DE000C70E1 /* vertex.glsl */,
+				BFDA86A228CF3F97000C70E1 /* main.cpp */,
+			);
+			path = "5.变换";
+			sourceTree = "<group>";
+		};
+		BFF5C83528DC9BB9008893A1 /* 8.颜色 */ = {
+			isa = PBXGroup;
+			children = (
+				BFF5C84328DDAE81008893A1 /* lampVertex.glsl */,
+				BFF5C84228DDABC8008893A1 /* lampFragment.glsl */,
+				BFF5C84028DC9DB9008893A1 /* fragment.glsl */,
+				BFF5C84128DC9DB9008893A1 /* vertex.glsl */,
+				BFF5C83628DC9BB9008893A1 /* main.cpp */,
+			);
+			path = "8.颜色";
+			sourceTree = "<group>";
+		};
+		BFF5C84928DDB4F9008893A1 /* 9.基础光照 */ = {
+			isa = PBXGroup;
+			children = (
+				BFF5C84A28DDB4F9008893A1 /* main.cpp */,
+			);
+			path = "9.基础光照";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF4F963928D593DD001411C8 /* 6.坐标系统 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF4F964028D593DD001411C8 /* Build configuration list for PBXNativeTarget "6.坐标系统" */;
+			buildPhases = (
+				BF4F963628D593DD001411C8 /* Sources */,
+				BF4F963728D593DD001411C8 /* Frameworks */,
+				BF4F963828D593DD001411C8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "6.坐标系统";
+			productName = "6.坐标系统";
+			productReference = BF4F963A28D593DD001411C8 /* 6.坐标系统 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF4F964A28D5A6FD001411C8 /* 7.摄像机 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF4F964F28D5A6FD001411C8 /* Build configuration list for PBXNativeTarget "7.摄像机" */;
+			buildPhases = (
+				BF4F964728D5A6FD001411C8 /* Sources */,
+				BF4F964828D5A6FD001411C8 /* Frameworks */,
+				BF4F964928D5A6FD001411C8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "7.摄像机";
+			productName = "7.摄像机";
+			productReference = BF4F964B28D5A6FD001411C8 /* 7.摄像机 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA861A28CDAC02000C70E1 /* OpenGL_TEST */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA862228CDAC02000C70E1 /* Build configuration list for PBXNativeTarget "OpenGL_TEST" */;
+			buildPhases = (
+				BFDA861728CDAC02000C70E1 /* Sources */,
+				BFDA861828CDAC02000C70E1 /* Frameworks */,
+				BFDA861928CDAC02000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenGL_TEST;
+			productName = OpenGL_TEST;
+			productReference = BFDA861B28CDAC02000C70E1 /* OpenGL_TEST */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA863928CDBA21000C70E1 /* 1.你好，窗口 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA863E28CDBA21000C70E1 /* Build configuration list for PBXNativeTarget "1.你好，窗口" */;
+			buildPhases = (
+				BFDA863628CDBA21000C70E1 /* Sources */,
+				BFDA863728CDBA21000C70E1 /* Frameworks */,
+				BFDA863828CDBA21000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "1.你好，窗口";
+			productName = "1.你好，窗口";
+			productReference = BFDA863A28CDBA21000C70E1 /* 1.你好，窗口 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA864928CDCC17000C70E1 /* 2.你好，三角形 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA864E28CDCC18000C70E1 /* Build configuration list for PBXNativeTarget "2.你好，三角形" */;
+			buildPhases = (
+				BFDA864628CDCC17000C70E1 /* Sources */,
+				BFDA864728CDCC17000C70E1 /* Frameworks */,
+				BFDA864828CDCC17000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "2.你好，三角形";
+			productName = "2.你好，三角形";
+			productReference = BFDA864A28CDCC17000C70E1 /* 2.你好，三角形 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA865928CED384000C70E1 /* 3.着色器 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA865E28CED384000C70E1 /* Build configuration list for PBXNativeTarget "3.着色器" */;
+			buildPhases = (
+				BFDA865628CED384000C70E1 /* Sources */,
+				BFDA865728CED384000C70E1 /* Frameworks */,
+				BFDA865828CED384000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "3.着色器";
+			productName = "3.着色器";
+			productReference = BFDA865A28CED384000C70E1 /* 3.着色器 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA868128CF2ABC000C70E1 /* 4.纹理 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA868628CF2ABC000C70E1 /* Build configuration list for PBXNativeTarget "4.纹理" */;
+			buildPhases = (
+				BFDA867E28CF2ABC000C70E1 /* Sources */,
+				BFDA867F28CF2ABC000C70E1 /* Frameworks */,
+				BFDA868028CF2ABC000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "4.纹理";
+			productName = "4.纹理";
+			productReference = BFDA868228CF2ABC000C70E1 /* 4.纹理 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDA869F28CF3F97000C70E1 /* 5.变换 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDA86A428CF3F97000C70E1 /* Build configuration list for PBXNativeTarget "5.变换" */;
+			buildPhases = (
+				BFDA869C28CF3F97000C70E1 /* Sources */,
+				BFDA869D28CF3F97000C70E1 /* Frameworks */,
+				BFDA869E28CF3F97000C70E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "5.变换";
+			productName = "5.变换";
+			productReference = BFDA86A028CF3F97000C70E1 /* 5.变换 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFF5C83328DC9BB9008893A1 /* 8.颜色 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFF5C83A28DC9BB9008893A1 /* Build configuration list for PBXNativeTarget "8.颜色" */;
+			buildPhases = (
+				BFF5C83028DC9BB9008893A1 /* Sources */,
+				BFF5C83128DC9BB9008893A1 /* Frameworks */,
+				BFF5C83228DC9BB9008893A1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "8.颜色";
+			productName = "8.颜色";
+			productReference = BFF5C83428DC9BB9008893A1 /* 8.颜色 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFF5C84728DDB4F9008893A1 /* 9.基础光照 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFF5C84C28DDB4F9008893A1 /* Build configuration list for PBXNativeTarget "9.基础光照" */;
+			buildPhases = (
+				BFF5C84428DDB4F9008893A1 /* Sources */,
+				BFF5C84528DDB4F9008893A1 /* Frameworks */,
+				BFF5C84628DDB4F9008893A1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "9.基础光照";
+			productName = "9.基础光照";
+			productReference = BFF5C84828DDB4F9008893A1 /* 9.基础光照 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDA861328CDAC02000C70E1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					BF4F963928D593DD001411C8 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BF4F964A28D5A6FD001411C8 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA861A28CDAC02000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA863928CDBA21000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA864928CDCC17000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA865928CED384000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA868128CF2ABC000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFDA869F28CF3F97000C70E1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFF5C83328DC9BB9008893A1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					BFF5C84728DDB4F9008893A1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = BFDA861628CDAC02000C70E1 /* Build configuration list for PBXProject "OpenGL_TEST" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFDA861228CDAC02000C70E1;
+			productRefGroup = BFDA861C28CDAC02000C70E1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFDA861A28CDAC02000C70E1 /* OpenGL_TEST */,
+				BFDA863928CDBA21000C70E1 /* 1.你好，窗口 */,
+				BFDA864928CDCC17000C70E1 /* 2.你好，三角形 */,
+				BFDA865928CED384000C70E1 /* 3.着色器 */,
+				BFDA868128CF2ABC000C70E1 /* 4.纹理 */,
+				BFDA869F28CF3F97000C70E1 /* 5.变换 */,
+				BF4F963928D593DD001411C8 /* 6.坐标系统 */,
+				BF4F964A28D5A6FD001411C8 /* 7.摄像机 */,
+				BFF5C83328DC9BB9008893A1 /* 8.颜色 */,
+				BFF5C84728DDB4F9008893A1 /* 9.基础光照 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF4F963628D593DD001411C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F963D28D593DD001411C8 /* main.cpp in Sources */,
+				BF4F964628D5968E001411C8 /* Shader.cpp in Sources */,
+				BF4F964128D594A7001411C8 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF4F964728D5A6FD001411C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F965E28D8AAA4001411C8 /* Camera.cpp in Sources */,
+				BF4F965228D5A703001411C8 /* Shader.cpp in Sources */,
+				BF4F964E28D5A6FD001411C8 /* main.cpp in Sources */,
+				BF4F965328D5A707001411C8 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA861728CDAC02000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA861F28CDAC02000C70E1 /* main.cpp in Sources */,
+				BF4F965D28D8AA92001411C8 /* Camera.cpp in Sources */,
+				BFDA867728CF20D4000C70E1 /* Shader.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA863628CDBA21000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA863D28CDBA21000C70E1 /* main.cpp in Sources */,
+				BFDA867828CF20D4000C70E1 /* Shader.cpp in Sources */,
+				BFDA868E28CF2B66000C70E1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA864628CDCC17000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA864D28CDCC18000C70E1 /* main.cpp in Sources */,
+				BFDA867928CF20D4000C70E1 /* Shader.cpp in Sources */,
+				BFDA868D28CF2B66000C70E1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA865628CED384000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA865D28CED384000C70E1 /* main.cpp in Sources */,
+				BFDA867A28CF20D4000C70E1 /* Shader.cpp in Sources */,
+				BFDA866828CED3B1000C70E1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA867E28CF2ABC000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA868528CF2ABC000C70E1 /* main.cpp in Sources */,
+				BFDA869928CF30C2000C70E1 /* Shader.cpp in Sources */,
+				BFDA868928CF2B1B000C70E1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDA869C28CF3F97000C70E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDA86B428CF4046000C70E1 /* Shader.cpp in Sources */,
+				BFDA86A328CF3F97000C70E1 /* main.cpp in Sources */,
+				BFDA86B528CF4049000C70E1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFF5C83028DC9BB9008893A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF5C83B28DC9BC2008893A1 /* Shader.cpp in Sources */,
+				BFF5C83C28DC9BC5008893A1 /* Camera.cpp in Sources */,
+				BFF5C83728DC9BB9008893A1 /* main.cpp in Sources */,
+				BFF5C83F28DC9CB5008893A1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFF5C84428DDB4F9008893A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF5C85128DDB51B008893A1 /* Camera.cpp in Sources */,
+				BFF5C84F28DDB50A008893A1 /* Shader.cpp in Sources */,
+				BFF5C84B28DDB4F9008893A1 /* main.cpp in Sources */,
+				BFF5C85028DDB50D008893A1 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BF4F963E28D593DD001411C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BF4F963F28D593DD001411C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
+		BF4F965028D5A6FD001411C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BF4F965128D5A6FD001411C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
+		BFDA862028CDAC02000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BFDA862128CDAC02000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BFDA862328CDAC02000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Debug;
+		};
+		BFDA862428CDAC02000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Release;
+		};
+		BFDA863F28CDBA21000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Debug;
+		};
+		BFDA864028CDBA21000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Release;
+		};
+		BFDA864F28CDCC18000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Debug;
+		};
+		BFDA865028CDCC18000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Release;
+		};
+		BFDA865F28CED384000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Debug;
+		};
+		BFDA866028CED384000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+				);
+			};
+			name = Release;
+		};
+		BFDA868728CF2ABC000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BFDA868828CF2ABC000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
+		BFDA86A528CF3F97000C70E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BFDA86A628CF3F97000C70E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
+		BFF5C83828DC9BB9008893A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BFF5C83928DC9BB9008893A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
+		BFF5C84D28DDB4F9008893A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BFF5C84E28DDB4F9008893A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF4F964028D593DD001411C8 /* Build configuration list for PBXNativeTarget "6.坐标系统" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4F963E28D593DD001411C8 /* Debug */,
+				BF4F963F28D593DD001411C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF4F964F28D5A6FD001411C8 /* Build configuration list for PBXNativeTarget "7.摄像机" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4F965028D5A6FD001411C8 /* Debug */,
+				BF4F965128D5A6FD001411C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA861628CDAC02000C70E1 /* Build configuration list for PBXProject "OpenGL_TEST" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA862028CDAC02000C70E1 /* Debug */,
+				BFDA862128CDAC02000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA862228CDAC02000C70E1 /* Build configuration list for PBXNativeTarget "OpenGL_TEST" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA862328CDAC02000C70E1 /* Debug */,
+				BFDA862428CDAC02000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA863E28CDBA21000C70E1 /* Build configuration list for PBXNativeTarget "1.你好，窗口" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA863F28CDBA21000C70E1 /* Debug */,
+				BFDA864028CDBA21000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA864E28CDCC18000C70E1 /* Build configuration list for PBXNativeTarget "2.你好，三角形" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA864F28CDCC18000C70E1 /* Debug */,
+				BFDA865028CDCC18000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA865E28CED384000C70E1 /* Build configuration list for PBXNativeTarget "3.着色器" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA865F28CED384000C70E1 /* Debug */,
+				BFDA866028CED384000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA868628CF2ABC000C70E1 /* Build configuration list for PBXNativeTarget "4.纹理" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA868728CF2ABC000C70E1 /* Debug */,
+				BFDA868828CF2ABC000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDA86A428CF3F97000C70E1 /* Build configuration list for PBXNativeTarget "5.变换" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDA86A528CF3F97000C70E1 /* Debug */,
+				BFDA86A628CF3F97000C70E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFF5C83A28DC9BB9008893A1 /* Build configuration list for PBXNativeTarget "8.颜色" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFF5C83828DC9BB9008893A1 /* Debug */,
+				BFF5C83928DC9BB9008893A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFF5C84C28DDB4F9008893A1 /* Build configuration list for PBXNativeTarget "9.基础光照" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFF5C84D28DDB4F9008893A1 /* Debug */,
+				BFF5C84E28DDB4F9008893A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDA861328CDAC02000C70E1 /* Project object */;
+}
