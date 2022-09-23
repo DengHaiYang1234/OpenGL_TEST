@@ -198,9 +198,9 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(0);
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/8.颜色/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/8.颜色/fragment.glsl");
+    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragment.glsl");
     
-    ShaderProgram lampShader("/Users/denghaiyang/OpenGL_TEST/8.颜色/lampVertex.glsl","/Users/denghaiyang/OpenGL_TEST/8.颜色/lampFragment.glsl");
+    ShaderProgram lampShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampVertex.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

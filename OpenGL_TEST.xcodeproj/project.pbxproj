@@ -208,6 +208,10 @@
 		BFF5C84328DDAE81008893A1 /* lampVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lampVertex.glsl; sourceTree = "<group>"; };
 		BFF5C84828DDB4F9008893A1 /* 9.基础光照 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "9.基础光照"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF5C84A28DDB4F9008893A1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFF5C85428DDB70A008893A1 /* lampFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lampFragment.glsl; sourceTree = "<group>"; };
+		BFF5C85528DDB70A008893A1 /* lampVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lampVertex.glsl; sourceTree = "<group>"; };
+		BFF5C85628DDB70B008893A1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BFF5C85728DDB70B008893A1 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,6 +465,10 @@
 		BFF5C84928DDB4F9008893A1 /* 9.基础光照 */ = {
 			isa = PBXGroup;
 			children = (
+				BFF5C85628DDB70B008893A1 /* fragment.glsl */,
+				BFF5C85428DDB70A008893A1 /* lampFragment.glsl */,
+				BFF5C85528DDB70A008893A1 /* lampVertex.glsl */,
+				BFF5C85728DDB70B008893A1 /* vertex.glsl */,
 				BFF5C84A28DDB4F9008893A1 /* main.cpp */,
 			);
 			path = "9.基础光照";
@@ -1425,12 +1433,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3.6/lib,
 					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
 			};
 			name = Debug;
 		};
@@ -1438,12 +1462,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3.6/lib,
 					/usr/local/Cellar/glew/2.2.0_1/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
 			};
 			name = Release;
 		};
