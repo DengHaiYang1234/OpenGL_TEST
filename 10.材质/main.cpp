@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  9.基础光照
+//  10.材质
 //
 //  Created by 邓海洋 on 2022/9/11.
 //
@@ -202,16 +202,12 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(0);
     
-    //相机空间的光照实现
-//    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexVS.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentVS.glsl");
     
     //世界空间的光照实现
-//    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentWS.glsl");
+    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/10.材质/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/10.材质/lightingFragmentWS.glsl");
     
-    //顶点实现的光照计算
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexGouraud.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentGouraud.glsl");
     
-    ShaderProgram lampShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampVertex.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampFragment.glsl");
+    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/10.材质/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/10.材质/lightFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -241,33 +237,64 @@ int main(int argc, const char * argv[]) {
         glm::mat4 view = camera.GetViewMatrix();
         
         glm::mat4 model = glm::mat4(1.0f);
-        //        model = glm::translate(model, glm::vec3(0,0,-1));
+        
+        glm::vec3 lightColor;
+        lightColor.x = sin(glfwGetTime() * 2.0f);
+        lightColor.y = sin(glfwGetTime() * 0.7f);
+        lightColor.z = sin(glfwGetTime() * 1.3f);
+        
+        glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);//降低满反射
+        glm::vec3 ambientColor = lightColor * glm::vec3(0.2f);//降低环境光
+        glm::vec3 specularColor = glm::vec3(1.0f);//高光
+        
+        glm::vec3 materialAmbient = glm::vec3(1.0f, 0.5f, 0.31f);
+        glm::vec3 materialDiffuse = glm::vec3(1.0f, 0.5f, 0.31f);
+        glm::vec3 materialSpecular = glm::vec3(0.5f, 0.5f, 0.5f);
+        
+        float materialShininess = 32.0f;
+        
+        //⭐️材质模拟  http://devernay.free.fr/cours/opengl/materials.html
+        lightColor = glm::vec3(1.0f);
+        diffuseColor = glm::vec3(1.0f);
+        ambientColor = glm::vec3(1.0f);
+        
+        materialAmbient = glm::vec3(0.0f,0.1f,0.06f);
+        materialDiffuse = glm::vec3(0.0f,0.50980392f,0.50980392f);
+        materialSpecular = glm::vec3(0.50196078f,0.50196078f,0.50196078f);
+        
+        materialShininess = 0.25 * 128;
         
         //激活这个程序对象
-        lightShader.use();
-        lightShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
-        
-        lightShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
-        lightShader.set_uniform("objectColor", 1.0f, 0.5f, 0.31f);
-        lightShader.set_uniform("lightColor", 1.0f, 1.0f, 1.0f);
-        lightShader.set_uniform("projection", glm::value_ptr(projection));
-        lightShader.set_uniform("view", glm::value_ptr(view));
-        lightShader.set_uniform("model",glm::value_ptr(model));
+        lightingShader.use();
+        lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
+        lightingShader.set_uniform("material.ambient",  materialAmbient.x,materialAmbient.y,materialAmbient.z);
+        lightingShader.set_uniform("material.diffuse",  materialDiffuse.x,materialDiffuse.y,materialDiffuse.z);
+        lightingShader.set_uniform("material.specular", materialSpecular.x,materialSpecular.y,materialSpecular.z);
+        lightingShader.set_uniform("light.ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
+        lightingShader.set_uniform("light.diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
+        lightingShader.set_uniform("light.specular", specularColor.x,specularColor.y,specularColor.z);
+        lightingShader.set_uniform("material.shininess", materialShininess);
+        lightingShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
+        lightingShader.set_uniform("lightColor", 1.0f, 1.0f, 1.0f);
+        lightingShader.set_uniform("projection", glm::value_ptr(projection));
+        lightingShader.set_uniform("view", glm::value_ptr(view));
+        lightingShader.set_uniform("model",glm::value_ptr(model));
         
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES,0,36);
         
-//        lightPos.x = sin(glfwGetTime()) * 2.0f;
-//        lightPos.z = cos(glfwGetTime()) * 2.0f;
+        //        lightPos.x = sin(glfwGetTime()) * 2.0f;
+        //        lightPos.z = cos(glfwGetTime()) * 2.0f;
         
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
         
-        lampShader.use();
-        lampShader.set_uniform("projection", glm::value_ptr(projection));
-        lampShader.set_uniform("view", glm::value_ptr(view));
-        lampShader.set_uniform("model",glm::value_ptr(model));
+        lightShader.use();
+        lightShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        lightShader.set_uniform("projection", glm::value_ptr(projection));
+        lightShader.set_uniform("view", glm::value_ptr(view));
+        lightShader.set_uniform("model",glm::value_ptr(model));
         
         glBindVertexArray(LightVAO);
         glDrawArrays(GL_TRIANGLES,0,36);

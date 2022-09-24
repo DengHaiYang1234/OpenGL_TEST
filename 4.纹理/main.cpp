@@ -166,6 +166,7 @@ int main(int argc, const char * argv[]) {
     if(data)
     {
         //绑定的纹理对象就会被附加上纹理图像
+        //⭐️：注意图片格式是RGB 或是 RGBA
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
@@ -192,6 +193,7 @@ int main(int argc, const char * argv[]) {
     if(data)
     {
         //绑定的纹理对象就会被附加上纹理图像
+        //⭐️：注意图片格式是RGB 或是 RGBA
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
@@ -206,6 +208,7 @@ int main(int argc, const char * argv[]) {
     //激活这个程序对象
     ourShader.use();
     
+    //这里的索引0或1 会与下方的GL_TEXTURE0或GL_TEXTURE1绑定
     ourShader.set_uniform("texture1", 0);
     ourShader.set_uniform("texture2", 1);
     

@@ -113,6 +113,8 @@ void ShaderProgram::set_uniform(std::string_view name, float value) const noexce
     glUniform1f(glGetUniformLocation(id_, name.data()), value);
 }
 
+
+
 void ShaderProgram::set_uniform(std::string_view name, float v1,float v2,float v3,float v4) const noexcept
 {
     glUniform4f(glGetUniformLocation(id_, name.data()), v1,v2,v3,v4);
