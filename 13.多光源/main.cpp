@@ -90,6 +90,14 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
+//点光源位置
+glm::vec3 pointLightPositions[] = {
+    glm::vec3( 0.7f,  0.2f,  2.0f),
+    glm::vec3( 2.3f, -3.3f, -4.0f),
+    glm::vec3(-4.0f,  2.0f, -12.0f),
+    glm::vec3( 0.0f,  0.0f, -3.0f)
+};
+
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
@@ -199,10 +207,10 @@ int main(int argc, const char * argv[]) {
     
     
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/12.投光物/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/12.投光物/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingFragmentWS.glsl");
     
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/12.投光物/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/12.投光物/lightFragment.glsl");
+    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -219,6 +227,8 @@ int main(int argc, const char * argv[]) {
     
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
+    
+    
     
     while (!glfwWindowShouldClose(window))
     {
@@ -260,14 +270,38 @@ int main(int argc, const char * argv[]) {
         lightingShader.set_uniform("view", glm::value_ptr(view));
         
         //⭐️⭐️⭐️⭐️点光源
-        lightingShader.set_uniform("pointLight.position", lightPos.x,lightPos.y,lightPos.z);
-        lightingShader.set_uniform("pointLight.ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("pointLight.diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("pointLight.specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("pointLight.constant",  1.0f);
-        lightingShader.set_uniform("pointLight.linear",    0.09f);
-        lightingShader.set_uniform("pointLight.quadratic", 0.032f);
+        lightingShader.set_uniform("pointLights[0].position", pointLightPositions[0].x,pointLightPositions[0].y,pointLightPositions[0].z);
+        lightingShader.set_uniform("pointLights[0].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
+        lightingShader.set_uniform("pointLights[0].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
+        lightingShader.set_uniform("pointLights[0].specular", specularColor.x,specularColor.y,specularColor.z);
+        lightingShader.set_uniform("pointLights[0].constant",  1.0f);
+        lightingShader.set_uniform("pointLights[0].linear",    0.09f);
+        lightingShader.set_uniform("pointLights[0].quadratic", 0.032f);
         
+        lightingShader.set_uniform("pointLights[1].position", pointLightPositions[1].x,pointLightPositions[1].y,pointLightPositions[1].z);
+        lightingShader.set_uniform("pointLights[1].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
+        lightingShader.set_uniform("pointLights[1].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
+        lightingShader.set_uniform("pointLights[1].specular", specularColor.x,specularColor.y,specularColor.z);
+        lightingShader.set_uniform("pointLights[1].constant",  1.0f);
+        lightingShader.set_uniform("pointLights[1].linear",    0.09f);
+        lightingShader.set_uniform("pointLights[1].quadratic", 0.032f);
+        
+        lightingShader.set_uniform("pointLights[2].position", pointLightPositions[2].x,pointLightPositions[2].y,pointLightPositions[2].z);
+        lightingShader.set_uniform("pointLights[2].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
+        lightingShader.set_uniform("pointLights[2].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
+        lightingShader.set_uniform("pointLights[2].specular", specularColor.x,specularColor.y,specularColor.z);
+        lightingShader.set_uniform("pointLights[2].constant",  1.0f);
+        lightingShader.set_uniform("pointLights[2].linear",    0.09f);
+        lightingShader.set_uniform("pointLights[2].quadratic", 0.032f);
+        
+        lightingShader.set_uniform("pointLights[3].position", pointLightPositions[3].x,pointLightPositions[3].y,pointLightPositions[3].z);
+        lightingShader.set_uniform("pointLights[3].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
+        lightingShader.set_uniform("pointLights[3].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
+        lightingShader.set_uniform("pointLights[3].specular", specularColor.x,specularColor.y,specularColor.z);
+        lightingShader.set_uniform("pointLights[3].constant",  1.0f);
+        lightingShader.set_uniform("pointLights[3].linear",    0.09f);
+        lightingShader.set_uniform("pointLights[3].quadratic", 0.032f);
+//        
         
         //⭐️⭐️⭐️⭐️方向光
         lightingShader.set_uniform("directionLight.direction", -0.2f, -1.0f, -0.3f);
@@ -303,18 +337,22 @@ int main(int argc, const char * argv[]) {
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
         
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
         
         lightShader.use();
         lightShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
         lightShader.set_uniform("projection", glm::value_ptr(projection));
         lightShader.set_uniform("view", glm::value_ptr(view));
-        lightShader.set_uniform("model",glm::value_ptr(model));
         
         glBindVertexArray(LightVAO);
-        glDrawArrays(GL_TRIANGLES,0,36);
+        
+        for(unsigned int i = 0; i < 4; i++)
+        {
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, pointLightPositions[i]);
+            model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+            lightShader.set_uniform("model",glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES,0,36);
+        }
         
         /*
          双缓冲(Double Buffer)

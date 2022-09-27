@@ -84,6 +84,12 @@
 		BFF7CFC828DF4642009BE3CA /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
 		BFF7CFC928DF4642009BE3CA /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
 		BFF7CFCA28DF4642009BE3CA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BFF7CFD628E32CA3009BE3CA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7CFD528E32CA3009BE3CA /* main.cpp */; };
+		BFF7CFDA28E32CAE009BE3CA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4F965B28D8AA92001411C8 /* Camera.cpp */; };
+		BFF7CFDB28E32CAE009BE3CA /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFF7CFDC28E32CAE009BE3CA /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFF7CFDD28E32CAE009BE3CA /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDA867528CF20D4000C70E1 /* Shader.cpp */; };
+		BFF7CFDE28E32CAE009BE3CA /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -204,6 +210,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		BFF7CFD128E32CA3009BE3CA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -283,6 +298,12 @@
 		BFF7CFCC28DF4719009BE3CA /* lightingFragmentWS.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingFragmentWS.glsl; sourceTree = "<group>"; };
 		BFF7CFCD28DF4719009BE3CA /* lightFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightFragment.glsl; sourceTree = "<group>"; };
 		BFF7CFCE28DF4719009BE3CA /* lightingVertexWS.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingVertexWS.glsl; sourceTree = "<group>"; };
+		BFF7CFD328E32CA3009BE3CA /* 13.多光源 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "13.多光源"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF7CFD528E32CA3009BE3CA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFF7CFDF28E32E22009BE3CA /* lightingVertexWS.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingVertexWS.glsl; sourceTree = "<group>"; };
+		BFF7CFE028E32E22009BE3CA /* lightingFragmentWS.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingFragmentWS.glsl; sourceTree = "<group>"; };
+		BFF7CFE128E32E22009BE3CA /* lightVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightVertex.glsl; sourceTree = "<group>"; };
+		BFF7CFE228E32E22009BE3CA /* lightFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightFragment.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +430,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFF7CFD028E32CA3009BE3CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF7CFDE28E32CAE009BE3CA /* libglfw.3.3.dylib in Frameworks */,
+				BFF7CFDC28E32CAE009BE3CA /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -450,6 +480,7 @@
 				BFF5C86128DEDC12008893A1 /* 10.材质 */,
 				BFF5C87528DEE939008893A1 /* 11.光照贴图 */,
 				BFF7CFC028DF4636009BE3CA /* 12.投光物 */,
+				BFF7CFD428E32CA3009BE3CA /* 13.多光源 */,
 				BFDA861C28CDAC02000C70E1 /* Products */,
 				BFDA862528CDAE2B000C70E1 /* Frameworks */,
 			);
@@ -471,6 +502,7 @@
 				BFF5C86028DEDC12008893A1 /* 10.材质 */,
 				BFF5C87428DEE939008893A1 /* 11.光照贴图 */,
 				BFF7CFBF28DF4636009BE3CA /* 12.投光物 */,
+				BFF7CFD328E32CA3009BE3CA /* 13.多光源 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -620,6 +652,18 @@
 				BFF7CFC128DF4636009BE3CA /* main.cpp */,
 			);
 			path = "12.投光物";
+			sourceTree = "<group>";
+		};
+		BFF7CFD428E32CA3009BE3CA /* 13.多光源 */ = {
+			isa = PBXGroup;
+			children = (
+				BFF7CFE228E32E22009BE3CA /* lightFragment.glsl */,
+				BFF7CFE028E32E22009BE3CA /* lightingFragmentWS.glsl */,
+				BFF7CFDF28E32E22009BE3CA /* lightingVertexWS.glsl */,
+				BFF7CFE128E32E22009BE3CA /* lightVertex.glsl */,
+				BFF7CFD528E32CA3009BE3CA /* main.cpp */,
+			);
+			path = "13.多光源";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,6 +890,23 @@
 			productReference = BFF7CFBF28DF4636009BE3CA /* 12.投光物 */;
 			productType = "com.apple.product-type.tool";
 		};
+		BFF7CFD228E32CA3009BE3CA /* 13.多光源 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFF7CFD928E32CA3009BE3CA /* Build configuration list for PBXNativeTarget "13.多光源" */;
+			buildPhases = (
+				BFF7CFCF28E32CA3009BE3CA /* Sources */,
+				BFF7CFD028E32CA3009BE3CA /* Frameworks */,
+				BFF7CFD128E32CA3009BE3CA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "13.多光源";
+			productName = "13.多光源";
+			productReference = BFF7CFD328E32CA3009BE3CA /* 13.多光源 */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -894,6 +955,9 @@
 					BFF7CFBE28DF4636009BE3CA = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					BFF7CFD228E32CA3009BE3CA = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 				};
 			};
 			buildConfigurationList = BFDA861628CDAC02000C70E1 /* Build configuration list for PBXProject "OpenGL_TEST" */;
@@ -922,6 +986,7 @@
 				BFF5C85F28DEDC12008893A1 /* 10.材质 */,
 				BFF5C87328DEE939008893A1 /* 11.光照贴图 */,
 				BFF7CFBE28DF4636009BE3CA /* 12.投光物 */,
+				BFF7CFD228E32CA3009BE3CA /* 13.多光源 */,
 			);
 		};
 /* End PBXProject section */
@@ -1060,6 +1125,17 @@
 				BFF7CFC228DF4636009BE3CA /* main.cpp in Sources */,
 				BFF7CFC828DF4642009BE3CA /* Shader.cpp in Sources */,
 				BFF7CFC628DF4642009BE3CA /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFF7CFCF28E32CA3009BE3CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF7CFDA28E32CAE009BE3CA /* Camera.cpp in Sources */,
+				BFF7CFD628E32CA3009BE3CA /* main.cpp in Sources */,
+				BFF7CFDD28E32CAE009BE3CA /* Shader.cpp in Sources */,
+				BFF7CFDB28E32CAE009BE3CA /* glad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1905,6 +1981,64 @@
 			};
 			name = Release;
 		};
+		BFF7CFD728E32CA3009BE3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Debug;
+		};
+		BFF7CFD828E32CA3009BE3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arm64;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+				);
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2030,6 +2164,15 @@
 			buildConfigurations = (
 				BFF7CFC428DF4636009BE3CA /* Debug */,
 				BFF7CFC528DF4636009BE3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFF7CFD928E32CA3009BE3CA /* Build configuration list for PBXNativeTarget "13.多光源" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFF7CFD728E32CA3009BE3CA /* Debug */,
+				BFF7CFD828E32CA3009BE3CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
