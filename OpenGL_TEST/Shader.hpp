@@ -8,10 +8,16 @@
 #ifndef Shader_hpp
 #define Shader_hpp
 
-#include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
+#include <string_view>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+#include <glad/glad.h>
 
 class Shader {
 public:
@@ -52,6 +58,7 @@ public:
     
     void set_uniform(std::string_view name, bool value) const noexcept;
     void set_uniform(std::string_view name, int value) const noexcept;
+    void set_uniform(std::string_view name, unsigned int value) const noexcept;
     void set_uniform(std::string_view name, float value) const noexcept;
     void set_uniform(std::string_view name, float v1,float v2,float v3) const noexcept;
     void set_uniform(std::string_view name, float v1,float v2,float v3,float v4) const noexcept;

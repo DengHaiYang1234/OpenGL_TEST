@@ -6,13 +6,7 @@
 //
 
 #include "Shader.hpp"
-#include <string>
-#include <string_view>
-#include <fstream>
-#include <sstream>
-#include <iostream>
 
-#include <glad/glad.h>
 
 Shader::Shader(std::string_view file_path)
 : id_{ 0 }
@@ -104,6 +98,11 @@ void ShaderProgram::set_uniform(std::string_view name, bool value) const noexcep
 }
 
 void ShaderProgram::set_uniform(std::string_view name, int value) const noexcept
+{
+    glUniform1i(glGetUniformLocation(id_, name.data()), value);
+}
+
+void ShaderProgram::set_uniform(std::string_view name,unsigned int value) const noexcept
 {
     glUniform1i(glGetUniformLocation(id_, name.data()), value);
 }
