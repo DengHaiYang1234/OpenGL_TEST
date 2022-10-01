@@ -5,11 +5,12 @@
 //  Created by 邓海洋 on 2022/9/11.
 //
 
-#include <glad/glad.h>
+//#include <glad/glad.h>
+//#include <iostream>
+//#include <glm/glm.hpp>
+//#import "Shader.hpp"
+#import "Model.hpp"
 #include <GLFW/glfw3.h>
-#include <iostream>
-#include <glm/glm.hpp>
-#import "Shader.hpp"
 
 /*
  

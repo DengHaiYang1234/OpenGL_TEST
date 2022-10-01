@@ -214,8 +214,8 @@ int main(int argc, const char * argv[]) {
     stbi_set_flip_vertically_on_load(true);
     
     unsigned int diffuseTex,specularTex;
-    diffuseTex = loadTexture("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/container2.png");
-    specularTex = loadTexture("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/container2_specular.png");
+    diffuseTex = loadTexture("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
+    specularTex = loadTexture("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png");
     
     //开启深度测试
     glEnable(GL_DEPTH_TEST);

@@ -237,7 +237,7 @@ int main(int argc, const char * argv[]) {
     
     //宽度、高度和颜色通道的个数
     int width,height,nrChannels;
-    unsigned char *data = stbi_load("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/container2.png", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png", &width, &height, &nrChannels, 0);
     if(data)
     {
         //绑定的纹理对象就会被附加上纹理图像
@@ -262,8 +262,8 @@ int main(int argc, const char * argv[]) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     
-    //data = stbi_load("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/container2_specular.png", &width, &height, &nrChannels, 0);
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/lighting_maps_specular_color.png", &width, &height, &nrChannels, 0);
+    //data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png", &width, &height, &nrChannels, 0);
+    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/lighting_maps_specular_color.png", &width, &height, &nrChannels, 0);
     if(data)
     {
         //绑定的纹理对象就会被附加上纹理图像
@@ -289,7 +289,7 @@ int main(int argc, const char * argv[]) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST/matrix.jpeg", &width, &height, &nrChannels, 0);
+    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/matrix.jpeg", &width, &height, &nrChannels, 0);
     if(data)
     {
         //绑定的纹理对象就会被附加上纹理图像

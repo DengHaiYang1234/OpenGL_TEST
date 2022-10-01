@@ -157,20 +157,21 @@ vec3 CalSpotLight(SpotLight spotLight,vec3 normal,vec3 fragPos,vec3 viewDir)
 
 void main()
 {
-    //基于世界空间的光照计算
-    vec3 norm = normalize(Normal);
-    vec3 viewDir = normalize(viewPos - FragPos);
-    
-    // 第一阶段：定向光照
-    vec3 result = CalDirectionLight(directionLight,norm,viewDir);
-    
-    // 第二阶段：点光源
-    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
-        result += CalPointLight(pointLights[i],norm,FragPos,viewDir);
-    }
+//    //基于世界空间的光照计算
+//    vec3 norm = normalize(Normal);
+//    vec3 viewDir = normalize(viewPos - FragPos);
 //
-//    // 第三阶段：聚光
-    result += CalSpotLight(spotLight,norm,FragPos,viewDir);
+//    // 第一阶段：定向光照
+//    vec3 result = CalDirectionLight(directionLight,norm,viewDir);
+//
+//    // 第二阶段：点光源
+//    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
+//        result += CalPointLight(pointLights[i],norm,FragPos,viewDir);
+//    }
+////
+////    // 第三阶段：聚光
+//    result += CalSpotLight(spotLight,norm,FragPos,viewDir);
     
-    FragColor = vec4(result,1);
+    
+    FragColor = texture(texture_specular2,TexCoords);
 }
