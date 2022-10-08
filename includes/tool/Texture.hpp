@@ -23,6 +23,7 @@ public:
     string type;
     string path;
     unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
+    unsigned int TextureLoad(const char *path);
     void SetFlipVertically(bool isFlipVert);
 };
 

@@ -260,14 +260,16 @@ int main(int argc, const char * argv[]) {
         //激活这个程序对象
         lightingShader.use();
         lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
+        lightingShader.set_uniform("projection", glm::value_ptr(projection));
+        lightingShader.set_uniform("view", glm::value_ptr(view));
         lightingShader.set_uniform("material.diffuse",  0);
         lightingShader.set_uniform("material.specular", 1);
+        
         lightingShader.set_uniform("material.shininess", materialShininess);
         lightingShader.set_uniform("matrixlight", (float)((1.0+sin(glfwGetTime()))/2+0.5));
         lightingShader.set_uniform("matrixmove", (float)glfwGetTime());
         lightingShader.set_uniform("lightColor", 1.0f, 1.0f, 1.0f);
-        lightingShader.set_uniform("projection", glm::value_ptr(projection));
-        lightingShader.set_uniform("view", glm::value_ptr(view));
+        
         
         //⭐️⭐️⭐️⭐️点光源
         lightingShader.set_uniform("pointLights[0].position", pointLightPositions[0].x,pointLightPositions[0].y,pointLightPositions[0].z);

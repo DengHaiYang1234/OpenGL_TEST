@@ -51,10 +51,8 @@ uniform DirectionLight directionLight;
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform SpotLight spotLight;
 uniform vec3 lightColor;
-uniform vec3 lightPos;
+uniform vec3 viewPosviewPos;
 uniform vec3 viewPos;
-uniform float matrixlight;
-uniform float matrixmove;
 
 uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_diffuse2;
@@ -66,6 +64,8 @@ in vec3 FragPos;//顶点世界坐标
 in vec3 Normal;
 in vec2 TexCoords;
 
+
+
 //计算方向光
 vec3 CalDirectionLight(DirectionLight light,vec3 normal,vec3 viewDir)
 {
@@ -75,7 +75,7 @@ vec3 CalDirectionLight(DirectionLight light,vec3 normal,vec3 viewDir)
     //等同于 I - 2.0 * dot(N, I) * N   I = -lightDir   N = norm
     vec3 reflectDir = reflect(-lightDir,normal);
     
-    vec4 diffuseCol = texture(material.diffuse,TexCoords);
+    vec4 diffuseCol = texture(texture_diffuse1,TexCoords);
     
     //环境光
     vec3 ambient = diffuseCol.rgb * directionLight.ambient;
@@ -84,7 +84,7 @@ vec3 CalDirectionLight(DirectionLight light,vec3 normal,vec3 viewDir)
     float diff = max(dot(normal,lightDir),0);
     vec3 diffuse = diffuseCol.rgb * diff * directionLight.diffuse;
     
-    vec4 specularCol = texture(material.specular,TexCoords);
+    vec4 specularCol = texture(texture_specular1,TexCoords);
     //反射光
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = specularCol.rgb * spec * directionLight.specular;
@@ -107,7 +107,7 @@ vec3 CalPointLight(PointLight pointLight,vec3 normal,vec3 fragPos,vec3 viewDir)
     //等同于 I - 2.0 * dot(N, I) * N   I = -lightDir   N = norm
     vec3 reflectDir = reflect(-lightDir,normal);
     
-    vec4 diffuseCol = texture(material.diffuse,TexCoords);
+    vec4 diffuseCol = texture(texture_diffuse1,TexCoords);
     
     //环境光
     vec3 ambient = diffuseCol.rgb * pointLight.ambient;
@@ -116,7 +116,7 @@ vec3 CalPointLight(PointLight pointLight,vec3 normal,vec3 fragPos,vec3 viewDir)
     float diff = max(dot(normal,lightDir),0);
     vec3 diffuse = diffuseCol.rgb * diff * pointLight.diffuse;
     
-    vec4 specularCol = texture(material.specular,TexCoords);
+    vec4 specularCol = texture(texture_specular1,TexCoords);
     //反射光
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = specularCol.rgb * spec * pointLight.specular;
@@ -137,7 +137,7 @@ vec3 CalSpotLight(SpotLight spotLight,vec3 normal,vec3 fragPos,vec3 viewDir)
     //等同于 I - 2.0 * dot(N, I) * N   I = -lightDir   N = norm
     vec3 reflectDir = reflect(-lightDir,normal);
     
-    vec4 diffuseCol = texture(material.diffuse,TexCoords);
+    vec4 diffuseCol = texture(texture_diffuse1,TexCoords);
     
     //环境光
     vec3 ambient = diffuseCol.rgb * spotLight.ambient * intensity;
@@ -146,7 +146,7 @@ vec3 CalSpotLight(SpotLight spotLight,vec3 normal,vec3 fragPos,vec3 viewDir)
     float diff = max(dot(normal,lightDir),0);
     vec3 diffuse = diffuseCol.rgb * diff * spotLight.diffuse * intensity;
     
-    vec4 specularCol = texture(material.specular,TexCoords);
+    vec4 specularCol = texture(texture_specular1,TexCoords);
     //反射光
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = specularCol.rgb * spec * spotLight.specular;
@@ -157,21 +157,26 @@ vec3 CalSpotLight(SpotLight spotLight,vec3 normal,vec3 fragPos,vec3 viewDir)
 
 void main()
 {
-//    //基于世界空间的光照计算
-//    vec3 norm = normalize(Normal);
-//    vec3 viewDir = normalize(viewPos - FragPos);
+    
+//    material.diffuse = texture_diffuse1;
 //
-//    // 第一阶段：定向光照
-//    vec3 result = CalDirectionLight(directionLight,norm,viewDir);
+//    material.specular = texture_specular1;
+    
+    //基于世界空间的光照计算
+    vec3 norm = normalize(Normal);
+    vec3 viewDir = normalize(viewPos - FragPos);
+
+    // 第一阶段：定向光照
+    vec3 result = CalDirectionLight(directionLight,norm,viewDir);
+
+    // 第二阶段：点光源
+    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
+        result += CalPointLight(pointLights[i],norm,FragPos,viewDir);
+    }
 //
-//    // 第二阶段：点光源
-//    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
-//        result += CalPointLight(pointLights[i],norm,FragPos,viewDir);
-//    }
-////
-////    // 第三阶段：聚光
-//    result += CalSpotLight(spotLight,norm,FragPos,viewDir);
+//    // 第三阶段：聚光
+    result += CalSpotLight(spotLight,norm,FragPos,viewDir);
     
     
-    FragColor = texture(texture_specular2,TexCoords);
+    FragColor = vec4(result,1);
 }
