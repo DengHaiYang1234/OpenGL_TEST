@@ -12,9 +12,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
+#import "Texture.hpp"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
 /*
 
@@ -76,7 +77,7 @@ float cubeVertices[] = {
 };
 
 glm::vec3 cubePositions[] = {
-  glm::vec3( 0.0f,  0.0f,  0.0f),
+  glm::vec3( 0.0f,  0.0f,  10.0f),
   glm::vec3( 2.0f,  5.0f, -15.0f),
   glm::vec3(-1.5f, -2.2f, -2.5f),
   glm::vec3(-3.8f, -2.0f, -12.3f),
@@ -180,79 +181,26 @@ int main(int argc, const char * argv[]) {
     
     ShaderProgram ourShader("/Users/denghaiyang/OpenGL_TEST/6.坐标系统/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/6.坐标系统/fragment.glsl");
 
-    //线框模式
-//    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    Texture textureLoader;
     
-    //图像加载时翻转y轴
-    stbi_set_flip_vertically_on_load(true);
-    
-    unsigned int texture,texture1;
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&texture);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,texture);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    //宽度、高度和颜色通道的个数
-    int width,height,nrChannels;
-    unsigned char *data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container.jpeg", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载container纹理失败]" << std::endl;
-    }
-    
-    stbi_image_free(data);
-    
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&texture1);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,texture1);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/awesomeface.png", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载wall纹理失败]" << std::endl;
-    }
-    
-    
-    stbi_image_free(data);
+    unsigned int texture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container.jpeg");
+    unsigned int texture1 = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/awesomeface.png");
+
     
     
     //激活这个程序对象
     ourShader.use();
     
+    
     ourShader.set_uniform("texture1", 0);
     ourShader.set_uniform("texture2", 1);
     
-    
-    
-    //Opengl相机空间使用右手坐标系，看向-z unity使用左右坐标系，看向+z
     glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f,0.0f,-3.0));
+    
+    
+    //将相机向+Z移动了10，因为view矩阵的结果已经是将相机坐标移到了(0,0,0)的结果
+    view = glm::translate(view, glm::vec3(0.0f,0.0f,0.0));
+    view = glm::lookAt(glm::vec3(0,0,0), glm::vec3(0,0,1), glm::vec3(0,1,0));
     
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), (screenWidth * 1.0f) / (screenHeight* 1.0f), 0.1f, 100.0f);
@@ -281,16 +229,26 @@ int main(int argc, const char * argv[]) {
         glBindTexture(GL_TEXTURE_2D,texture1);
         
         glBindVertexArray(VAO);
-        for (unsigned i = 0; i < 10; i ++) {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f,0.3f,0.0f));
-            ourShader.set_uniform("model",glm::value_ptr(model));
-            ourShader.set_uniform("view",glm::value_ptr(view));
-            ourShader.set_uniform("projection",glm::value_ptr(projection));
-            glDrawArrays(GL_TRIANGLES,0,36);
-        }
+        
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, cubePositions[0]);
+        float angle = 20.0f;
+        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f,0.3f,0.0f));
+        ourShader.set_uniform("model",glm::value_ptr(model));
+        ourShader.set_uniform("view",glm::value_ptr(view));
+        ourShader.set_uniform("projection",glm::value_ptr(projection));
+        glDrawArrays(GL_TRIANGLES,0,36);
+        
+//        for (unsigned i = 0; i < 10; i ++) {
+//            glm::mat4 model = glm::mat4(1.0f);
+//            model = glm::translate(model, cubePositions[i]);
+//            float angle = 20.0f * i;
+//            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f,0.3f,0.0f));
+//            ourShader.set_uniform("model",glm::value_ptr(model));
+//            ourShader.set_uniform("view",glm::value_ptr(view));
+//            ourShader.set_uniform("projection",glm::value_ptr(projection));
+//            glDrawArrays(GL_TRIANGLES,0,36);
+//        }
 
         glBindVertexArray(0);
         
