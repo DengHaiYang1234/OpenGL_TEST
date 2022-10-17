@@ -396,6 +396,10 @@
 		BF4F964D28D5A6FD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF4F965628D5A7BA001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
 		BF4F965728D5A7BA001411C8 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF6EB1B428FD8EB8006D8233 /* FBO_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBO_fragment.glsl; sourceTree = "<group>"; };
+		BF6EB1B528FD8EB8006D8233 /* FBO_vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBO_vertex.glsl; sourceTree = "<group>"; };
+		BF6EB1B628FD926C006D8233 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF6EB1B728FD926C006D8233 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
 		BF8639B428EEAEDB00B7265E /* fragmentOutline.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragmentOutline.glsl; sourceTree = "<group>"; };
 		BF8639B528EEAEDB00B7265E /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
 		BF8639B628EEAEDB00B7265E /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
@@ -771,6 +775,10 @@
 		BF8639FE28EFFB2500B7265E /* 19.帧缓冲 */ = {
 			isa = PBXGroup;
 			children = (
+				BF6EB1B728FD926C006D8233 /* fragment.glsl */,
+				BF6EB1B628FD926C006D8233 /* vertex.glsl */,
+				BF6EB1B428FD8EB8006D8233 /* FBO_fragment.glsl */,
+				BF6EB1B528FD8EB8006D8233 /* FBO_vertex.glsl */,
 				BF8639FF28EFFB2500B7265E /* main.cpp */,
 			);
 			path = "19.帧缓冲";
