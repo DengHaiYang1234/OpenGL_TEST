@@ -13,6 +13,7 @@
 #include <string>
 #include <string_view>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
     string path;
     unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
     unsigned int TextureLoad(const char *path);
+    unsigned int LoadCubeMap(vector<string> faces);
     void SetFlipVertically(bool isFlipVert);
 };
 
