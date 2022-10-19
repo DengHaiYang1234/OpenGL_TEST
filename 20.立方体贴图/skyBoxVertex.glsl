@@ -12,7 +12,6 @@ void main()
     
     vec4 prjoPos = projection * view *  vec4(aPos, 1.0);
     
-
     gl_Position = prjoPos.xyww;
     
 }
