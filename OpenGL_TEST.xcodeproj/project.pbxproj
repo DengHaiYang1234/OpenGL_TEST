@@ -502,6 +502,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF032F6A2901863700658D7D /* redFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redFragment.glsl; sourceTree = "<group>"; };
+		BF032F6B2901863700658D7D /* redVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redVertex.glsl; sourceTree = "<group>"; };
+		BF032F6C2901925600658D7D /* blueVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blueVertex.glsl; sourceTree = "<group>"; };
+		BF032F6D2901925600658D7D /* blueFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blueFragment.glsl; sourceTree = "<group>"; };
+		BF032F6E2901925600658D7D /* greenVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greenVertex.glsl; sourceTree = "<group>"; };
+		BF032F6F2901925600658D7D /* yellowFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yellowFragment.glsl; sourceTree = "<group>"; };
+		BF032F702901925600658D7D /* yellowVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yellowVertex.glsl; sourceTree = "<group>"; };
+		BF032F712901925600658D7D /* greenFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greenFragment.glsl; sourceTree = "<group>"; };
 		BF4F963A28D593DD001411C8 /* 6.坐标系统 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "6.坐标系统"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF4F963C28D593DD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF4F964428D5963A001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
@@ -973,6 +981,14 @@
 		BF6EB1D328FEDAA2006D8233 /* 22.高级GLSL */ = {
 			isa = PBXGroup;
 			children = (
+				BF032F6D2901925600658D7D /* blueFragment.glsl */,
+				BF032F6C2901925600658D7D /* blueVertex.glsl */,
+				BF032F712901925600658D7D /* greenFragment.glsl */,
+				BF032F6E2901925600658D7D /* greenVertex.glsl */,
+				BF032F6F2901925600658D7D /* yellowFragment.glsl */,
+				BF032F702901925600658D7D /* yellowVertex.glsl */,
+				BF032F6B2901863700658D7D /* redVertex.glsl */,
+				BF032F6A2901863700658D7D /* redFragment.glsl */,
 				BF6EB1D428FEDAA2006D8233 /* main.cpp */,
 			);
 			path = "22.高级GLSL";

@@ -55,6 +55,8 @@ public:
     
     ~ShaderProgram();
     
+    constexpr unsigned ID() const noexcept { return id_; }
+    
     void use() const noexcept;
     
     void set_uniform(std::string_view name, bool value) const noexcept;
