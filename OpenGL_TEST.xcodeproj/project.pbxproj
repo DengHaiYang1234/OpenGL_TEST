@@ -510,6 +510,17 @@
 		BF032F6F2901925600658D7D /* yellowFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yellowFragment.glsl; sourceTree = "<group>"; };
 		BF032F702901925600658D7D /* yellowVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yellowVertex.glsl; sourceTree = "<group>"; };
 		BF032F712901925600658D7D /* greenFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greenFragment.glsl; sourceTree = "<group>"; };
+		BF032F732903BE0900658D7D /* GeometryShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeometryShader.glsl; sourceTree = "<group>"; };
+		BF032F74290504D200658D7D /* instanceFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = instanceFragment.glsl; sourceTree = "<group>"; };
+		BF032F75290504D200658D7D /* instanceVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = instanceVertex.glsl; sourceTree = "<group>"; };
+		BF032F77290511B900658D7D /* planet_Quom1200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet_Quom1200.png; sourceTree = "<group>"; };
+		BF032F78290511B900658D7D /* planet.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = planet.obj; sourceTree = "<group>"; };
+		BF032F79290511B900658D7D /* planet.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = planet.mtl; sourceTree = "<group>"; };
+		BF032F7B290511F300658D7D /* rock.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = rock.obj; sourceTree = "<group>"; };
+		BF032F7C290511F300658D7D /* Rock-Texture-Surface.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Rock-Texture-Surface.jpg"; sourceTree = "<group>"; };
+		BF032F7D290511F300658D7D /* rock.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = rock.mtl; sourceTree = "<group>"; };
+		BF032F7E29051AC500658D7D /* modelVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = modelVertex.glsl; sourceTree = "<group>"; };
+		BF032F7F29051AC500658D7D /* modelFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = modelFragment.glsl; sourceTree = "<group>"; };
 		BF4F963A28D593DD001411C8 /* 6.坐标系统 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "6.坐标系统"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF4F963C28D593DD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF4F964428D5963A001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
@@ -938,6 +949,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF032F76290511B900658D7D /* planet */ = {
+			isa = PBXGroup;
+			children = (
+				BF032F77290511B900658D7D /* planet_Quom1200.png */,
+				BF032F78290511B900658D7D /* planet.obj */,
+				BF032F79290511B900658D7D /* planet.mtl */,
+			);
+			path = planet;
+			sourceTree = "<group>";
+		};
+		BF032F7A290511F300658D7D /* rock */ = {
+			isa = PBXGroup;
+			children = (
+				BF032F7B290511F300658D7D /* rock.obj */,
+				BF032F7C290511F300658D7D /* Rock-Texture-Surface.jpg */,
+				BF032F7D290511F300658D7D /* rock.mtl */,
+			);
+			path = rock;
+			sourceTree = "<group>";
+		};
 		BF4F963B28D593DD001411C8 /* 6.坐标系统 */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,6 +1028,7 @@
 		BF6EB1DE28FEDAB6006D8233 /* 23.几何着色器 */ = {
 			isa = PBXGroup;
 			children = (
+				BF032F732903BE0900658D7D /* GeometryShader.glsl */,
 				BF6EB1DF28FEDAB6006D8233 /* main.cpp */,
 			);
 			path = "23.几何着色器";
@@ -1005,6 +1037,10 @@
 		BF6EB1E928FEDACE006D8233 /* 24.GPU实例化 */ = {
 			isa = PBXGroup;
 			children = (
+				BF032F7F29051AC500658D7D /* modelFragment.glsl */,
+				BF032F7E29051AC500658D7D /* modelVertex.glsl */,
+				BF032F74290504D200658D7D /* instanceFragment.glsl */,
+				BF032F75290504D200658D7D /* instanceVertex.glsl */,
 				BF6EB1EA28FEDACE006D8233 /* main.cpp */,
 			);
 			path = "24.GPU实例化";
@@ -1313,6 +1349,8 @@
 		BFF7D08128E87459009BE3CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF032F7A290511F300658D7D /* rock */,
+				BF032F76290511B900658D7D /* planet */,
 				BFF7D08228E87459009BE3CA /* nanosuit */,
 			);
 			path = Models;

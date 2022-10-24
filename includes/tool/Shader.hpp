@@ -64,6 +64,7 @@ public:
     void set_uniform(std::string_view name, unsigned int value) const noexcept;
     void set_uniform(std::string_view name, float value) const noexcept;
     void set_uniform(std::string_view name, float v1,float v2,float v3) const noexcept;
+    void set_uniform(std::string_view name, float v1,float v2)const noexcept;
     void set_uniform(std::string_view name, float v1,float v2,float v3,float v4) const noexcept;
     void set_uniform(std::string_view name,float* v) const noexcept;
     

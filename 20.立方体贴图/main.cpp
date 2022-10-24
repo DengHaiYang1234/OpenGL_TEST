@@ -264,7 +264,8 @@ int main()
     
     // load models
     // -----------
-    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
+//    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
+    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/rock/rock.obj");
     
     // render loop
     // -----------

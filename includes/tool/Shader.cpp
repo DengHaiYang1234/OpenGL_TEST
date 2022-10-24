@@ -124,6 +124,11 @@ void ShaderProgram::set_uniform(std::string_view name, float v1,float v2,float v
     glUniform3f(glGetUniformLocation(id_, name.data()), v1,v2,v3);
 }
 
+void ShaderProgram::set_uniform(std::string_view name, float v1,float v2) const noexcept
+{
+    glUniform2f(glGetUniformLocation(id_, name.data()), v1,v2);
+}
+
 void ShaderProgram::set_uniform(std::string_view name,float* v) const noexcept
 {
     //参数2：如果目标统一变量不是矩阵数组，则为1，如果是矩阵数组，则为1或更多。
