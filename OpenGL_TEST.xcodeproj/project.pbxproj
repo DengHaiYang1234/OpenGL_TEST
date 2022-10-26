@@ -529,6 +529,10 @@
 		BF4F964D28D5A6FD001411C8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF4F965628D5A7BA001411C8 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
 		BF4F965728D5A7BA001411C8 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF61C36029096A2900C32A57 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		BF61C36129096A2900C32A57 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		BF61C3622909752200C32A57 /* screenFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = screenFragment.glsl; sourceTree = "<group>"; };
+		BF61C3632909752200C32A57 /* screenVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = screenVertex.glsl; sourceTree = "<group>"; };
 		BF6EB1B428FD8EB8006D8233 /* FBO_fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBO_fragment.glsl; sourceTree = "<group>"; };
 		BF6EB1B528FD8EB8006D8233 /* FBO_vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBO_vertex.glsl; sourceTree = "<group>"; };
 		BF6EB1B628FD926C006D8233 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
@@ -1049,6 +1053,10 @@
 		BF6EB1F428FEDADC006D8233 /* 25.抗锯齿 */ = {
 			isa = PBXGroup;
 			children = (
+				BF61C3622909752200C32A57 /* screenFragment.glsl */,
+				BF61C3632909752200C32A57 /* screenVertex.glsl */,
+				BF61C36129096A2900C32A57 /* fragment.glsl */,
+				BF61C36029096A2900C32A57 /* vertex.glsl */,
 				BF6EB1F528FEDADC006D8233 /* main.cpp */,
 			);
 			path = "25.抗锯齿";
