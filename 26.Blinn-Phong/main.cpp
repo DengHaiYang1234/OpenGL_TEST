@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  10.材质
+//  26.Blinn-Phong
 //
-//  Created by 邓海洋 on 2022/9/11.
+//  Created by 邓海洋 on 2022/10/29.
 //
 
 #include <glad/glad.h>
@@ -15,15 +15,14 @@
 #import "Camera.hpp"
 #import "Texture.hpp"
 
-
-//三角形
-float vertices[] =
-{
-    //     ---- 位置 ----
-    0.5f,  0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.5f,  0.5f, 0.0f,
+float floorVertices[] = {
+    // positions          // texture Coords (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). this will cause the floor texture to repeat)
+     5.0f, -0.5f,  5.0f,0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
+    -5.0f, -0.5f,  5.0f,0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+    -5.0f, -0.5f, -5.0f,0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
+     5.0f, -0.5f,  5.0f,0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
+    -5.0f, -0.5f, -5.0f,0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
+     5.0f, -0.5f, -5.0f,0.0f,  1.0f,  0.0f,  2.0f, 2.0f
 };
 
 float cubeVertices[] = {
@@ -151,9 +150,7 @@ int main(int argc, const char * argv[]) {
     int nrAttributes;
     glGetIntegerv(GL_MAX_VERTEX_ATTRIBS,&nrAttributes);
     std::cout << "当前设备支持的最大顶点属性个数： " << nrAttributes << std::endl;
-    
-    
-    
+
     //创建VAO
     unsigned int VAO;
     glGenVertexArrays(1,&VAO);
@@ -200,15 +197,30 @@ int main(int argc, const char * argv[]) {
     glEnableVertexAttribArray(0);
     
     
+    unsigned int floorVAO,floorVBO;
+    glGenVertexArrays(1,&floorVAO);
+    glBindVertexArray(floorVAO);
+    
+    glGenBuffers(1,&floorVBO);
+    glBindBuffer(GL_ARRAY_BUFFER,floorVBO);
+    glBufferData(GL_ARRAY_BUFFER,sizeof(floorVertices),&floorVertices,GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(6 * sizeof(float)));
+    glBindVertexArray(0);
+    
+    
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingFragmentWS.glsl");
+    
+    ShaderProgram floorLightingShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/floorLightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/floorLightingFragmentWS.glsl");
     
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightFragment.glsl");
-    
-    //线框模式
-    //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    
+    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightFragment.glsl");
+        
     //光的位置
     glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
     
@@ -216,14 +228,13 @@ int main(int argc, const char * argv[]) {
     
     texture.SetFlipVertically(true);
     
-    unsigned int diffuseTex,specularTex;
+    unsigned int diffuseTex,specularTex,floorTexture;
     diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
     specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png");
+    floorTexture = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wall.jpeg");
     
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
-    
-    
     
     while (!glfwWindowShouldClose(window))
     {
@@ -250,89 +261,23 @@ int main(int argc, const char * argv[]) {
         glm::vec3 ambientColor = lightColor * glm::vec3(0.1f);//环境光
         glm::vec3 specularColor = glm::vec3(1.0f);//高光
         
-        float materialShininess = 32.0f;
+        float materialShininess = 1.0f;
                 
         //激活这个程序对象
         lightingShader.use();
         lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
         lightingShader.set_uniform("projection", glm::value_ptr(projection));
         lightingShader.set_uniform("view", glm::value_ptr(view));
-        lightingShader.set_uniform("material.diffuse",  0);
-        lightingShader.set_uniform("material.specular", 1);
-        
-        lightingShader.set_uniform("material.shininess", materialShininess);
-        lightingShader.set_uniform("matrixlight", (float)((1.0+sin(glfwGetTime()))/2+0.5));
-        lightingShader.set_uniform("matrixmove", (float)glfwGetTime());
-        lightingShader.set_uniform("lightColor", 1.0f, 1.0f, 1.0f);
-        
-        
-        //⭐️⭐️⭐️⭐️点光源
-        lightingShader.set_uniform("pointLights[0].position", pointLightPositions[0].x,pointLightPositions[0].y,pointLightPositions[0].z);
-        lightingShader.set_uniform("pointLights[0].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("pointLights[0].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("pointLights[0].specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("pointLights[0].constant",  1.0f);
-        lightingShader.set_uniform("pointLights[0].linear",    0.09f);
-        lightingShader.set_uniform("pointLights[0].quadratic", 0.032f);
-        
-        lightingShader.set_uniform("pointLights[1].position", pointLightPositions[1].x,pointLightPositions[1].y,pointLightPositions[1].z);
-        lightingShader.set_uniform("pointLights[1].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("pointLights[1].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("pointLights[1].specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("pointLights[1].constant",  1.0f);
-        lightingShader.set_uniform("pointLights[1].linear",    0.09f);
-        lightingShader.set_uniform("pointLights[1].quadratic", 0.032f);
-        
-        lightingShader.set_uniform("pointLights[2].position", pointLightPositions[2].x,pointLightPositions[2].y,pointLightPositions[2].z);
-        lightingShader.set_uniform("pointLights[2].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("pointLights[2].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("pointLights[2].specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("pointLights[2].constant",  1.0f);
-        lightingShader.set_uniform("pointLights[2].linear",    0.09f);
-        lightingShader.set_uniform("pointLights[2].quadratic", 0.032f);
-        
-        lightingShader.set_uniform("pointLights[3].position", pointLightPositions[3].x,pointLightPositions[3].y,pointLightPositions[3].z);
-        lightingShader.set_uniform("pointLights[3].ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("pointLights[3].diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("pointLights[3].specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("pointLights[3].constant",  1.0f);
-        lightingShader.set_uniform("pointLights[3].linear",    0.09f);
-        lightingShader.set_uniform("pointLights[3].quadratic", 0.032f);
-//        
-        
-        //⭐️⭐️⭐️⭐️方向光
-        lightingShader.set_uniform("directionLight.direction", -0.2f, -1.0f, -0.3f);
-        lightingShader.set_uniform("directionLight.ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("directionLight.diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("directionLight.specular", specularColor.x,specularColor.y,specularColor.z);
-        
-        //⭐️⭐️⭐️⭐️聚光灯
-        lightingShader.set_uniform("spotLight.position", camera.Position.x, camera.Position.y, camera.Position.z);
-        lightingShader.set_uniform("spotLight.direction", camera.Front.x,camera.Front.y,camera.Front.z);
-        lightingShader.set_uniform("spotLight.cutOff", glm::cos(glm::radians(12.5f)));//内切光角正弦值
-        lightingShader.set_uniform("spotLight.outerCutOff", glm::cos(glm::radians(17.5f)));//外切光角正弦值
-        lightingShader.set_uniform("spotLight.ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("spotLight.diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("spotLight.specular", specularColor.x,specularColor.y,specularColor.z);
        
+        
+        //渲染地板
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D,diffuseTex);
+        glBindTexture(GL_TEXTURE_2D,floorTexture);
         
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D,specularTex);
-    
-        glBindVertexArray(VAO);
-        
-        for(unsigned int i = 0; i < 10; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            lightingShader.set_uniform("model", glm::value_ptr(model));
-
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        glBindVertexArray(floorVAO);
+        model = glm::mat4(1.0f);
+        lightingShader.set_uniform("model", glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         
         
         lightShader.use();
@@ -342,14 +287,11 @@ int main(int argc, const char * argv[]) {
         
         glBindVertexArray(LightVAO);
         
-        for(unsigned int i = 0; i < 4; i++)
-        {
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, pointLightPositions[i]);
-            model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-            lightShader.set_uniform("model",glm::value_ptr(model));
-            glDrawArrays(GL_TRIANGLES,0,36);
-        }
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, pointLightPositions[0]);
+        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+        lightShader.set_uniform("model",glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES,0,36);
         
         /*
          双缓冲(Double Buffer)

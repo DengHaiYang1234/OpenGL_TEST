@@ -22,7 +22,7 @@ Shader::Shader(std::string_view file_path)
         source_ = ss.str();
     }
     catch (std::ifstream::failure e) {
-        std::cout << "Error::Shader::File_Not_Successfully_Read" << std::endl;
+        std::cout << "  ❎❎❎<shader源文件读取失败>❎❎❎    错误地址:" << file_path << std::endl;
     }
 }
 
@@ -45,7 +45,24 @@ VertexShader::VertexShader(std::string_view file_path)
     glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(id_, 512, nullptr, log);
-        std::cout << "ERROR:SHADER::VERTEX::COMPILEATION_FAILED\n" << log << std::endl;
+        std::cout << "  ❎❎❎<编译【顶点】着色器失败>❎❎❎  " << log << std::endl;
+    }
+}
+
+GeometryShader::GeometryShader(std::string_view file_path)
+: Shader{ file_path }
+{
+    id_ = glCreateShader(GL_GEOMETRY_SHADER);
+    auto source_str = source_.c_str();
+    glShaderSource(id_, 1, &source_str, NULL);
+    glCompileShader(id_);
+    
+    int success{};
+    char log_info[512];
+    glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        glGetShaderInfoLog(id_, 512, nullptr, log_info);
+        std::cout << "  ❎❎❎<编译【几何】着色器失败>❎❎❎  " << log_info << std::endl;
     }
 }
 
@@ -62,7 +79,7 @@ FragmentShader::FragmentShader(std::string_view file_path)
     glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(id_, 512, nullptr, log_info);
-        std::cout << "ERROR:SHADER::FRAGMENT::COMPILEATION_FAILED\n" << log_info << std::endl;
+        std::cout << "  ❎❎❎<编译【片段】着色器失败>❎❎❎  " << log_info << std::endl;
     }
 }
 
@@ -82,7 +99,28 @@ ShaderProgram::ShaderProgram(std::string_view vertex_shader, std::string_view fr
     glGetProgramiv(id_, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(id_, 512, nullptr, log_info);
-        std::cout << "ERROR:SHADER::PROGRAM::LINK_FAILED\n" << log_info << std::endl;
+        std::cout <<  "  ❎❎❎<链接【ShaderProgram】失败>❎❎❎  " << log_info << std::endl;
+    }
+}
+
+ShaderProgram::ShaderProgram(std::string_view vertex_shader, std::string_view geometry_shader,std::string_view fragment_shader): id_{ 0 }
+{
+    VertexShader vertex{ vertex_shader };
+    GeometryShader geometry{ geometry_shader };
+    FragmentShader fragment{ fragment_shader };
+    
+    id_ = glCreateProgram();
+    glAttachShader(id_, vertex.get_id());
+    glAttachShader(id_, fragment.get_id());
+    glAttachShader(id_, geometry.get_id());
+    glLinkProgram(id_);
+    
+    int success{};
+    char log_info[512];
+    glGetProgramiv(id_, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(id_, 512, nullptr, log_info);
+        std::cout <<  "  ❎❎❎<链接【ShaderProgram】失败>❎❎❎  " << log_info << std::endl;
     }
 }
 

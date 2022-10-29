@@ -39,9 +39,16 @@ protected:
     std::string source_;
 };
 
+//explicit关键字的作用就是防止类构造函数的隐式自动转换
+//https://blog.csdn.net/weixin_45525272/article/details/105996548
 class VertexShader: public Shader {
 public:
     explicit VertexShader(std::string_view file_path);
+};
+
+class GeometryShader: public Shader {
+public:
+    explicit GeometryShader(std::string_view file_path);
 };
 
 class FragmentShader: public Shader {
@@ -49,9 +56,12 @@ public:
     explicit FragmentShader(std::string_view file_path);
 };
 
+
+//https://blog.csdn.net/jiemashizhen/article/details/125628779
 class ShaderProgram {
 public:
     ShaderProgram(std::string_view vertex_shader, std::string_view fragment_shader);
+    ShaderProgram(std::string_view vertex_shader, std::string_view geometry_shader,std::string_view fragment_shader);
     
     ~ShaderProgram();
     

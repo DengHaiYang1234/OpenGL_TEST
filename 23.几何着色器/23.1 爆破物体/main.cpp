@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  23.几何着色器
+//  23.1 爆破物体
 //
-//  Created by 邓海洋 on 2022/10/18.
+//  Created by 邓海洋 on 2022/10/29.
 //
 
 #include <glad/glad.h>
@@ -84,32 +84,13 @@ int main()
     // build and compile shaders
     // -------------------------
     //
-    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/geometry.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/fragment.glsl");
+    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/23.1 爆破物体/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/23.1 爆破物体/geometry.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/23.1 爆破物体/fragment.glsl");
     
-//    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/fragment.glsl");
-   
-    float points[] = {
-        -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // 左上
-             0.5f,  0.5f, 0.0f, 1.0f, 0.0f, // 右上
-             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // 右下
-            -0.5f, -0.5f, 1.0f, 1.0f, 0.0f  // 左下
-    };
-        
-
-    unsigned int VAO,VBO;
-    glGenVertexArrays(1,&VAO);
-    glGenBuffers(1,&VBO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    glBufferData(GL_ARRAY_BUFFER,sizeof(points),&points,GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,5 * sizeof(float),(void *)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,5 * sizeof(float),(void *)(2 * sizeof(float)));
-    glBindVertexArray(0);
     
-    useShader.use();
+//    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/23.1 爆破物体/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/23.1 爆破物体/fragment.glsl");
     
+    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
+       
     // render loop
     // -----------
     while(!glfwWindowShouldClose(window))
@@ -128,29 +109,24 @@ int main()
         // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        
-//        glm::mat4 model = glm::mat4(1.0f);
-//        glm::mat4 view = camera.GetViewMatrix();
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+        glm::mat4 model = glm::mat4(1.0f);
+        glm::mat4 view = camera.GetViewMatrix();
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         
         useShader.use();
-        glBindVertexArray(VAO);
-        
-        //⚠️  这里的绘制类型，决定了几何着色器的输入绘制类型（in）
-        //lines:max_vertices>=2
-        //triangles:max_vertices》=3
-        glDrawArrays(GL_POINTS, 0, 4);
-        glBindVertexArray(0);
+        useShader.set_uniform("time", (float)glfwGetTime());
+//        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        useShader.set_uniform("model", glm::value_ptr(model));
+        useShader.set_uniform("view", glm::value_ptr(view));
+        useShader.set_uniform("projection", glm::value_ptr(projection));
+        ourModel.Draw(useShader);
         
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
         
     glfwTerminate();
     return 0;
@@ -211,4 +187,3 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
-

@@ -13,9 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#import "Texture.hpp"
 
 /*
  
@@ -213,95 +211,21 @@ int main(int argc, const char * argv[]) {
     
     
     ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightFragment.glsl");
-    
-    //线框模式
-    //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    
+        
     //光的位置
     glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
     
-    //图像加载时翻转y轴
-    stbi_set_flip_vertically_on_load(true);
+    Texture texture;
+    
+    texture.SetFlipVertically(true);
+    
     
     unsigned int diffuseTex,specularTex,emissionTex;
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&diffuseTex);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,diffuseTex);
     
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    //宽度、高度和颜色通道的个数
-    int width,height,nrChannels;
-    unsigned char *data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        //⭐️：注意图片格式是RGB 或是 RGBA
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载container2纹理失败]" << std::endl;
-    }
-    
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&specularTex);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,specularTex);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    
-    //data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png", &width, &height, &nrChannels, 0);
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/lighting_maps_specular_color.png", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        //⭐️：注意图片格式是RGB 或是 RGBA
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载container2_specular纹理失败]" << std::endl;
-    }
-    
-    
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&emissionTex);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,emissionTex);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/matrix.jpeg", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        //⭐️：注意图片格式是RGB 或是 RGBA
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载container2_specular纹理失败]" << std::endl;
-    }
-    
+    diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
+    specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/lighting_maps_specular_color.png");
+    emissionTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/matrix.jpeg");
+        
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
     
