@@ -22,7 +22,7 @@ Shader::Shader(std::string_view file_path)
         source_ = ss.str();
     }
     catch (std::ifstream::failure e) {
-        std::cout << "  ❎❎❎<shader源文件读取失败>❎❎❎    错误地址:" << file_path << std::endl;
+        std::cout << "  ❎❎❎<shader源文件读取失败>❎❎❎    错误地址:"<< "，[路径:" << file_path << "]  "   << file_path << std::endl;
     }
 }
 
@@ -45,7 +45,7 @@ VertexShader::VertexShader(std::string_view file_path)
     glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(id_, 512, nullptr, log);
-        std::cout << "  ❎❎❎<编译【顶点】着色器失败>❎❎❎  " << log << std::endl;
+        std::cout << "  ❎❎❎<编译【顶点】着色器失败>❎❎❎  "<< "，[路径:" << file_path << "]  "   << log << std::endl;
     }
 }
 
@@ -62,7 +62,7 @@ GeometryShader::GeometryShader(std::string_view file_path)
     glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(id_, 512, nullptr, log_info);
-        std::cout << "  ❎❎❎<编译【几何】着色器失败>❎❎❎  " << log_info << std::endl;
+        std::cout << "  ❎❎❎<编译【几何】着色器失败>❎❎❎  "<< "，[路径:" << file_path << "]  "   << log_info << std::endl;
     }
 }
 
@@ -79,7 +79,7 @@ FragmentShader::FragmentShader(std::string_view file_path)
     glGetShaderiv(id_, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(id_, 512, nullptr, log_info);
-        std::cout << "  ❎❎❎<编译【片段】着色器失败>❎❎❎  " << log_info << std::endl;
+        std::cout << "  ❎❎❎<编译【片段】着色器失败>❎❎❎  " << "，[路径:" << file_path << "]  "  << log_info << std::endl;
     }
 }
 

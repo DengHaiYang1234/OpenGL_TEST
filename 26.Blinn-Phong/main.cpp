@@ -26,69 +26,47 @@ float floorVertices[] = {
 };
 
 float cubeVertices[] = {
-        // positions          // normals           // texture coords
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
-};
-
-glm::vec3 cubePositions[] = {
-    glm::vec3( 0.0f,  0.0f,  0.0f),
-    glm::vec3( 2.0f,  5.0f, -15.0f),
-    glm::vec3(-1.5f, -2.2f, -2.5f),
-    glm::vec3(-3.8f, -2.0f, -12.3f),
-    glm::vec3( 2.4f, -0.4f, -3.5f),
-    glm::vec3(-1.7f,  3.0f, -7.5f),
-    glm::vec3( 1.3f, -2.0f, -2.5f),
-    glm::vec3( 1.5f,  2.0f, -2.5f),
-    glm::vec3( 1.5f,  0.2f, -1.5f),
-    glm::vec3(-1.3f,  1.0f, -1.5f)
-};
-
-//点光源位置
-glm::vec3 pointLightPositions[] = {
-    glm::vec3( 0.7f,  0.2f,  2.0f),
-    glm::vec3( 2.3f, -3.3f, -4.0f),
-    glm::vec3(-4.0f,  2.0f, -12.0f),
-    glm::vec3( 0.0f,  0.0f, -3.0f)
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 };
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
@@ -147,92 +125,26 @@ int main(int argc, const char * argv[]) {
     //设置视口大小
     glViewport(0,0,800,600);
     
-    int nrAttributes;
-    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS,&nrAttributes);
-    std::cout << "当前设备支持的最大顶点属性个数： " << nrAttributes << std::endl;
-
-    //创建VAO
-    unsigned int VAO;
-    glGenVertexArrays(1,&VAO);
-    glBindVertexArray(VAO);
     
-    //VBO
-    unsigned int VBO;
-    //一个缓冲ID生成一个VBO对象
-    glGenBuffers(1,&VBO);
-    
-    //绑定VBO
-    //创建的缓冲绑定到GL_ARRAY_BUFFER目标上
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    //把之前定义的顶点数据复制到缓冲的内存中
-    /*
-     GL_STATIC_DRAW ：数据不会或几乎不会改变。
-     GL_DYNAMIC_DRAW：数据会被改变很多。
-     GL_STREAM_DRAW ：数据每次绘制时都会改变。
-     */
-    glBufferData(GL_ARRAY_BUFFER,sizeof(cubeVertices),cubeVertices,GL_STATIC_DRAW);
-    
-    //解析位置数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
-    
-    //以顶点属性位置值作为参数，启用顶点属性
-    glEnableVertexAttribArray(0);
-    
-    //解析法线数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    
-    //解析纹理坐标数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    
-    unsigned int LightVAO;
+    unsigned int LightVAO,LightVBO;
     glGenVertexArrays(1,&LightVAO);
     glBindVertexArray(LightVAO);
+    
+    glGenBuffers(1,&LightVBO);
     // 只需要绑定VBO不用再次设置VBO的数据，因为箱子的VBO数据中已经包含了正确的立方体顶点数据
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    //设置灯立方体的顶点属性（对我们的灯来说仅仅只有位置数据）
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER,LightVBO);
+    glBufferData(GL_ARRAY_BUFFER,sizeof(cubeVertices),&cubeVertices[0],GL_STATIC_DRAW);
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(0);
-    
-    
-    unsigned int floorVAO,floorVBO;
-    glGenVertexArrays(1,&floorVAO);
-    glBindVertexArray(floorVAO);
-    
-    glGenBuffers(1,&floorVBO);
-    glBindBuffer(GL_ARRAY_BUFFER,floorVBO);
-    glBufferData(GL_ARRAY_BUFFER,sizeof(floorVertices),&floorVertices,GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,6 * sizeof(float),(void*)0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(6 * sizeof(float)));
-    glBindVertexArray(0);
-    
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6 * sizeof(float),(void*)(3 * sizeof(float)));
     
     //世界空间的光照实现
     ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingFragmentWS.glsl");
     
-    ShaderProgram floorLightingShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/floorLightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/floorLightingFragmentWS.glsl");
-    
-    
     ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightFragment.glsl");
-        
-    //光的位置
-    glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
-    
-    Texture texture;
-    
-    texture.SetFlipVertically(true);
-    
-    unsigned int diffuseTex,specularTex,floorTexture;
-    diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png");
-    floorTexture = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wall.jpeg");
-    
+            
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
     
@@ -257,40 +169,39 @@ int main(int argc, const char * argv[]) {
         glm::mat4 model = glm::mat4(1.0f);
         
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 diffuseColor = lightColor * glm::vec3(0.8f);//漫反射
-        glm::vec3 ambientColor = lightColor * glm::vec3(0.1f);//环境光
-        glm::vec3 specularColor = glm::vec3(1.0f);//高光
         
-        float materialShininess = 1.0f;
-                
-        //激活这个程序对象
-        lightingShader.use();
-        lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
-        lightingShader.set_uniform("projection", glm::value_ptr(projection));
-        lightingShader.set_uniform("view", glm::value_ptr(view));
-       
-        
-        //渲染地板
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D,floorTexture);
-        
-        glBindVertexArray(floorVAO);
-        model = glm::mat4(1.0f);
-        lightingShader.set_uniform("model", glm::value_ptr(model));
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        
-        
+        glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+
         lightShader.use();
         lightShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
         lightShader.set_uniform("projection", glm::value_ptr(projection));
         lightShader.set_uniform("view", glm::value_ptr(view));
         
-        glBindVertexArray(LightVAO);
-        
         model = glm::mat4(1.0f);
-        model = glm::translate(model, pointLightPositions[0]);
+        model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
         lightShader.set_uniform("model",glm::value_ptr(model));
+        
+        glBindVertexArray(LightVAO);
+        glDrawArrays(GL_TRIANGLES,0,36);
+        
+        lightingShader.use();
+        model = glm::mat4(1.0f);
+        lightingShader.set_uniform("projection", glm::value_ptr(projection));
+        lightingShader.set_uniform("view", glm::value_ptr(view));
+        lightingShader.set_uniform("model", glm::value_ptr(model));
+
+        
+        lightingShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        lightingShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
+        
+        glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
+        lightingShader.set_uniform("objectColor", objectColor.x, objectColor.y, objectColor.z);
+        lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
+        lightingShader.set_uniform("shininess", 0.1f);
+        
+        
+        glBindVertexArray(LightVAO);
         glDrawArrays(GL_TRIANGLES,0,36);
         
         /*
@@ -305,9 +216,9 @@ int main(int argc, const char * argv[]) {
         glfwPollEvents();
     }
     
-    glDeleteVertexArrays(1, &VAO);
+    
     glDeleteVertexArrays(1, &LightVAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &LightVBO);
     
     glfwTerminate();
     return  0;

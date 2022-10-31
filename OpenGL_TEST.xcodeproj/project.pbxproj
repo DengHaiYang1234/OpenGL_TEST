@@ -1086,9 +1086,9 @@
 				BF0AEA60290D68FC00577BE6 /* floorLightingFragmentWS.glsl */,
 				BF0AEA5F290D68FB00577BE6 /* floorLightingVertexWS.glsl */,
 				BF0AEA5B290D656D00577BE6 /* lightFragment.glsl */,
+				BF0AEA5E290D656E00577BE6 /* lightVertex.glsl */,
 				BF0AEA5C290D656D00577BE6 /* lightingFragmentWS.glsl */,
 				BF0AEA5D290D656D00577BE6 /* lightingVertexWS.glsl */,
-				BF0AEA5E290D656E00577BE6 /* lightVertex.glsl */,
 				BF0AEA4D290D5D6A00577BE6 /* main.cpp */,
 			);
 			path = "26.Blinn-Phong";
