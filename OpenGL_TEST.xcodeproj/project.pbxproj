@@ -674,6 +674,8 @@
 		BFA0DCD12911665F0077D19E /* lightViewFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightViewFragment.glsl; sourceTree = "<group>"; };
 		BFA0DCD22911665F0077D19E /* lightObjectFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightObjectFragment.glsl; sourceTree = "<group>"; };
 		BFA0DCD32911665F0077D19E /* lightViewVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightViewVertex.glsl; sourceTree = "<group>"; };
+		BFA0DCD42912A0C10077D19E /* quadVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quadVertex.glsl; sourceTree = "<group>"; };
+		BFA0DCD52912A0C10077D19E /* quadFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quadFragment.glsl; sourceTree = "<group>"; };
 		BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/Cellar/glfw/3.3.6/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../usr/local/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		BFDA862A28CDAE52000C70E1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1289,6 +1291,8 @@
 		BFA0DCBC291150AF0077D19E /* 27.阴影映射 */ = {
 			isa = PBXGroup;
 			children = (
+				BFA0DCD52912A0C10077D19E /* quadFragment.glsl */,
+				BFA0DCD42912A0C10077D19E /* quadVertex.glsl */,
 				BFA0DCD02911665F0077D19E /* lightObjectVertex.glsl */,
 				BFA0DCD22911665F0077D19E /* lightObjectFragment.glsl */,
 				BFA0DCD32911665F0077D19E /* lightViewVertex.glsl */,

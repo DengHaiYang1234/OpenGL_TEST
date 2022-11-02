@@ -5,6 +5,7 @@
 //  Created by 邓海洋 on 2022/11/1.
 //
 
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -75,6 +76,7 @@ int main(int argc, const char * argv[]) {
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
     //GLAD是用来管理OpenGL的函数指针的，所以在调用任何OpenGL的函数之前我们需要初始化GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -84,7 +86,7 @@ int main(int argc, const char * argv[]) {
     }
     
     //设置视口大小
-    glViewport(0,0,800,600);
+    glViewport(0, 0, screenWidth, screenHeight);
     
     //世界空间的光照实现
     ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/27.阴影映射/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/27.阴影映射/lightingFragmentWS.glsl");
@@ -93,10 +95,12 @@ int main(int argc, const char * argv[]) {
     
     ShaderProgram lightViewShader("/Users/denghaiyang/OpenGL_TEST/27.阴影映射/lightViewVertex.glsl","/Users/denghaiyang/OpenGL_TEST/27.阴影映射/lightViewFragment.glsl");
     
+    ShaderProgram quadShader("/Users/denghaiyang/OpenGL_TEST/27.阴影映射/quadVertex.glsl","/Users/denghaiyang/OpenGL_TEST/27.阴影映射/quadFragment.glsl");
+    
     unsigned int woodIndex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wood.png");
-    lightingShader.set_uniform("wood", 0);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D,woodIndex);
+//    lightingShader.set_uniform("wood", 0);
+//    glActiveTexture(GL_TEXTURE0);
+//    glBindTexture(GL_TEXTURE_2D,woodIndex);
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
     
@@ -123,17 +127,20 @@ int main(int argc, const char * argv[]) {
     glReadBuffer(GL_NONE);
     glBindFramebuffer(GL_FRAMEBUFFER,0);
     
+    //当调用glClear函数，清除颜色缓冲之后，整个颜色缓冲都会被填充为glClearColor里所设置的颜色
+    //glClearColor函数是一个状态设置函数，而glClear函数则是一个状态使用的函数，它使用了当前的状态来获取应该清除为的颜色
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    
     while (!glfwWindowShouldClose(window))
     {
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
         
+        glfwPollEvents();
         processInput(window);
         
-        //当调用glClear函数，清除颜色缓冲之后，整个颜色缓冲都会被填充为glClearColor里所设置的颜色
-        //glClearColor函数是一个状态设置函数，而glClear函数则是一个状态使用的函数，它使用了当前的状态来获取应该清除为的颜色
-        glClearColor(0.1f,0.1f,0,1);
+        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
@@ -155,32 +162,41 @@ int main(int argc, const char * argv[]) {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, woodIndex);
         RenderScene(lightViewShader);
-        glBindFramebuffer(GL_FRAMEBUFFER,0);
         
-        //2.正常渲染场景，并使用之前生成的深度图
-        glViewport(0,0,screenWidth,screenHeight);
+        //不是很理解哈？暂时先这样写
+        unsigned int h = 1600;
+////        //2.正常渲染场景，并使用之前生成的深度图
+        glBindFramebuffer(GL_FRAMEBUFFER,0);
+        glViewport(0, 0, h * 800.0f / 600.0f, h);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         lightingShader.use();
         lightingShader.set_uniform("projection", glm::value_ptr(projection));
         lightingShader.set_uniform("view", glm::value_ptr(view));
+        lightingShader.set_uniform("lightSpaceMatrix", glm::value_ptr(lightSpaceVPMatrix));
         lightingShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
         lightingShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
         lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
         lightingShader.set_uniform("shininess", 0.1f);
-        lightingShader.set_uniform("depthMap", 1);
+        lightingShader.set_uniform("shadowMap", 1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D,depthMap);
-        
-        
+
         RenderScene(lightingShader);
-        
+
         //渲染一个灯光的obj
         lightObjectShader.use();
         lightObjectShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
         lightObjectShader.set_uniform("projection", glm::value_ptr(projection));
         lightObjectShader.set_uniform("view", glm::value_ptr(view));
         RenderLightObject(lightObjectShader);
+        
+        //将深度信息渲染至屏幕
+        quadShader.use();
+        quadShader.set_uniform("shadowMap", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D,depthMap);
+//        RenderQuad();
     
         /*
          双缓冲(Double Buffer)
@@ -191,7 +207,7 @@ int main(int argc, const char * argv[]) {
         //交换颜色缓冲（它是一个储存着GLFW窗口每一个像素颜色值的大缓冲），它在这一迭代中被用来绘制，并且将会作为输出显示在屏幕上
         glfwSwapBuffers(window);
         //glfwPollEvents函数检查有没有触发什么事件（比如键盘输入、鼠标移动等）、更新窗口状态，并调用对应的回调函数（可以通过回调方法手动设置）。
-        glfwPollEvents();
+//        glfwPollEvents();
     }
     
     glfwTerminate();
