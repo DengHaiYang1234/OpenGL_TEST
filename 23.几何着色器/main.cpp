@@ -89,7 +89,7 @@ int main()
 //    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/fragment.glsl");
    
     float points[] = {
-        -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // 左上
+            -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // 左上
              0.5f,  0.5f, 0.0f, 1.0f, 0.0f, // 右上
              0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // 右下
             -0.5f, -0.5f, 1.0f, 1.0f, 0.0f  // 左下

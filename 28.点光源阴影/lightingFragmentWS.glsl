@@ -11,55 +11,69 @@ uniform vec3 viewPos;
 uniform float shininess;
 
 uniform sampler2D wood;
-uniform sampler2D shadowMap;
+uniform samplerCube depthMap;
+
+uniform float far_plane;
 
 in VS_OUT
 {
     vec3 FragPos;
     vec3 Normal;
     vec2 TexCoords;
-    vec4 FragPosLightSpace;
 }fs_in;
 
-float ShadowCalculation(vec4 fragPosLightSpace,vec3 normal,vec3 lightDir)
+float ShadowCalculation(vec3 fragPos)
 {
-    //进行齐次裁剪，将xyz归为[-1,1]区间
-    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-    //投影值屏幕坐标
-    projCoords = projCoords *  0.5 + 0.5;
+    vec3 fragToLight = fragPos - lightPos;
     
-    //获取当前片段在光照空间下最近的深度值
-    float closestDepth = texture(shadowMap,projCoords.xy).r;
-        
-    //当前片段的在光照空间的实际深度值
-    float currentDepth = projCoords.z;
+    float closestDepth = texture(depthMap,fragToLight).r;
     
-    //阴影偏移，用于解决阴影失真的问题
-    //表面法线与光照方向的点积决定偏移程度，若光照与法线相互垂直，则说明不太需要偏移，反之亦然
-    float bias = max(0.05 * (1.0 - dot(normal,lightDir)),0.005);
+    //转为实际深度
+    closestDepth *= far_plane;
     
-    //若当前深度值大于最近的深度值，说明在阴影里，反之亦然
+    //当前片段与光照的距离
+    float currentDepth = length(fragToLight);
+
+    float bias = 0.05;
+    float samples = 4.0;
+    float offset = 0.1;
     float shadow = 0;
+    float viewDistance = length(viewPos - fragPos);
+    float diskRadius = (1.0 + (viewDistance / far_plane)) / 25.0;
     
-    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
-    for (int x = -1; x <= 1; ++x) {
-        for (int y = -1; y <= 1; y++) {
-            float curClosestDepth = texture(shadowMap,projCoords.xy + vec2(x,y) * texelSize).r;
-            shadow += currentDepth - bias > curClosestDepth  ? 1.0 : 0.0;
-        }
+    vec3 sampleOffsetDirections[20] = vec3[]
+    (
+       vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
+       vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
+       vec3( 1,  1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1,  1,  0),
+       vec3( 1,  0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1,  0, -1),
+       vec3( 0,  1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0,  1, -1)
+    );
+    
+    for(int i = 0; i < samples; ++i)
+    {
+        float closestDepth = texture(depthMap, fragToLight + sampleOffsetDirections[i] * diskRadius).r;
+        closestDepth *= far_plane;   // Undo mapping [0;1]
+        if(currentDepth - bias > closestDepth)
+            shadow += 1.0;
     }
     
-    shadow /= 9;
-    
-    //解决超出视锥体范围的区域被判定为阴影的情况，这里要么增加视锥体的远平面，要么判定深度>1.
-    if(projCoords.z > 1.0)
-        shadow = 0.0;
-    
+    shadow /= float(samples);
+
     return shadow;
 }
 
 void main()
 {
+    //调试cube
+//    vec3 fragToLight = fs_in.FragPos - lightPos;
+//    float depth = texture(depthMap,fragToLight).r;
+//
+//    FragColor = vec4(depth,depth,depth,1);
+    
+    
+    vec3 objectColor = texture(wood,fs_in.TexCoords).rgb;
+
     //基于世界空间的光照计算
     vec3 normal = normalize(fs_in.Normal);
     vec3 lightDir = normalize(lightPos - fs_in.FragPos);
@@ -86,20 +100,18 @@ void main()
 
     //⚠️：若光源在表面以下，那么半程向量与表面法线之间的夹角还是会超过90度。
     vec3 halfwayDir = normalize(lightDir+viewDir);
-    
+
     //⭐️：如果场景特别亮，物体四周后方阴影特别明显的假，改一下反射度试试
     float spec = pow(max (dot(viewDir, halfwayDir), 0.0), 64);
 
     float specularStrength = 0.5;
     vec3 specular = specularStrength * spec * lightColor.rgb;
 
-    vec3 objectColor = texture(wood,fs_in.TexCoords).rgb;
-    
     //阴影计算
-    float shadow = ShadowCalculation(fs_in.FragPosLightSpace,normal,lightDir);
-    
+    float shadow = ShadowCalculation(fs_in.FragPos);
+
     shadow = min(shadow, 0.75);
-        
+
     vec3 result = (ambient + (1.0 - shadow) * ( diffuse + specular)) * objectColor;
 
     FragColor = vec4(result,1);

@@ -77,7 +77,7 @@ float cubeVertices[] = {
 };
 
 glm::vec3 cubePositions[] = {
-  glm::vec3( 0.0f,  0.0f,  10.0f),
+  glm::vec3( 0.0f,  0.0f,  -1.0),
   glm::vec3( 2.0f,  5.0f, -15.0f),
   glm::vec3(-1.5f, -2.2f, -2.5f),
   glm::vec3(-3.8f, -2.0f, -12.3f),
@@ -199,11 +199,16 @@ int main(int argc, const char * argv[]) {
     
     
     //将相机向+Z移动了10，因为view矩阵的结果已经是将相机坐标移到了(0,0,0)的结果
-    view = glm::translate(view, glm::vec3(0.0f,0.0f,0.0));
-    view = glm::lookAt(glm::vec3(0,0,0), glm::vec3(0,0,1), glm::vec3(0,1,0));
+//    view = glm::translate(view, glm::vec3(0.0f,0.0f,0.0));
+    view = glm::lookAt(glm::vec3(0,0.0,-1), glm::vec3(0,0,0), glm::vec3(0,1,0));
     
-    glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), (screenWidth * 1.0f) / (screenHeight* 1.0f), 0.1f, 100.0f);
+    GLfloat aspect = (GLfloat)screenWidth/(GLfloat)screenHeight;
+    GLfloat near = 1.0f;
+    GLfloat far = 25.0f;
+    glm::mat4 shadowProj = glm::perspective(glm::radians(90.0f), aspect, near, far);
+    
+    glm::mat4 projection = shadowProj;
+//    projection = glm::perspective(glm::radians(90.0f), aspect, near, far);
     
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
@@ -231,9 +236,10 @@ int main(int argc, const char * argv[]) {
         glBindVertexArray(VAO);
         
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, cubePositions[0]);
-        float angle = 20.0f;
-        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f,0.3f,0.0f));
+        model = glm::translate(model, glm::vec3( 0.0f,  0.0f,  -1.0));
+//        float angle = 20.0f;
+//        model = glm::translate(model, cubePositions[i]);
+//        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f,0.3f,5.0f));
         ourShader.set_uniform("model",glm::value_ptr(model));
         ourShader.set_uniform("view",glm::value_ptr(view));
         ourShader.set_uniform("projection",glm::value_ptr(projection));
