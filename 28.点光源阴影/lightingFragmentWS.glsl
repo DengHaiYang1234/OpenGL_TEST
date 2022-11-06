@@ -73,7 +73,7 @@ void main()
     
     
     vec3 objectColor = texture(wood,fs_in.TexCoords).rgb;
-
+    
     //基于世界空间的光照计算
     vec3 normal = normalize(fs_in.Normal);
     vec3 lightDir = normalize(lightPos - fs_in.FragPos);
