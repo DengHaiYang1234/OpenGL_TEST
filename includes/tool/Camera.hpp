@@ -65,6 +65,15 @@ public:
     {
         return glm::lookAt(Position, Position + Front, Up);
     }
+    
+    // mac视网膜屏幕在使用framebuffer渲染之后，解绑的时候需要放大两倍，不然会出现显示不全的问题;
+    // 若外接显示器，不需要这个方法
+    void 解决Mac视网膜屏幕显示不全的问题(bool scale2x,float screenWidth,float screenHeight)
+    {
+        float scale = scale2x ? 2.0 : 1.0;
+        glViewport(0,0,screenWidth * scale,screenHeight * scale);
+    }
+
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)

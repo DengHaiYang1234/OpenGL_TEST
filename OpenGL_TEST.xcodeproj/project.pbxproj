@@ -220,6 +220,26 @@
 		BFDE08A1291BE39D00622C86 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
 		BFDE08A2291BE39D00622C86 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06F28E87383009BE3CA /* Shader.cpp */; };
 		BFDE08A3291BE39D00622C86 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDE08B3291C99AD00622C86 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDE08B2291C99AD00622C86 /* main.cpp */; };
+		BFDE08B7291C99C200622C86 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D07128E87383009BE3CA /* Model.cpp */; };
+		BFDE08B8291C99C200622C86 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDE08B9291C99C200622C86 /* libassimp.5.1.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF7CFE328E482BA009BE3CA /* libassimp.5.1.6.dylib */; };
+		BFDE08BA291C99C200622C86 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
+		BFDE08BB291C99C200622C86 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06C28E87383009BE3CA /* Mesh.cpp */; };
+		BFDE08BC291C99C200622C86 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06F28E87383009BE3CA /* Shader.cpp */; };
+		BFDE08BD291C99C200622C86 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06D28E87383009BE3CA /* Camera.cpp */; };
+		BFDE08BE291C99C200622C86 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D0D128E87E81009BE3CA /* Texture.cpp */; };
+		BFDE08BF291C99C200622C86 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDE08CF291D36ED00622C86 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDE08CE291D36ED00622C86 /* main.cpp */; };
+		BFDE08D3291D36FB00622C86 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = BFDA866728CED3B1000C70E1 /* glad.c */; };
+		BFDE08D4291D36FB00622C86 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D0D128E87E81009BE3CA /* Texture.cpp */; };
+		BFDE08D5291D36FB00622C86 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06D28E87383009BE3CA /* Camera.cpp */; };
+		BFDE08D6291D36FB00622C86 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06C28E87383009BE3CA /* Mesh.cpp */; };
+		BFDE08D7291D36FB00622C86 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D06F28E87383009BE3CA /* Shader.cpp */; };
+		BFDE08D8291D36FB00622C86 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF7D07128E87383009BE3CA /* Model.cpp */; };
+		BFDE08D9291D36FB00622C86 /* libassimp.5.1.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF7CFE328E482BA009BE3CA /* libassimp.5.1.6.dylib */; };
+		BFDE08DA291D36FB00622C86 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
+		BFDE08DB291D36FB00622C86 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
 		BFF5C83728DC9BB9008893A1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF5C83628DC9BB9008893A1 /* main.cpp */; };
 		BFF5C83D28DC9BD0008893A1 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862628CDAE2B000C70E1 /* libglfw.3.3.dylib */; };
 		BFF5C83E28DC9BD0008893A1 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDA862828CDAE46000C70E1 /* libGLEW.2.2.0.dylib */; };
@@ -589,6 +609,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		BFDE08AE291C99AC00622C86 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFDE08CA291D36ED00622C86 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		BFF5C83228DC9BB9008893A1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,6 +880,34 @@
 		BFDE08A9291BE4B900622C86 /* hdrVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hdrVertex.glsl; sourceTree = "<group>"; };
 		BFDE08AA291BED4800622C86 /* blurFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blurFragment.glsl; sourceTree = "<group>"; };
 		BFDE08AB291BED4800622C86 /* blurVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blurVertex.glsl; sourceTree = "<group>"; };
+		BFDE08B0291C99AC00622C86 /* 33.延迟渲染 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "33.延迟渲染"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDE08B2291C99AD00622C86 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDE08C0291CA55D00622C86 /* gBufferVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gBufferVertex.glsl; sourceTree = "<group>"; };
+		BFDE08C1291CA55D00622C86 /* gBufferFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gBufferFragment.glsl; sourceTree = "<group>"; };
+		BFDE08C2291CAC9200622C86 /* previewVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewVertex.glsl; sourceTree = "<group>"; };
+		BFDE08C3291CAC9200622C86 /* previewFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewFragment.glsl; sourceTree = "<group>"; };
+		BFDE08C4291CC89800622C86 /* lightingFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingFragment.glsl; sourceTree = "<group>"; };
+		BFDE08C5291CC89800622C86 /* lightingVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingVertex.glsl; sourceTree = "<group>"; };
+		BFDE08C6291CD7C500622C86 /* lightObjectVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightObjectVertex.glsl; sourceTree = "<group>"; };
+		BFDE08C7291CD7C600622C86 /* lightObjectFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightObjectFragment.glsl; sourceTree = "<group>"; };
+		BFDE08CC291D36ED00622C86 /* 34.环境光遮蔽SSAO */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "34.环境光遮蔽SSAO"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDE08CE291D36ED00622C86 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		BFDE08DC291D37AA00622C86 /* gBufferVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gBufferVertex.glsl; sourceTree = "<group>"; };
+		BFDE08DD291D37AA00622C86 /* lightObjectFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightObjectFragment.glsl; sourceTree = "<group>"; };
+		BFDE08DE291D37AA00622C86 /* lightObjectVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightObjectVertex.glsl; sourceTree = "<group>"; };
+		BFDE08DF291D37AA00622C86 /* lightingVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingVertex.glsl; sourceTree = "<group>"; };
+		BFDE08E0291D37AA00622C86 /* lightingFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lightingFragment.glsl; sourceTree = "<group>"; };
+		BFDE08E1291D37AA00622C86 /* gBufferFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gBufferFragment.glsl; sourceTree = "<group>"; };
+		BFDE08E3291D392C00622C86 /* source_attribution.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = source_attribution.txt; sourceTree = "<group>"; };
+		BFDE08E4291D392C00622C86 /* backpack.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = backpack.obj; sourceTree = "<group>"; };
+		BFDE08E5291D392C00622C86 /* diffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = diffuse.jpg; sourceTree = "<group>"; };
+		BFDE08E6291D392C00622C86 /* specular.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = specular.jpg; sourceTree = "<group>"; };
+		BFDE08E7291D392C00622C86 /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
+		BFDE08E8291D392C00622C86 /* ao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ao.jpg; sourceTree = "<group>"; };
+		BFDE08E9291D392C00622C86 /* roughness.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = roughness.jpg; sourceTree = "<group>"; };
+		BFDE08EA291D392C00622C86 /* backpack.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = backpack.mtl; sourceTree = "<group>"; };
+		BFDE08EB291D3F3900622C86 /* previewFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewFragment.glsl; sourceTree = "<group>"; };
+		BFDE08EC291D3F3900622C86 /* previewVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = previewVertex.glsl; sourceTree = "<group>"; };
 		BFF5C83428DC9BB9008893A1 /* 8.颜色 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "8.颜色"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF5C83628DC9BB9008893A1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BFF5C84028DC9DB9008893A1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
@@ -1194,6 +1260,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFDE08AD291C99AC00622C86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDE08BA291C99C200622C86 /* libglfw.3.3.dylib in Frameworks */,
+				BFDE08B8291C99C200622C86 /* libGLEW.2.2.0.dylib in Frameworks */,
+				BFDE08B9291C99C200622C86 /* libassimp.5.1.6.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDE08C9291D36ED00622C86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDE08DB291D36FB00622C86 /* libglfw.3.3.dylib in Frameworks */,
+				BFDE08D9291D36FB00622C86 /* libassimp.5.1.6.dylib in Frameworks */,
+				BFDE08DA291D36FB00622C86 /* libGLEW.2.2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFF5C83128DC9BB9008893A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1539,6 +1625,8 @@
 				BFDE085C2919F60000622C86 /* 30.视差贴图 */,
 				BFDE0877291A8FAF00622C86 /* 31.HDR */,
 				BFDE0895291BE38600622C86 /* 32.泛光 */,
+				BFDE08B1291C99AD00622C86 /* 33.延迟渲染 */,
+				BFDE08CD291D36ED00622C86 /* 34.环境光遮蔽SSAO */,
 				BFDA861C28CDAC02000C70E1 /* Products */,
 				BFDA862528CDAE2B000C70E1 /* Frameworks */,
 			);
@@ -1581,6 +1669,8 @@
 				BFDE085B2919F60000622C86 /* 30.视差贴图 */,
 				BFDE0876291A8FAF00622C86 /* 31.HDR */,
 				BFDE0894291BE38600622C86 /* 32.泛光 */,
+				BFDE08B0291C99AC00622C86 /* 33.延迟渲染 */,
+				BFDE08CC291D36ED00622C86 /* 34.环境光遮蔽SSAO */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1718,6 +1808,53 @@
 			path = "32.泛光";
 			sourceTree = "<group>";
 		};
+		BFDE08B1291C99AD00622C86 /* 33.延迟渲染 */ = {
+			isa = PBXGroup;
+			children = (
+				BFDE08C7291CD7C600622C86 /* lightObjectFragment.glsl */,
+				BFDE08C6291CD7C500622C86 /* lightObjectVertex.glsl */,
+				BFDE08C4291CC89800622C86 /* lightingFragment.glsl */,
+				BFDE08C5291CC89800622C86 /* lightingVertex.glsl */,
+				BFDE08C3291CAC9200622C86 /* previewFragment.glsl */,
+				BFDE08C2291CAC9200622C86 /* previewVertex.glsl */,
+				BFDE08C1291CA55D00622C86 /* gBufferFragment.glsl */,
+				BFDE08C0291CA55D00622C86 /* gBufferVertex.glsl */,
+				BFDE08B2291C99AD00622C86 /* main.cpp */,
+			);
+			path = "33.延迟渲染";
+			sourceTree = "<group>";
+		};
+		BFDE08CD291D36ED00622C86 /* 34.环境光遮蔽SSAO */ = {
+			isa = PBXGroup;
+			children = (
+				BFDE08EB291D3F3900622C86 /* previewFragment.glsl */,
+				BFDE08EC291D3F3900622C86 /* previewVertex.glsl */,
+				BFDE08E1291D37AA00622C86 /* gBufferFragment.glsl */,
+				BFDE08DC291D37AA00622C86 /* gBufferVertex.glsl */,
+				BFDE08E0291D37AA00622C86 /* lightingFragment.glsl */,
+				BFDE08DF291D37AA00622C86 /* lightingVertex.glsl */,
+				BFDE08DD291D37AA00622C86 /* lightObjectFragment.glsl */,
+				BFDE08DE291D37AA00622C86 /* lightObjectVertex.glsl */,
+				BFDE08CE291D36ED00622C86 /* main.cpp */,
+			);
+			path = "34.环境光遮蔽SSAO";
+			sourceTree = "<group>";
+		};
+		BFDE08E2291D392C00622C86 /* backpack */ = {
+			isa = PBXGroup;
+			children = (
+				BFDE08E3291D392C00622C86 /* source_attribution.txt */,
+				BFDE08E4291D392C00622C86 /* backpack.obj */,
+				BFDE08E5291D392C00622C86 /* diffuse.jpg */,
+				BFDE08E6291D392C00622C86 /* specular.jpg */,
+				BFDE08E7291D392C00622C86 /* normal.png */,
+				BFDE08E8291D392C00622C86 /* ao.jpg */,
+				BFDE08E9291D392C00622C86 /* roughness.jpg */,
+				BFDE08EA291D392C00622C86 /* backpack.mtl */,
+			);
+			path = backpack;
+			sourceTree = "<group>";
+		};
 		BFF5C83528DC9BB9008893A1 /* 8.颜色 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1850,6 +1987,7 @@
 		BFF7D08128E87459009BE3CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFDE08E2291D392C00622C86 /* backpack */,
 				BF032F7A290511F300658D7D /* rock */,
 				BF032F76290511B900658D7D /* planet */,
 				BFF7D08228E87459009BE3CA /* nanosuit */,
@@ -2334,6 +2472,40 @@
 			productReference = BFDE0894291BE38600622C86 /* 32.泛光 */;
 			productType = "com.apple.product-type.tool";
 		};
+		BFDE08AF291C99AC00622C86 /* 33.延迟渲染 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDE08B6291C99AD00622C86 /* Build configuration list for PBXNativeTarget "33.延迟渲染" */;
+			buildPhases = (
+				BFDE08AC291C99AC00622C86 /* Sources */,
+				BFDE08AD291C99AC00622C86 /* Frameworks */,
+				BFDE08AE291C99AC00622C86 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "33.延迟渲染";
+			productName = "33.延迟渲染";
+			productReference = BFDE08B0291C99AC00622C86 /* 33.延迟渲染 */;
+			productType = "com.apple.product-type.tool";
+		};
+		BFDE08CB291D36ED00622C86 /* 34.环境光遮蔽SSAO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFDE08D0291D36ED00622C86 /* Build configuration list for PBXNativeTarget "34.环境光遮蔽SSAO" */;
+			buildPhases = (
+				BFDE08C8291D36ED00622C86 /* Sources */,
+				BFDE08C9291D36ED00622C86 /* Frameworks */,
+				BFDE08CA291D36ED00622C86 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "34.环境光遮蔽SSAO";
+			productName = "34.环境光遮蔽SSAO";
+			productReference = BFDE08CC291D36ED00622C86 /* 34.环境光遮蔽SSAO */;
+			productType = "com.apple.product-type.tool";
+		};
 		BFF5C83328DC9BB9008893A1 /* 8.颜色 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFF5C83A28DC9BB9008893A1 /* Build configuration list for PBXNativeTarget "8.颜色" */;
@@ -2571,6 +2743,12 @@
 					BFDE0893291BE38600622C86 = {
 						CreatedOnToolsVersion = 14.1;
 					};
+					BFDE08AF291C99AC00622C86 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					BFDE08CB291D36ED00622C86 = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					BFF5C83328DC9BB9008893A1 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -2647,6 +2825,8 @@
 				BFDE085A2919F60000622C86 /* 30.视差贴图 */,
 				BFDE0875291A8FAE00622C86 /* 31.HDR */,
 				BFDE0893291BE38600622C86 /* 32.泛光 */,
+				BFDE08AF291C99AC00622C86 /* 33.延迟渲染 */,
+				BFDE08CB291D36ED00622C86 /* 34.环境光遮蔽SSAO */,
 			);
 		};
 /* End PBXProject section */
@@ -2999,6 +3179,34 @@
 				BFDE08A2291BE39D00622C86 /* Shader.cpp in Sources */,
 				BFDE0897291BE38600622C86 /* main.cpp in Sources */,
 				BFDE08A3291BE39D00622C86 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDE08AC291C99AC00622C86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDE08BB291C99C200622C86 /* Mesh.cpp in Sources */,
+				BFDE08B3291C99AD00622C86 /* main.cpp in Sources */,
+				BFDE08BD291C99C200622C86 /* Camera.cpp in Sources */,
+				BFDE08BE291C99C200622C86 /* Texture.cpp in Sources */,
+				BFDE08BC291C99C200622C86 /* Shader.cpp in Sources */,
+				BFDE08B7291C99C200622C86 /* Model.cpp in Sources */,
+				BFDE08BF291C99C200622C86 /* glad.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDE08C8291D36ED00622C86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDE08D5291D36FB00622C86 /* Camera.cpp in Sources */,
+				BFDE08D4291D36FB00622C86 /* Texture.cpp in Sources */,
+				BFDE08CF291D36ED00622C86 /* main.cpp in Sources */,
+				BFDE08D3291D36FB00622C86 /* glad.c in Sources */,
+				BFDE08D8291D36FB00622C86 /* Model.cpp in Sources */,
+				BFDE08D7291D36FB00622C86 /* Shader.cpp in Sources */,
+				BFDE08D6291D36FB00622C86 /* Mesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5040,6 +5248,158 @@
 			};
 			name = Release;
 		};
+		BFDE08B4291C99AD00622C86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/assimp/5.1.6/include,
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"$(PROJECT_DIR)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+					/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+			};
+			name = Debug;
+		};
+		BFDE08B5291C99AD00622C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/assimp/5.1.6/include,
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"$(PROJECT_DIR)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+					/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+			};
+			name = Release;
+		};
+		BFDE08D1291D36ED00622C86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/assimp/5.1.6/include,
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"$(PROJECT_DIR)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+					/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+			};
+			name = Debug;
+		};
+		BFDE08D2291D36ED00622C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/usr/local/Cellar/assimp/5.1.6/include,
+					/usr/local/Cellar/glew/2.2.0_1/include,
+					/usr/local/Cellar/glfw/3.3.6/include,
+					/Users/denghaiyang/OpenGL_TEST/includes/glad/include,
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"$(PROJECT_DIR)",
+					"/Users/denghaiyang/OpenGL_TEST/includes/glm-0.9.9.8",
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/Users/denghaiyang/OpenGL_TEST/includes/tool,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/assimp/5.1.6/lib,
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+					"\"$(SRCROOT)/includes/glad/src/glad.c\"",
+					/Users/denghaiyang/OpenGL_TEST/includes/tool/stb_image.h,
+					/Users/denghaiyang/OpenGL_TEST/OpenGL_TEST,
+					/Users/denghaiyang/OpenGL_TEST/includes,
+				);
+			};
+			name = Release;
+		};
 		BFF5C83828DC9BB9008893A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5891,6 +6251,24 @@
 			buildConfigurations = (
 				BFDE0899291BE38600622C86 /* Debug */,
 				BFDE089A291BE38600622C86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDE08B6291C99AD00622C86 /* Build configuration list for PBXNativeTarget "33.延迟渲染" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDE08B4291C99AD00622C86 /* Debug */,
+				BFDE08B5291C99AD00622C86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFDE08D0291D36ED00622C86 /* Build configuration list for PBXNativeTarget "34.环境光遮蔽SSAO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFDE08D1291D36ED00622C86 /* Debug */,
+				BFDE08D2291D36ED00622C86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

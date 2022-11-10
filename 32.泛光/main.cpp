@@ -57,43 +57,40 @@ Texture textureLoader;
 
 int main(int argc, const char * argv[]) {
     // glfw: initialize and configure
-        // ------------------------------
-        glfwInit();
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    #ifdef __APPLE__
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    #endif
-
-        // glfw window creation
-        // --------------------
-        GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", NULL, NULL);
-        if (window == NULL)
-        {
-            std::cout << "Failed to create GLFW window" << std::endl;
-            glfwTerminate();
-            return -1;
-        }
-        glfwMakeContextCurrent(window);
-        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-        glfwSetCursorPosCallback(window, mouse_callback);
-        glfwSetScrollCallback(window, scroll_callback);
-
-        // tell GLFW to capture our mouse
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-        // glad: load all OpenGL function pointers
-        // ---------------------------------------
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        {
-            std::cout << "Failed to initialize GLAD" << std::endl;
-            return -1;
-        }
+    // ------------------------------
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
-    //开启深度测试
-    glEnable(GL_DEPTH_TEST);
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+    
+    // glfw window creation
+    // --------------------
+    GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "LearnOpenGL", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    
+    // tell GLFW to capture our mouse
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
     
     ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/32.泛光/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/32.泛光/lightingFragmentWS.glsl");
     
@@ -120,6 +117,13 @@ int main(int argc, const char * argv[]) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, HDR_ColorBuffers[i], 0);
     }
+    
+    //必须加入深度缓存，不然拷贝出来的纹理会出现深度测试失败的问题
+    unsigned int rboDepth;
+    glGenRenderbuffers(1, &rboDepth);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
     
     GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
     glDrawBuffers(2, attachments);
@@ -149,7 +153,7 @@ int main(int argc, const char * argv[]) {
             std::cout << "Framebuffer not complete!" << std::endl;
     }
     
-
+    
     
     std::vector<glm::vec3> lightPositions;
     lightPositions.push_back(glm::vec3( 0.0f, 0.5f,  1.5f));
@@ -182,11 +186,13 @@ int main(int argc, const char * argv[]) {
         
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        glBindFramebuffer(GL_FRAMEBUFFER,0);
         
         //1.渲染场景
+        //开启深度测试
         glBindFramebuffer(GL_FRAMEBUFFER,HDR_FBO);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
         
         lightingShader.use();
         lightingShader.set_uniform("projection", glm::value_ptr(projection));
@@ -215,13 +221,8 @@ int main(int argc, const char * argv[]) {
             RenderLightObject(lightObjectShader);
         }
         
-        
-        ////        //2.正常渲染场景，并使用之前生成的深度图
+        //2.模糊HDR超出纹理
         glBindFramebuffer(GL_FRAMEBUFFER,0);
-
-
-        // 2. blur bright fragments with two-pass Gaussian Blur
-        // --------------------------------------------------
         bool horizontal = true, first_iteration = true;
         unsigned int amount = 10;
         blurShader.use();
@@ -237,11 +238,12 @@ int main(int argc, const char * argv[]) {
             if (first_iteration)
                 first_iteration = false;
         }
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        glBindFramebuffer(GL_FRAMEBUFFER,0);
+        
         //3.融合
         hdrShader.use();
-        hdrShader.set_uniform("exposure", 0.1f);
+        hdrShader.set_uniform("exposure", 1.0f);
         hdrShader.set_uniform("scene", 0);
         hdrShader.set_uniform("bloomBlur", 1);
         glActiveTexture(GL_TEXTURE0);
@@ -249,9 +251,8 @@ int main(int argc, const char * argv[]) {
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[!horizontal]);
         RenderQuad();
-        
         glfwSwapBuffers(window);
-                glfwPollEvents();
+        glfwPollEvents();
     }
     
     glfwTerminate();

@@ -13,7 +13,7 @@ struct Light {
     vec3 Color;
 };
 
-uniform Light lights[16];
+uniform Light lights[4];
 uniform sampler2D diffuseTexture;
 uniform vec3 viewPos;
 
@@ -22,10 +22,10 @@ void main()
     vec3 color = texture(diffuseTexture, fs_in.TexCoords).rgb;
     vec3 normal = normalize(fs_in.Normal);
     // ambient
-    vec3 ambient = 0.0 * color;
+    vec3 ambient =  color;
     // lighting
     vec3 lighting = vec3(0.0);
-    for(int i = 0; i < 16; i++)
+    for(int i = 0; i < 4; i++)
     {
         // diffuse
         vec3 lightDir = normalize(lights[i].Position - fs_in.FragPos);
@@ -46,5 +46,6 @@ void main()
         BrightColor = vec4(result, 1.0);
     else
         BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
+    
     FragColor = vec4(result, 1.0);
 }
