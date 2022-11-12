@@ -1,50 +1,47 @@
 #version 330 core
 out vec4 FragColor;
+in vec2 TexCoords;
 
-uniform sampler2D gPositionTex;
-uniform sampler2D gNormalTex;
-uniform sampler2D gColorSpecTex;
+uniform sampler2D gPosition;
+uniform sampler2D gNormal;
+uniform sampler2D gAlbedo;
+uniform sampler2D ssao;
 
-struct Light
-{
+struct Light {
     vec3 Position;
     vec3 Color;
+
     float Linear;
     float Quadratic;
+    float Radius;
 };
-
-const int NR_LIGHTS = 32;
-uniform Light lights[NR_LIGHTS];
-uniform vec3 viewPos;
-in vec2 TexCoords;
+uniform Light light;
 
 void main()
 {
-    // 从G Buffer中获取数据
-    vec3 FragPos = texture(gPositionTex,TexCoords).rgb;
-    vec3 Normal = texture(gNormalTex,TexCoords).rgb;
-    vec4 ColorSpec = texture(gColorSpecTex,TexCoords);
-    vec3 diffuse = ColorSpec.rgb;
-    float Specular = ColorSpec.a;
-    
-    // 计算光照
-    vec3 lighting = diffuse * 0.1;
-    vec3 viewDir = normalize(viewPos - FragPos);
-    for (int i = 0; i < NR_LIGHTS; i++) {
-        vec3 lightDir = normalize(lights[i].Position - FragPos);
-        // 漫反射
-        vec3 diffuse = max(dot(Normal,lightDir),0.0) * diffuse * lights[i].Color;
-        // 镜面反射
-        vec3 halfwayDir = normalize(lightDir + viewDir);
-        float spec = pow(max(dot(Normal,halfwayDir),0.0),16.0);
-        vec3 specularColor = lights[i].Color * spec * Specular;
-        // 环境光
-        float d = length(lights[i].Position - FragPos);
-        float attenuation = 1.0 / (1.0 + lights[i].Linear * d  + lights[i].Quadratic * d * d);
-        diffuse *= attenuation;
-        specularColor *= attenuation;
-        lighting += diffuse + specularColor;
-    }
+    // 从G缓冲中提取数据
+    vec3 FragPos = texture(gPosition, TexCoords).rgb;
+    vec3 Normal = texture(gNormal, TexCoords).rgb;
+    vec3 Diffuse = texture(gAlbedo, TexCoords).rgb;
+    float AmbientOcclusion = texture(ssao, TexCoords).r;
 
-    FragColor = vec4(lighting,1);
+    // Blinn-Phong (观察空间中)
+    vec3 ambient = vec3(0.3 * AmbientOcclusion); // 这里我们加上遮蔽因子
+    vec3 lighting  = ambient;
+    vec3 viewDir  = normalize(-FragPos); // Viewpos 为 (0.0.0)，在观察空间中
+    // 漫反射
+    vec3 lightDir = normalize(light.Position - FragPos);
+    vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Diffuse * light.Color;
+    // 镜面
+    vec3 halfwayDir = normalize(lightDir + viewDir);
+    float spec = pow(max(dot(Normal, halfwayDir), 0.0), 8.0);
+    vec3 specular = light.Color * spec;
+    // 衰减
+    float dist = length(light.Position - FragPos);
+    float attenuation = 1.0 / (1.0 + light.Linear * dist + light.Quadratic * dist * dist);
+    diffuse  *= attenuation;
+    specular *= attenuation;
+    lighting += diffuse + specular;
+
+    FragColor = vec4(lighting, 1.0);
 }

@@ -939,6 +939,10 @@
 		BFDE0B00291E282E00622C86 /* Render.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Render.cpp; sourceTree = "<group>"; };
 		BFDE0B04291E430500622C86 /* hyMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hyMath.cpp; sourceTree = "<group>"; };
 		BFDE0B06291E430600622C86 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		BFDE0B0A291F7EE100622C86 /* ssaoVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoVertex.glsl; sourceTree = "<group>"; };
+		BFDE0B0B291F7EE200622C86 /* ssaoFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoFragment.glsl; sourceTree = "<group>"; };
+		BFDE0B0C291F876F00622C86 /* ssaoBlurVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoBlurVertex.glsl; sourceTree = "<group>"; };
+		BFDE0B0D291F876F00622C86 /* ssaoBlurFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ssaoBlurFragment.glsl; sourceTree = "<group>"; };
 		BFF5C83428DC9BB9008893A1 /* 8.颜色 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "8.颜色"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF5C83628DC9BB9008893A1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BFF5C84028DC9DB9008893A1 /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
@@ -1870,6 +1874,10 @@
 		BFDE08CD291D36ED00622C86 /* 34.环境光遮蔽SSAO */ = {
 			isa = PBXGroup;
 			children = (
+				BFDE0B0C291F876F00622C86 /* ssaoBlurVertex.glsl */,
+				BFDE0B0D291F876F00622C86 /* ssaoBlurFragment.glsl */,
+				BFDE0B0A291F7EE100622C86 /* ssaoVertex.glsl */,
+				BFDE0B0B291F7EE200622C86 /* ssaoFragment.glsl */,
 				BFDE08EB291D3F3900622C86 /* previewFragment.glsl */,
 				BFDE08EC291D3F3900622C86 /* previewVertex.glsl */,
 				BFDE08E1291D37AA00622C86 /* gBufferFragment.glsl */,

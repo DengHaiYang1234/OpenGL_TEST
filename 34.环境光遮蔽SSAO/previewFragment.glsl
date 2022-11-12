@@ -7,5 +7,5 @@ in vec2 TexCoords;
 void main()
 {
     vec3 color = texture(image,TexCoords).rgb;
-    FragColor = vec4(color,1);
+    FragColor = vec4(color.r,color.r,color.r,1);
 }

@@ -11,6 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <random>
 #import "Shader.hpp"
 #import "Camera.hpp"
 #import "Texture.hpp"
@@ -24,7 +25,7 @@ void RenderLightObject(ShaderProgram &lightShader);
 void RenderQuad();
 void RenderCube();
 void RenderScene(ShaderProgram &shader,Model &modelObj);
-
+GLfloat Lerp(GLfloat a,GLfloat b,GLfloat f);
 
 const GLuint SHADW_WIDTH = 1024,SHADOW_HEIGHT = 1024;
 
@@ -97,6 +98,10 @@ int main(int argc, const char * argv[]) {
     
     ShaderProgram previewShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/previewVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/previewFragment.glsl");
     
+    ShaderProgram ssaoShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoFragment.glsl");
+    
+    ShaderProgram ssaoBlurShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoBlurVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoBlurFragment.glsl");
+    
     Model backpack("/Users/denghaiyang/OpenGL_TEST/Models/backpack/backpack.obj");
     
     std::vector<glm::vec3> objectPositions;
@@ -110,6 +115,7 @@ int main(int argc, const char * argv[]) {
     objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
     objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
     
+    // - ⭐️GBuufer 生成相关
     GLuint gBuffer;
     glGenFramebuffers(1,&gBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER,gBuffer);
@@ -161,24 +167,66 @@ int main(int argc, const char * argv[]) {
     
     glEnable(GL_DEPTH_TEST);
     
-    const GLuint NR_LIGHTS = 32;
-    std::vector<glm::vec3> lightPositions;
-    std::vector<glm::vec3> lightColors;
-    srand(13);
-    for (GLuint i = 0; i < NR_LIGHTS; i++)
-    {
-        // Calculate slightly random offsets
-        GLfloat xPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
-        GLfloat yPos = ((rand() % 100) / 100.0) * 6.0 - 4.0;
-        GLfloat zPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
-        lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
-        // Also calculate random color
-        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        lightColors.push_back(glm::vec3(rColor, gColor, bColor));
+    glm::vec3 lightPos = glm::vec3(2.0, 4.0, -2.0);
+    glm::vec3 lightColor = glm::vec3(0.2, 0.2, 0.7);
+    
+    // - ⭐️SSAO半球相关
+    std::uniform_int_distribution<GLfloat> randomFloats(0.0,1.0);
+    std::default_random_engine generator;
+    std::vector<glm::vec3> ssaoKernal;
+    for (GLuint i = 0; i < 64; i++) {
+        glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0,
+                         randomFloats(generator) * 2.0 - 1.0,
+                         randomFloats(generator));
+        sample = glm::normalize(sample);
+        sample *= randomFloats(generator);
+        GLfloat scale = GLfloat(i) / 64.0;
+        scale = Lerp(0.1f, 1.0f, scale * scale);
+        sample *= scale;
+        ssaoKernal.push_back(sample);
     }
     
+    std::vector<glm::vec3>  ssaoNoise;
+    for (GLuint i = 0; i < 16; i++) {
+        glm::vec3 noise(randomFloats(generator) * 2.0 - 1.0,
+                        randomFloats(generator) * 2.0 - 1.0,
+                        0.0);
+        ssaoNoise.push_back(noise);
+    }
+    
+    GLuint noiseTexture;
+    glGenTextures(1,&noiseTexture);
+    glBindTexture(GL_TEXTURE_2D,noiseTexture);
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB16F,4,4,0,GL_RGB,GL_FLOAT,&ssaoNoise[0]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    // - 创建ssao的FBO
+    GLuint ssaoFBO;
+    glGenFramebuffers(1,&ssaoFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER,ssaoFBO);
+    GLuint ssaoColorBuffer;
+    glGenTextures(1,&ssaoColorBuffer);
+    glBindTexture(GL_TEXTURE_2D,ssaoColorBuffer);
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RED,screenWidth,screenHeight,0,GL_RGB,GL_FLOAT,NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBuffer, 0);
+    
+    // - 创建ssao模糊处理的FBO
+    GLuint ssaoBlurFBO;
+    glGenFramebuffers(1,&ssaoBlurFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER,ssaoBlurFBO);
+    GLuint ssaoBlurColorBuffer;
+    glGenTextures(1,&ssaoBlurColorBuffer);
+    glBindTexture(GL_TEXTURE_2D,ssaoBlurColorBuffer);
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RED,screenWidth,screenHeight,0,GL_RGB,GL_FLOAT,NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoBlurColorBuffer, 0);
+
     while (!glfwWindowShouldClose(window))
     {
         float currentFrame = static_cast<float>(glfwGetTime());
@@ -194,7 +242,7 @@ int main(int argc, const char * argv[]) {
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
         
-        
+        // - 1️⃣几何处理阶段：渲染到G缓冲中
         glBindFramebuffer(GL_FRAMEBUFFER,gBuffer);
         camera.解决Mac视网膜屏幕显示不全的问题(false,screenWidth,screenHeight);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -205,16 +253,72 @@ int main(int argc, const char * argv[]) {
         gBUfferShader.set_uniform("near_plan", 0.1f);
         gBUfferShader.set_uniform("far_plan", 100.0f);
         RenderScene(gBUfferShader,backpack);
-        
         glBindFramebuffer(GL_FRAMEBUFFER,0);
+        
+        // - 2️⃣ 使用gbuffer渲染ssao纹理
+        glBindFramebuffer(GL_FRAMEBUFFER,ssaoFBO);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        ssaoShader.use();
+        for (GLuint i = 0; i < 64; i++)
+        {
+            ssaoShader.set_uniform("samples[" + std::to_string(i) + "]",ssaoKernal[i].x,ssaoKernal[i].y,ssaoKernal[i].z);
+        }
+        ssaoShader.set_uniform("projection", glm::value_ptr(projection));
+        ssaoShader.set_uniform("gPosition", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, gPositionDepth);
+        ssaoShader.set_uniform("gNormal", 1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, gNormal);
+        ssaoShader.set_uniform("texNoise", 2);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, noiseTexture);
+        RenderQuad();
+        glBindFramebuffer(GL_FRAMEBUFFER,0);
+        
+        // - 3️⃣ ssao模糊处理
+        glBindFramebuffer(GL_FRAMEBUFFER,ssaoBlurFBO);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        ssaoBlurShader.use();
+        ssaoBlurShader.set_uniform("ssaoInput", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, ssaoColorBuffer);
+        RenderQuad();
+        glBindFramebuffer(GL_FRAMEBUFFER,0);
+        
+        
         camera.解决Mac视网膜屏幕显示不全的问题(true,screenWidth,screenHeight);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        previewShader.use();
-        previewShader.set_uniform("image", 0);
+        // - 4️⃣ 光照渲染
+        lightingShader.use();
+        lightingShader.set_uniform("gPosition", 0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, gPositionDepth);
+        lightingShader.set_uniform("gNormal", 1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, gNormal);
+        lightingShader.set_uniform("gAlbedo", 2);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, gAlbedoSpec);
+        lightingShader.set_uniform("ssao", 3);
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, ssaoBlurColorBuffer);
+        
+        glm::vec3 lightPosView = glm::vec3(camera.GetViewMatrix() * glm::vec4(lightPos, 1.0));
+        lightingShader.set_uniform("light.Position",lightPosView.x,lightPosView.y,lightPosView.z);
+        lightingShader.set_uniform("light.Color",lightColor.x,lightColor.y,lightColor.z);
+        const float linear    = 0.09f;
+        const float quadratic = 0.032f;
+        lightingShader.set_uniform("light.Linear",linear);
+        lightingShader.set_uniform("light.Quadratic",quadratic);
         RenderQuad();
+        
+//        previewShader.use();
+//        previewShader.set_uniform("image", 0);
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, ssaoBlurColorBuffer);
+//        RenderQuad();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -288,6 +392,11 @@ void RenderLightObject(ShaderProgram &lightShader)
     model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
     lightShader.set_uniform("model", glm::value_ptr(model));
     RenderCube();
+}
+
+GLfloat Lerp(GLfloat a,GLfloat b,GLfloat f)
+{
+    return a + f * (b - a);
 }
 
 void RenderScene(ShaderProgram &shader,Model &modelObj)
