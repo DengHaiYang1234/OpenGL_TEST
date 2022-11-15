@@ -21,6 +21,8 @@ void main()
         vec3 fragPos = texture(gPosition, TexCoords).xyz;
         vec3 normal = normalize(texture(gNormal, TexCoords).rgb);
         vec3 randomVec = normalize(texture(texNoise, TexCoords * noiseScale).xyz);
+    
+        //https://zhuanlan.zhihu.com/p/472014547 正交化 也就是切线的计算由来
         // create TBN change-of-basis matrix: from tangent-space to view-space
         vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
         vec3 bitangent = cross(normal, tangent);
