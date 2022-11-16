@@ -214,6 +214,12 @@ int main(int argc, const char * argv[]) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBuffer, 0);
+    unsigned int rboDepth1;
+    glGenRenderbuffers(1, &rboDepth1);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboDepth1);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth1);
+    glBindFramebuffer(GL_FRAMEBUFFER,0);
     
     // - 创建ssao模糊处理的FBO
     GLuint ssaoBlurFBO;
@@ -226,6 +232,12 @@ int main(int argc, const char * argv[]) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoBlurColorBuffer, 0);
+    unsigned int rboDepth2;
+    glGenRenderbuffers(1, &rboDepth2);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboDepth2);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth2);
+    glBindFramebuffer(GL_FRAMEBUFFER,0);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -244,7 +256,7 @@ int main(int argc, const char * argv[]) {
         
         // - 1️⃣几何处理阶段：渲染到G缓冲中
         glBindFramebuffer(GL_FRAMEBUFFER,gBuffer);
-        camera.解决Mac视网膜屏幕显示不全的问题(false,screenWidth,screenHeight);
+//        camera.解决Mac视网膜屏幕显示不全的问题(false,screenWidth,screenHeight);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         gBUfferShader.use();
@@ -289,7 +301,7 @@ int main(int argc, const char * argv[]) {
         
         camera.解决Mac视网膜屏幕显示不全的问题(true,screenWidth,screenHeight);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+
         // - 4️⃣ 光照渲染
         lightingShader.use();
         lightingShader.set_uniform("gPosition", 0);
@@ -304,7 +316,7 @@ int main(int argc, const char * argv[]) {
         lightingShader.set_uniform("ssao", 3);
         glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, ssaoBlurColorBuffer);
-        
+
         glm::vec3 lightPosView = glm::vec3(camera.GetViewMatrix() * glm::vec4(lightPos, 1.0));
         lightingShader.set_uniform("light.Position",lightPosView.x,lightPosView.y,lightPosView.z);
         lightingShader.set_uniform("light.Color",lightColor.x,lightColor.y,lightColor.z);
@@ -317,7 +329,7 @@ int main(int argc, const char * argv[]) {
 //        previewShader.use();
 //        previewShader.set_uniform("image", 0);
 //        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, ssaoBlurColorBuffer);
+//        glBindTexture(GL_TEXTURE_2D, ssaoColorBuffer);
 //        RenderQuad();
 
         glfwSwapBuffers(window);

@@ -18,11 +18,17 @@ const float PI = 3.14159265359;
 uniform Light lights[NR_LIGHTS];
 
 uniform vec3 camPos;//相机位置
-uniform vec3  albedo;// 反射率  模型本身的颜色
-uniform float metallic; // 金属度
-uniform float roughness;// 粗糙度
-uniform float ao; // 环境光遮蔽
+//uniform vec3 albedo;// 反射率  模型本身的颜色
+//uniform float metallic; // 金属度
+//uniform float roughness;// 粗糙度
+//uniform float ao; // 环境光遮蔽
 uniform vec3 lightPositions[4];//4个点光源
+
+uniform sampler2D albedoMap;//反射率贴图
+uniform sampler2D normalMap;//法线贴图
+uniform sampler2D metallicMap;//金属度贴图
+uniform sampler2D roughnessMap;//粗糙度贴图
+uniform sampler2D aoMap;//环境光遮蔽贴图
 
 //菲涅尔方程描述的是在不同的表面角下表面所反射的光线所占的比率
 vec3 fresnelSchlick(float cosTheta,vec3 F0)
@@ -53,7 +59,7 @@ float GeometrySchlickGGX(float NdotV,float roughness)
     float k = (r * r) / 8.0;
     float nom = NdotV;
     float denom = NdotV * (1.0 - k) + k;
-    float nom / denom;
+    return nom / denom;
 }
 
 float GeometrySmith(vec3 N,vec3 V,vec3 L,float roughness)
@@ -68,6 +74,26 @@ float GeometrySmith(vec3 N,vec3 V,vec3 L,float roughness)
 
 void main()
 {
+//    uniform vec3 camPos;//相机位置
+//    uniform vec3 albedo;// 反射率  模型本身的颜色
+//    uniform float metallic; // 金属度
+//    uniform float roughness;// 粗糙度
+//    uniform float ao; // 环境光遮蔽
+//    uniform vec3 lightPositions[4];//4个点光源
+    
+//    uniform sampler2D albedoMap;//反射率贴图
+//    uniform sampler2D normalMap;//法线贴图
+//    uniform sampler2D metallicMap;//金属度贴图
+//    uniform sampler2D roughnessMap;//粗糙度贴图
+//    uniform sampler2D aoMap;//环境光遮蔽贴图
+    
+    vec3 albedo = texture(albedoMap,TexCoords).rgb;
+    vec3 Normal = texture(normalMap,TexCoords).rgb;
+    float metallic = texture(metallicMap,TexCoords).r;
+    float roughness = texture(roughnessMap,TexCoords).r;
+    float ao = texture(aoMap,TexCoords).r;
+    
+    
     //法线
     vec3 N = normalize(Normal);
     //视角方向
@@ -92,7 +118,7 @@ void main()
         //获取菲涅尔反射
         vec3 F = fresnelSchlick(max(dot(H,V),0.0),F0);
         //法线分布函数
-        float NDF = GeometrySchlickGGX(N,H,roughness);
+        float NDF = DistributionGGX(N,H,roughness);
         //几何遮蔽函数
         float G = GeometrySmith(N,V,L,roughness);
         
@@ -111,4 +137,10 @@ void main()
     }
     vec3 ambient = vec3(0.03) * albedo * ao;
     vec3 color   = ambient + Lo;
+    
+    //gamma 校正
+    color = color / (color + vec3(1.0));
+    color = pow(color, vec3(1.0/2.2));
+    
+    FragColor = vec4(color,1);
 }
