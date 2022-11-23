@@ -125,13 +125,15 @@ int main()
         modelMatrices[i] = model;
     }
     
-    
+    //这个buffer是填充顶点数据instanceMatrixs属性数组的
     unsigned int buffer;
     glGenBuffers(1,&buffer);
     glBindBuffer(GL_ARRAY_BUFFER,buffer);
     glBufferData(GL_ARRAY_BUFFER,amount * sizeof(glm::mat4),&modelMatrices[0],GL_STATIC_DRAW);
     
     for (unsigned int i = 0; i < rockModel.meshes.size(); i++) {
+        //填充instanceMatrixs数据，矩阵需要拆分为4个vec4数据，所以是从3开始的
+        //VAO的第0，1，2数据已经填充完毕，现在是从第3个位置开始填充
         unsigned int VAO = rockModel.meshes[i].VAO;
         glBindVertexArray(VAO);
         glEnableVertexAttribArray(3);

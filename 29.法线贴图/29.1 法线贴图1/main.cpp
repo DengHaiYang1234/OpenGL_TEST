@@ -16,11 +16,16 @@
 #import "Camera.hpp"
 #import "Texture.hpp"
 
-
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void RenderLightObject(ShaderProgram &lightShader);
+void RenderQuad();
+void RenderCube();
+
+
+const GLuint SHADW_WIDTH = 1024,SHADOW_HEIGHT = 1024;
 
 int screenWidth = 800;
 int screenHeight = 600;
@@ -38,9 +43,15 @@ glm::vec3 cameraPos = glm::vec3(0.0f,0.0f,3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f,0.0f,-1.0f);
 //相机向上的方向
 glm::vec3 cameraUp = glm::vec3(0.0f,1.0f,0.0f);
+//灯光初始位置
+glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
 
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
+
+Texture textureLoader;
+
+
 
 int main(int argc, const char * argv[]) {
     glfwInit();
@@ -61,6 +72,7 @@ int main(int argc, const char * argv[]) {
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
     //GLAD是用来管理OpenGL的函数指针的，所以在调用任何OpenGL的函数之前我们需要初始化GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -70,82 +82,18 @@ int main(int argc, const char * argv[]) {
     }
     
     //设置视口大小
-    glViewport(0,0,800,600);
+    glViewport(0, 0, screenWidth, screenHeight);
     
-    int nrAttributes;
-    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS,&nrAttributes);
-    std::cout << "当前设备支持的最大顶点属性个数： " << nrAttributes << std::endl;
+    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightingFragmentWS.glsl");
     
+    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightObjectFragment.glsl");
     
-    
-    //创建VAO
-    unsigned int VAO;
-    glGenVertexArrays(1,&VAO);
-    glBindVertexArray(VAO);
-    
-    //VBO
-    unsigned int VBO;
-    //一个缓冲ID生成一个VBO对象
-    glGenBuffers(1,&VBO);
-    
-    //绑定VBO
-    //创建的缓冲绑定到GL_ARRAY_BUFFER目标上
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    //把之前定义的顶点数据复制到缓冲的内存中
-    /*
-     GL_STATIC_DRAW ：数据不会或几乎不会改变。
-     GL_DYNAMIC_DRAW：数据会被改变很多。
-     GL_STREAM_DRAW ：数据每次绘制时都会改变。
-     */
-    glBufferData(GL_ARRAY_BUFFER,sizeof(cubeVertices),cubeVertices,GL_STATIC_DRAW);
-    
-    //解析位置数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
-    
-    //以顶点属性位置值作为参数，启用顶点属性
-    glEnableVertexAttribArray(0);
-    
-    //解析法线数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    
-    //解析纹理坐标数据                                //步长：每个顶点有3个float构成的pos和3个float构成的color
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    
-    unsigned int LightVAO;
-    glGenVertexArrays(1,&LightVAO);
-    glBindVertexArray(LightVAO);
-    // 只需要绑定VBO不用再次设置VBO的数据，因为箱子的VBO数据中已经包含了正确的立方体顶点数据
-    glBindBuffer(GL_ARRAY_BUFFER,VBO);
-    //设置灯立方体的顶点属性（对我们的灯来说仅仅只有位置数据）
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,8 * sizeof(float),(void*)0);
-    //以顶点属性位置值作为参数，启用顶点属性
-    glEnableVertexAttribArray(0);
-    
-    
-    //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightingFragmentWS.glsl");
-    
-    
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightFragment.glsl");
-        
-    //光的位置
-    glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
-    
-    Texture texture;
-    
-    texture.SetFlipVertically(true);
-    
-    
-    unsigned int diffuseTex,specularTex,emissionTex;
-    
-    diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/lighting_maps_specular_color.png");
-    emissionTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/matrix.jpeg");
-        
+    unsigned int brickwallTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/brickwall.jpeg");
+    unsigned int brickwallNormalTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/brickwall_normal.jpeg");
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
+    
+    
     
     while (!glfwWindowShouldClose(window))
     {
@@ -153,85 +101,45 @@ int main(int argc, const char * argv[]) {
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
         
+        glfwPollEvents();
         processInput(window);
         
-        //当调用glClear函数，清除颜色缓冲之后，整个颜色缓冲都会被填充为glClearColor里所设置的颜色
-        //glClearColor函数是一个状态设置函数，而glClear函数则是一个状态使用的函数，它使用了当前的状态来获取应该清除为的颜色
-        glClearColor(0.1f,0.1f,0,1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//每次渲染迭代之前清除深度缓冲（否则前一帧的深度信息仍然保存在缓冲中）
-            
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
         
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
         // camera/view transformation
         glm::mat4 view = camera.GetViewMatrix();
-        
-        glm::mat4 model = glm::mat4(1.0f);
-        
         glm::vec3 lightColor = glm::vec3(1.0f);
-        glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);//降低满反射
-        glm::vec3 ambientColor = lightColor * glm::vec3(0.2f);//降低环境光
-        glm::vec3 specularColor = glm::vec3(1.0f);//高光
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::rotate(model, (GLfloat)-90, glm::normalize(glm::vec3(1.0, 0.0, 0.0)));
         
-        float materialShininess = 32.0f;
-                
-        //激活这个程序对象
         lightingShader.use();
-        lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
-        lightingShader.set_uniform("material.diffuse",  0);
-        lightingShader.set_uniform("material.specular", 1);
-        lightingShader.set_uniform("material.emission", 2);
-        lightingShader.set_uniform("matrixlight", (float)((1.0+sin(glfwGetTime()))/2+0.5));
-        lightingShader.set_uniform("matrixmove", (float)glfwGetTime());
-        lightingShader.set_uniform("light.ambient",  ambientColor.x, ambientColor.y, ambientColor.z);
-        lightingShader.set_uniform("light.diffuse",  diffuseColor.x, diffuseColor.y, diffuseColor.z); // 将光照调暗了一些以搭配场景
-        lightingShader.set_uniform("light.specular", specularColor.x,specularColor.y,specularColor.z);
-        lightingShader.set_uniform("material.shininess", materialShininess);
-        lightingShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
-        lightingShader.set_uniform("lightColor", 1.0f, 1.0f, 1.0f);
         lightingShader.set_uniform("projection", glm::value_ptr(projection));
         lightingShader.set_uniform("view", glm::value_ptr(view));
-        lightingShader.set_uniform("model",glm::value_ptr(model));
-        
+        lightingShader.set_uniform("model", glm::value_ptr(model));
+        lightingShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        lightingShader.set_uniform("lightPos", lightPos.x,lightPos.y,lightPos.z);
+        lightingShader.set_uniform("viewPos", camera.Position.x,camera.Position.y,camera.Position.z);
+        lightingShader.set_uniform("shininess", 0.1f);
+        lightingShader.set_uniform("brickwall", 0);
+        lightingShader.set_uniform("normalMap", 1);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D,diffuseTex);
-        
+        glBindTexture(GL_TEXTURE_2D, brickwallTex);
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D,specularTex);
+        glBindTexture(GL_TEXTURE_2D,brickwallNormalTex);
+        RenderQuad();
         
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D,emissionTex);
         
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES,0,36);
+        //渲染一个灯光的obj
+        lightObjectShader.use();
+        lightObjectShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        lightObjectShader.set_uniform("projection", glm::value_ptr(projection));
+        lightObjectShader.set_uniform("view", glm::value_ptr(view));
+        RenderLightObject(lightObjectShader);
         
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        
-        lightShader.use();
-        lightShader.set_uniform("lightColor", lightColor.x, lightColor.y, lightColor.z);
-        lightShader.set_uniform("projection", glm::value_ptr(projection));
-        lightShader.set_uniform("view", glm::value_ptr(view));
-        lightShader.set_uniform("model",glm::value_ptr(model));
-        
-        glBindVertexArray(LightVAO);
-        glDrawArrays(GL_TRIANGLES,0,36);
-        
-        /*
-         双缓冲(Double Buffer)
-         
-         应用程序使用单缓冲绘图时可能会存在图像闪烁的问题。 这是因为生成的图像不是一下子被绘制出来的，而是按照从左到右，由上而下逐像素地绘制而成的。最终图像不是在瞬间显示给用户，而是通过一步一步生成的，这会导致渲染的结果很不真实。为了规避这些问题，我们应用双缓冲渲染窗口应用程序。前缓冲保存着最终输出的图像，它会在屏幕上显示；而所有的的渲染指令都会在后缓冲上绘制。当所有的渲染指令执行完毕后，我们交换(Swap)前缓冲和后缓冲，这样图像就立即呈显出来，之前提到的不真实感就消除了。
-         */
-        
-        //交换颜色缓冲（它是一个储存着GLFW窗口每一个像素颜色值的大缓冲），它在这一迭代中被用来绘制，并且将会作为输出显示在屏幕上
         glfwSwapBuffers(window);
-        //glfwPollEvents函数检查有没有触发什么事件（比如键盘输入、鼠标移动等）、更新窗口状态，并调用对应的回调函数（可以通过回调方法手动设置）。
-        glfwPollEvents();
     }
-    
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteVertexArrays(1, &LightVAO);
-    glDeleteBuffers(1, &VBO);
     
     glfwTerminate();
     return  0;
@@ -287,75 +195,177 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
 
+void RenderLightObject(ShaderProgram &lightShader)
+{
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, lightPos);
+    model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+    lightShader.set_uniform("model", glm::value_ptr(model));
+    RenderCube();
+}
+
+// RenderQuad() Renders a 1x1 quad in NDC
+GLuint quadVAO = 0;
+GLuint quadVBO;
+void RenderQuad()
+{
+    if (quadVAO == 0)
+    {
+        // positions
+        glm::vec3 pos1(-1.0, 1.0, 0.0);
+        glm::vec3 pos2(-1.0, -1.0, 0.0);
+        glm::vec3 pos3(1.0, -1.0, 0.0);
+        glm::vec3 pos4(1.0, 1.0, 0.0);
+        // texture coordinates
+        glm::vec2 uv1(0.0, 1.0);
+        glm::vec2 uv2(0.0, 0.0);
+        glm::vec2 uv3(1.0, 0.0);
+        glm::vec2 uv4(1.0, 1.0);
+        // normal vector
+        glm::vec3 nm(0.0, 0.0, 1.0);
+        
+        // calculate tangent/bitangent vectors of both triangles
+        glm::vec3 tangent1, bitangent1;
+        glm::vec3 tangent2, bitangent2;
+        // - triangle 1
+        glm::vec3 edge1 = pos2 - pos1;
+        glm::vec3 edge2 = pos3 - pos1;
+        glm::vec2 deltaUV1 = uv2 - uv1;
+        glm::vec2 deltaUV2 = uv3 - uv1;
+        
+        GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+        
+        tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+        tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+        tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+        tangent1 = glm::normalize(tangent1);
+        
+        bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+        bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+        bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+        bitangent1 = glm::normalize(bitangent1);
+        
+        // - triangle 2
+        edge1 = pos3 - pos1;
+        edge2 = pos4 - pos1;
+        deltaUV1 = uv3 - uv1;
+        deltaUV2 = uv4 - uv1;
+        
+        f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+        
+        tangent2.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+        tangent2.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+        tangent2.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+        tangent2 = glm::normalize(tangent2);
+        
+        
+        bitangent2.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+        bitangent2.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+        bitangent2.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+        bitangent2 = glm::normalize(bitangent2);
+        
+        
+        GLfloat quadVertices[] = {
+            // Positions            // normal         // TexCoords  // Tangent                          // Bitangent
+            pos1.x, pos1.y, pos1.z, nm.x, nm.y, nm.z, uv1.x, uv1.y, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
+            pos2.x, pos2.y, pos2.z, nm.x, nm.y, nm.z, uv2.x, uv2.y, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
+            pos3.x, pos3.y, pos3.z, nm.x, nm.y, nm.z, uv3.x, uv3.y, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
+            
+            pos1.x, pos1.y, pos1.z, nm.x, nm.y, nm.z, uv1.x, uv1.y, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z,
+            pos3.x, pos3.y, pos3.z, nm.x, nm.y, nm.z, uv3.x, uv3.y, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z,
+            pos4.x, pos4.y, pos4.z, nm.x, nm.y, nm.z, uv4.x, uv4.y, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z
+        };
+        // Setup plane VAO
+        glGenVertexArrays(1, &quadVAO);
+        glGenBuffers(1, &quadVBO);
+        glBindVertexArray(quadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), (GLvoid*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), (GLvoid*)(8 * sizeof(GLfloat)));
+        glEnableVertexAttribArray(4);
+        glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 14 * sizeof(GLfloat), (GLvoid*)(11 * sizeof(GLfloat)));
+    }
+    glBindVertexArray(quadVAO);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindVertexArray(0);
+}
+
 // RenderCube() Renders a 1x1 3D cube in NDC.
-unsigned int cubeVAO = 0;
-unsigned int cubeVBO = 0;
+GLuint cubeVAO = 0;
+GLuint cubeVBO = 0;
 void RenderCube()
 {
-    // initialize (if necessary)
+    // Initialize (if necessary)
     if (cubeVAO == 0)
     {
-        float vertices[] = {
-            // back face
-            -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
-            1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
-            1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right
-            1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
-            -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
-            -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
-            // front face
-            -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
-            1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
-            1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
-            1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
-            -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
-            -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
-            // left face
-            -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
-            -1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
-            -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
-            -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
-            -1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
-            -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
-            // right face
-            1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
-            1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
-            1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right
-            1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
-            1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
-            1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left
-            // bottom face
-            -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
-            1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
-            1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
-            1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
-            -1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
-            -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
-            // top face
-            -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
-            1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
-            1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right
-            1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
-            -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
-            -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left
+        GLfloat vertices[] = {
+            // Back face
+            -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // Bottom-left
+            0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right
+            0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom-right
+            0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,  // top-right
+            -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,  // bottom-left
+            -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,// top-left
+            // Front face
+            -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
+            0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // bottom-right
+            0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,  // top-right
+            0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top-right
+            -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  // top-left
+            -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  // bottom-left
+            // Left face
+            -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
+            -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-left
+            -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-left
+            -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
+            -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
+            -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
+            // Right face
+            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-left
+            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
+            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-right
+            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-right
+            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  // top-left
+            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom-left
+            // Bottom face
+            -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+            0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top-left
+            0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,// bottom-left
+            0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom-left
+            -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom-right
+            -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+            // Top face
+            -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
+            0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
+            0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top-right
+            0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
+            -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
+            -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f // bottom-left
         };
         glGenVertexArrays(1, &cubeVAO);
         glGenBuffers(1, &cubeVBO);
-        // fill buffer
+        // Fill buffer
         glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        // link vertex attributes
+        // Link vertex attributes
         glBindVertexArray(cubeVAO);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
-    // render Cube
+    // Render Cube
     glBindVertexArray(cubeVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
