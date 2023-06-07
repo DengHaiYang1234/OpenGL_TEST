@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -49,7 +50,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -84,13 +85,13 @@ int main(int argc, const char * argv[]) {
     //设置视口大小
     glViewport(0, 0, screenWidth, screenHeight);
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/31.HDR/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/31.HDR/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "31.HDR/lightingVertexWS.glsl",ApplicationPath + "31.HDR/lightingFragmentWS.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/31.HDR/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/31.HDR/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "31.HDR/lightObjectVertex.glsl",ApplicationPath + "31.HDR/lightObjectFragment.glsl");
     
-    ShaderProgram hdrShader("/Users/denghaiyang/OpenGL_TEST/31.HDR/hdrVertex.glsl","/Users/denghaiyang/OpenGL_TEST/31.HDR/hdrFragment.glsl");
+    ShaderProgram hdrShader(ApplicationPath + "31.HDR/hdrVertex.glsl",ApplicationPath + "31.HDR/hdrFragment.glsl");
     
-    unsigned int woodTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wood.png");
+    unsigned int woodTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "wood.png");
     
     unsigned int HDR_FBO;
     glGenFramebuffers(1,&HDR_FBO);

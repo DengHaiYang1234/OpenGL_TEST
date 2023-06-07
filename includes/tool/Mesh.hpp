@@ -11,7 +11,7 @@
 #include <vector>
 
 #import "Shader.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 using namespace std;
 
 #define MAX_BONE_INFLUENCE 4
@@ -38,11 +38,11 @@ public:
     // mesh Data
     vector<Vertex>       vertices;
     vector<unsigned int> indices;
-    vector<Texture>      textures;
+    vector<TextureUtilities>      textures;
     unsigned int VAO;
 
     // constructor
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
+    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<TextureUtilities> textures)
     {
         this->vertices = vertices;
         this->indices = indices;

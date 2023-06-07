@@ -14,8 +14,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
-
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
@@ -53,7 +53,7 @@ glm::vec3 lightPos = glm::vec3(-2.0f, 4.0f, -1.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -89,15 +89,15 @@ int main(int argc, const char * argv[]) {
     glViewport(0, 0, screenWidth, screenHeight);
     
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader("/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightingVertexWS.glsl","/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightingFragmentWS.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader("/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightObjectVertex.glsl","/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightObjectFragment.glsl");
     
-    ShaderProgram lightViewShader("/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightViewVertex.glsl","/Users/denghaiyang/OpenGL_TEST28.点光源阴影/lightViewFragment.glsl");
+    ShaderProgram lightViewShader("/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightViewVertex.glsl","/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/lightViewFragment.glsl");
     
-    ShaderProgram quadShader("/Users/denghaiyang/OpenGL_TEST28.点光源阴影/quadVertex.glsl","/Users/denghaiyang/OpenGL_TEST28.点光源阴影/quadFragment.glsl");
+    ShaderProgram quadShader("/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/quadVertex.glsl","/Users/denghaiyang/hyhy/xcode/OpenGL_TEST28.点光源阴影/quadFragment.glsl");
     
-    unsigned int woodIndex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wood.png");
+    unsigned int woodIndex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "wood.png");
     //    lightingShader.set_uniform("wood", 0);
     //    glActiveTexture(GL_TEXTURE0);
     //    glBindTexture(GL_TEXTURE_2D,woodIndex);

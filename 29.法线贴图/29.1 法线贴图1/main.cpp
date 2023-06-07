@@ -14,7 +14,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -49,7 +50,7 @@ glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -84,12 +85,12 @@ int main(int argc, const char * argv[]) {
     //设置视口大小
     glViewport(0, 0, screenWidth, screenHeight);
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "29.法线贴图/lightingVertexWS.glsl",ApplicationPath + "29.法线贴图/lightingFragmentWS.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/29.法线贴图/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "29.法线贴图/lightObjectVertex.glsl",ApplicationPath + "29.法线贴图/lightObjectFragment.glsl");
     
-    unsigned int brickwallTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/brickwall.jpeg");
-    unsigned int brickwallNormalTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/brickwall_normal.jpeg");
+    unsigned int brickwallTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "brickwall.jpeg");
+    unsigned int brickwallNormalTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "brickwall_normal.jpeg");
     //开启深度测试
     glEnable(GL_DEPTH_TEST);
     

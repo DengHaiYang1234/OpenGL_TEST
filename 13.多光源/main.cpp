@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 
 //三角形
@@ -201,10 +202,10 @@ int main(int argc, const char * argv[]) {
     
     
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "13.多光源/lightingVertexWS.glsl",ApplicationPath + "13.多光源/lightingFragmentWS.glsl");
     
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/13.多光源/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/13.多光源/lightFragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "13.多光源/lightVertex.glsl",ApplicationPath + "13.多光源/lightFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -212,13 +213,13 @@ int main(int argc, const char * argv[]) {
     //光的位置
     glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
     
-    Texture texture;
+    TextureUtilities texture;
     
     texture.SetFlipVertically(true);
     
     unsigned int diffuseTex,specularTex;
-    diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2_specular.png");
+    diffuseTex = texture.LoadTextureFromPath(ApplicationTexturePath + "container2.png");
+    specularTex = texture.LoadTextureFromPath(ApplicationTexturePath + "container2_specular.png");
     
     //开启深度测试
     glEnable(GL_DEPTH_TEST);

@@ -16,8 +16,9 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -87,12 +88,12 @@ int main()
     
     // build and compile shaders
     // -------------------------
-    ShaderProgram instanceShader("/Users/denghaiyang/OpenGL_TEST/24.GPU实例化/instanceVertex.glsl","/Users/denghaiyang/OpenGL_TEST/24.GPU实例化/instanceFragment.glsl");
+    ShaderProgram instanceShader(ApplicationPath + "24.GPU实例化/instanceVertex.glsl",ApplicationPath + "24.GPU实例化/instanceFragment.glsl");
     
-    ShaderProgram modelShader("/Users/denghaiyang/OpenGL_TEST/24.GPU实例化/modelVertex.glsl","/Users/denghaiyang/OpenGL_TEST/24.GPU实例化/modelFragment.glsl");
+    ShaderProgram modelShader(ApplicationPath + "24.GPU实例化/modelVertex.glsl",ApplicationPath + "24.GPU实例化/modelFragment.glsl");
         
-    Model rockModel("/Users/denghaiyang/OpenGL_TEST/Models/rock/rock.obj");
-    Model planetModel("/Users/denghaiyang/OpenGL_TEST/Models/planet/planet.obj");
+    Model rockModel(ApplicationPath + "Models/rock/rock.obj");
+    Model planetModel(ApplicationPath + "Models/planet/planet.obj");
     
     unsigned int amount = 200000;
     glm::mat4 *modelMatrices;

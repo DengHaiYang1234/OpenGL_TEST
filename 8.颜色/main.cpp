@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
+#import "CommonUtilities.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -198,9 +199,9 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(0);
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/8.颜色/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/8.颜色/fragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "8.颜色/vertex.glsl",ApplicationPath + "8.颜色/fragment.glsl");
     
-    ShaderProgram lampShader("/Users/denghaiyang/OpenGL_TEST/8.颜色/lampVertex.glsl","/Users/denghaiyang/OpenGL_TEST/8.颜色/lampFragment.glsl");
+    ShaderProgram lampShader(ApplicationPath + "8.颜色/lampVertex.glsl",ApplicationPath + "8.颜色/lampFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

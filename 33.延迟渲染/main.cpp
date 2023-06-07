@@ -22,8 +22,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -58,7 +59,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 int main(int argc, const char * argv[]) {
     // glfw: initialize and configure
@@ -97,15 +98,15 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
-    ShaderProgram gBUfferShader("/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/gBufferVertex.glsl","/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/gBufferFragment.glsl");
+    ShaderProgram gBUfferShader(ApplicationPath + "33.延迟渲染/gBufferVertex.glsl",ApplicationPath + "33.延迟渲染/gBufferFragment.glsl");
     
-    ShaderProgram previewShader("/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/previewVertex.glsl","/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/previewFragment.glsl");
+    ShaderProgram previewShader(ApplicationPath + "33.延迟渲染/previewVertex.glsl",ApplicationPath + "33.延迟渲染/previewFragment.glsl");
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/lightingVertex.glsl","/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/lightingFragment.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "33.延迟渲染/lightingVertex.glsl",ApplicationPath + "33.延迟渲染/lightingFragment.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/33.延迟渲染/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "33.延迟渲染/lightObjectVertex.glsl",ApplicationPath + "33.延迟渲染/lightObjectFragment.glsl");
     
-    Model cyborg("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
+    Model cyborg(ApplicationPath + "Models/nanosuit/nanosuit.obj");
     std::vector<glm::vec3> objectPositions;
     objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
     objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));

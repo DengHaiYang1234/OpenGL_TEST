@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 //使用MRT渲染
 
@@ -51,7 +52,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -92,15 +93,15 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/32.泛光/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/32.泛光/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "32.泛光/lightingVertexWS.glsl",ApplicationPath + "32.泛光/lightingFragmentWS.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/32.泛光/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/32.泛光/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "32.泛光/lightObjectVertex.glsl",ApplicationPath + "32.泛光/lightObjectFragment.glsl");
     
-    ShaderProgram hdrShader("/Users/denghaiyang/OpenGL_TEST/32.泛光/hdrVertex.glsl","/Users/denghaiyang/OpenGL_TEST/32.泛光/hdrFragment.glsl");
+    ShaderProgram hdrShader(ApplicationPath + "32.泛光/hdrVertex.glsl",ApplicationPath + "32.泛光/hdrFragment.glsl");
     
-    ShaderProgram blurShader("/Users/denghaiyang/OpenGL_TEST/32.泛光/blurVertex.glsl","/Users/denghaiyang/OpenGL_TEST/32.泛光/blurFragment.glsl");
+    ShaderProgram blurShader(ApplicationPath + "32.泛光/blurVertex.glsl",ApplicationPath + "32.泛光/blurFragment.glsl");
     
-    unsigned int woodTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wood.png");
+    unsigned int woodTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "wood.png");
     
     unsigned int HDR_FBO;
     glGenFramebuffers(1,&HDR_FBO);

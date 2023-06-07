@@ -11,6 +11,7 @@
 //#import "Shader.hpp"
 #import "Model.hpp"
 #include <GLFW/glfw3.h>
+#import "CommonUtilities.hpp"
 
 /*
  
@@ -99,7 +100,7 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(1);
     
-    ShaderProgram ourShader("/Users/denghaiyang/OpenGL_TEST/3.着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/3.着色器/fragment.glsl");
+    ShaderProgram ourShader(ApplicationPath + "3.着色器/vertex.glsl",ApplicationPath + "3.着色器/fragment.glsl");
 
     //线框模式
 //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

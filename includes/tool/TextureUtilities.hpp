@@ -17,14 +17,14 @@
 
 using namespace std;
 
-class Texture
+class TextureUtilities
 {
 public:
     unsigned int id;
     string type;
     string path;
-    unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
-    unsigned int TextureLoad(const char *path);
+    unsigned int LoadTextureFromDirectory(const char *path, const string &directory, bool gamma = false);
+    unsigned int LoadTextureFromPath(string path);
     unsigned int LoadCubeMap(vector<string> faces);
     void SetFlipVertically(bool isFlipVert);
 };

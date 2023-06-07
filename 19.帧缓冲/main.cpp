@@ -14,7 +14,8 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -80,9 +81,9 @@ int main()
     
     // build and compile shaders
     // -------------------------
-    ShaderProgram sceneShader("/Users/denghaiyang/OpenGL_TEST/19.帧缓冲/vertex.glsl", "/Users/denghaiyang/OpenGL_TEST/19.帧缓冲/fragment.glsl");
+    ShaderProgram sceneShader(ApplicationPath + "19.帧缓冲/vertex.glsl", ApplicationPath + "19.帧缓冲/fragment.glsl");
     
-    ShaderProgram fboShader("/Users/denghaiyang/OpenGL_TEST/19.帧缓冲/FBO_vertex.glsl", "/Users/denghaiyang/OpenGL_TEST/19.帧缓冲/FBO_fragment.glsl");
+    ShaderProgram fboShader(ApplicationPath + "19.帧缓冲/FBO_vertex.glsl", ApplicationPath + "19.帧缓冲/FBO_fragment.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -189,12 +190,12 @@ int main()
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     
-    Texture textureLoader;
+    TextureUtilities textureLoader;
     // load textures
     // -------------
-    unsigned int cubeTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    unsigned int floorTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wall.jpeg");
-    unsigned int transparentTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/blending_transparent_window.png");
+    unsigned int cubeTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "container2.png");
+    unsigned int floorTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "wall.jpeg");
+    unsigned int transparentTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "blending_transparent_window.png");
     
     // transparent window locations
     // --------------------------------

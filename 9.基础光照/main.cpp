@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
+#import "CommonUtilities.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -203,15 +204,15 @@ int main(int argc, const char * argv[]) {
     glEnableVertexAttribArray(0);
     
     //相机空间的光照实现
-//    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexVS.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentVS.glsl");
+//    ShaderProgram lightShader(ApplicationPath + "9.基础光照/vertexVS.glsl",ApplicationPath + "9.基础光照/fragmentVS.glsl");
     
     //世界空间的光照实现
-//    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentWS.glsl");
+//    ShaderProgram lightShader(ApplicationPath + "9.基础光照/vertexWS.glsl",ApplicationPath + "9.基础光照/fragmentWS.glsl");
     
     //顶点实现的光照计算
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/vertexGouraud.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/fragmentGouraud.glsl");
+    ShaderProgram lightShader(ApplicationPath + "9.基础光照/vertexGouraud.glsl",ApplicationPath + "9.基础光照/fragmentGouraud.glsl");
     
-    ShaderProgram lampShader("/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampVertex.glsl","/Users/denghaiyang/OpenGL_TEST/9.基础光照/lampFragment.glsl");
+    ShaderProgram lampShader(ApplicationPath + "9.基础光照/lampVertex.glsl",ApplicationPath + "9.基础光照/lampFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

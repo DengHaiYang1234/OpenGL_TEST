@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 float floorVertices[] = {
     // positions          // texture Coords (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). this will cause the floor texture to repeat)
@@ -141,9 +142,9 @@ int main(int argc, const char * argv[]) {
     glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6 * sizeof(float),(void*)(3 * sizeof(float)));
     
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "26.Blinn-Phong/lightingVertexWS.glsl",ApplicationPath + "26.Blinn-Phong/lightingFragmentWS.glsl");
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/26.Blinn-Phong/lightFragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "26.Blinn-Phong/lightVertex.glsl",ApplicationPath + "26.Blinn-Phong/lightFragment.glsl");
             
     //开启深度测试
     glEnable(GL_DEPTH_TEST);

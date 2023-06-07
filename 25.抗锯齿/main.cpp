@@ -14,8 +14,9 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -88,9 +89,9 @@ int main()
     // build and compile shaders
     // -------------------------
     //
-    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/25.抗锯齿/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/25.抗锯齿/fragment.glsl");
+    ShaderProgram useShader(ApplicationPath + "25.抗锯齿/vertex.glsl",ApplicationPath + "25.抗锯齿/fragment.glsl");
     
-    ShaderProgram screenShader("/Users/denghaiyang/OpenGL_TEST/25.抗锯齿/screenVertex.glsl","/Users/denghaiyang/OpenGL_TEST/25.抗锯齿/screenFragment.glsl");
+    ShaderProgram screenShader(ApplicationPath + "25.抗锯齿/screenVertex.glsl",ApplicationPath + "25.抗锯齿/screenFragment.glsl");
     
     
     // set up vertex data (and buffer(s)) and configure vertex attributes

@@ -6,7 +6,7 @@
 //
 
 
-#include "Texture.hpp"
+#include "TextureUtilities.hpp"
 
 /*
  TMD,这里有坑，如果让这两个东西定义在.hpp文件中，一直会报duplicate symbols for architecture x86_64 错误。
@@ -14,7 +14,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #import "stb_image.h"
 
-unsigned int Texture::TextureFromFile(const char *path, const string &directory, bool gamma)
+unsigned int TextureUtilities::LoadTextureFromDirectory(const char *path, const string &directory, bool gamma)
 {
     string filename = string(path);
     filename = directory + '/' + filename;
@@ -58,14 +58,14 @@ unsigned int Texture::TextureFromFile(const char *path, const string &directory,
     return textureID;
 }
 
-
-unsigned int Texture::TextureLoad(const char *path)
+unsigned int TextureUtilities::LoadTextureFromPath(string path)
 {
+    char* p = const_cast<char*>(path.c_str());
     unsigned int textureID;
     glGenTextures(1, &textureID);
     
     int width, height, nrComponents;
-    unsigned char *data = stbi_load(path, &width, &height, &nrComponents, 0);
+    unsigned char *data = stbi_load(p, &width, &height, &nrComponents, 0);
     if (data)
     {
         GLenum format;
@@ -97,12 +97,13 @@ unsigned int Texture::TextureLoad(const char *path)
 }
 
 
-void Texture::SetFlipVertically(bool isFlipVert)
+
+void TextureUtilities::SetFlipVertically(bool isFlipVert)
 {
     stbi_set_flip_vertically_on_load(true);
 }
 
-unsigned int Texture::LoadCubeMap(vector<string> faces)
+unsigned int TextureUtilities::LoadCubeMap(vector<string> faces)
 {
     unsigned int textureID;
     glGenTextures(1,&textureID);

@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -49,7 +50,7 @@ glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -84,13 +85,13 @@ int main(int argc, const char * argv[]) {
     //设置视口大小
     glViewport(0, 0, screenWidth, screenHeight);
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/30.视差贴图/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/30.视差贴图/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "30.视差贴图/lightingVertexWS.glsl",ApplicationPath + "30.视差贴图/lightingFragmentWS.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/30.视差贴图/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/30.视差贴图/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "30.视差贴图/lightObjectVertex.glsl",ApplicationPath + "30.视差贴图/lightObjectFragment.glsl");
     
-    unsigned int bricksTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/bricks2.jpeg");
-    unsigned int bricksNormalTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/bricks2_normal.jpeg");
-    unsigned int bricksDispTex = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/bricks2_disp.jpeg");
+    unsigned int bricksTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "bricks2.jpeg");
+    unsigned int bricksNormalTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "bricks2_normal.jpeg");
+    unsigned int bricksDispTex = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "bricks2_disp.jpeg");
 
     //开启深度测试
     glEnable(GL_DEPTH_TEST);

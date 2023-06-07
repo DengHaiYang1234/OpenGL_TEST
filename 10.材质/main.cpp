@@ -13,9 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#import "CommonUtilities.hpp"
 
 /*
  
@@ -204,10 +202,10 @@ int main(int argc, const char * argv[]) {
     
     
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/10.材质/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/10.材质/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "10.材质/lightingVertexWS.glsl",ApplicationPath + "10.材质/lightingFragmentWS.glsl");
     
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/10.材质/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/10.材质/lightFragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "10.材质/lightVertex.glsl",ApplicationPath + "10.材质/lightFragment.glsl");
     
     //线框模式
     //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

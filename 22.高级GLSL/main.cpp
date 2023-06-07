@@ -14,7 +14,8 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -84,13 +85,13 @@ int main()
     
     // build and compile shaders
     // -------------------------
-    ShaderProgram redShader("/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/redVertex.glsl","/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/redFragment.glsl");
+    ShaderProgram redShader(ApplicationPath + "22.高级GLSL/redVertex.glsl",ApplicationPath + "22.高级GLSL/redFragment.glsl");
     
-    ShaderProgram blueShader("/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/blueVertex.glsl","/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/blueFragment.glsl");
+    ShaderProgram blueShader(ApplicationPath + "22.高级GLSL/blueVertex.glsl",ApplicationPath + "22.高级GLSL/blueFragment.glsl");
     
-    ShaderProgram yellowShader("/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/yellowVertex.glsl","/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/yellowFragment.glsl");
+    ShaderProgram yellowShader(ApplicationPath + "22.高级GLSL/yellowVertex.glsl",ApplicationPath + "22.高级GLSL/yellowFragment.glsl");
     
-    ShaderProgram greenShader("/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/greenVertex.glsl","/Users/denghaiyang/OpenGL_TEST/22.高级GLSL/greenFragment.glsl");
+    ShaderProgram greenShader(ApplicationPath + "22.高级GLSL/greenVertex.glsl",ApplicationPath + "22.高级GLSL/greenFragment.glsl");
     
     
     
@@ -144,12 +145,12 @@ int main()
     
     vector<string> skyBoxFaces =
     {
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/right.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/left.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/top.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/bottom.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/front.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/back.jpg"
+        ApplicationTexturePath + "skybox/right.jpg",
+        ApplicationTexturePath + "skybox/left.jpg",
+        ApplicationTexturePath + "skybox/top.jpg",
+        ApplicationTexturePath + "skybox/bottom.jpg",
+        ApplicationTexturePath + "skybox/front.jpg",
+        ApplicationTexturePath + "skybox/back.jpg"
     };
     
     /*
@@ -227,7 +228,7 @@ int main()
     glBufferSubData(GL_UNIFORM_BUFFER,0,sizeof(glm::mat4),glm::value_ptr(projection));
     glBindBuffer(GL_UNIFORM_BUFFER,0);
     
-    Texture textureLoader;
+    TextureUtilities textureLoader;
     
     // render loop
     // -----------

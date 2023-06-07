@@ -14,8 +14,9 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -84,9 +85,9 @@ int main()
     // build and compile shaders
     // -------------------------
     //
-    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/geometry.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/fragment.glsl");
+    ShaderProgram useShader(ApplicationPath + "23.几何着色器/vertex.glsl",ApplicationPath + "23.几何着色器/geometry.glsl",ApplicationPath + "23.几何着色器/fragment.glsl");
     
-//    ShaderProgram useShader("/Users/denghaiyang/OpenGL_TEST/23.几何着色器/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/23.几何着色器/fragment.glsl");
+//    ShaderProgram useShader(ApplicationPath + "23.几何着色器/vertex.glsl",ApplicationPath + "23.几何着色器/fragment.glsl");
    
     float points[] = {
             -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // 左上

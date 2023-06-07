@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 #include <vector>
 
@@ -63,6 +64,7 @@ public:
     // returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
+//        std::cout<<"Position:"<<Position.x<<","<<Position.y<<","<<Position.z<<",Front:"<<Front.x<<","<<Front.y<<","<<Front.z<<std::endl;
         return glm::lookAt(Position, Position + Front, Up);
     }
     

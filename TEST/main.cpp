@@ -15,7 +15,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -52,7 +53,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 
 
@@ -87,7 +88,7 @@ int main(int argc, const char * argv[]) {
     //设置视口大小
     glViewport(0, 0, screenWidth, screenHeight);
     
-    ShaderProgram pbrShader("/Users/denghaiyang/OpenGL_TEST/TEST/default.vs","/Users/denghaiyang/OpenGL_TEST/TEST/default.fs");
+    ShaderProgram pbrShader(ApplicationPath + "TEST/default.vs",ApplicationPath + "TEST/default.fs");
     
     GLfloat vertices[] = {
         // 位置               // 颜色

@@ -13,7 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 /*
  
@@ -205,26 +206,26 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(0);
     
-    
+
     //世界空间的光照实现
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "11.光照贴图/lightingVertexWS.glsl",ApplicationPath + "11.光照贴图/lightingFragmentWS.glsl");
     
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/11.光照贴图/lightFragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "11.光照贴图/lightVertex.glsl",ApplicationPath +  "11.光照贴图/lightFragment.glsl");
         
     //光的位置
     glm::vec3 lightPos(1.2f, 0.5f, 2.0f);
     
-    Texture texture;
+    TextureUtilities texture;
     
     texture.SetFlipVertically(true);
     
     
     unsigned int diffuseTex,specularTex,emissionTex;
     
-    diffuseTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    specularTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/lighting_maps_specular_color.png");
-    emissionTex = texture.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/matrix.jpeg");
+    diffuseTex = texture.LoadTextureFromPath(ApplicationTexturePath + "container2.png");
+    specularTex = texture.LoadTextureFromPath(ApplicationTexturePath + "lighting_maps_specular_color.png");
+    emissionTex = texture.LoadTextureFromPath(ApplicationTexturePath + "matrix.jpeg");
         
     //开启深度测试
     glEnable(GL_DEPTH_TEST);

@@ -14,8 +14,10 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
+
 
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
@@ -88,9 +90,9 @@ int main()
     
     // build and compile shaders
     // -------------------------
-    ShaderProgram shader("/Users/denghaiyang/OpenGL_TEST/20.立方体贴图/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/20.立方体贴图/fragment.glsl");
+    ShaderProgram shader(ApplicationPath + "20.立方体贴图/vertex.glsl",ApplicationPath + "20.立方体贴图/fragment.glsl");
     
-    ShaderProgram skyBoxShader("/Users/denghaiyang/OpenGL_TEST/20.立方体贴图/skyBoxVertex.glsl","/Users/denghaiyang/OpenGL_TEST/20.立方体贴图/skyBoxFragment.glsl");
+    ShaderProgram skyBoxShader(ApplicationPath + "20.立方体贴图/skyBoxVertex.glsl",ApplicationPath + "20.立方体贴图/skyBoxFragment.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -188,12 +190,12 @@ int main()
     
     vector<string> skyBoxFaces =
     {
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/right.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/left.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/top.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/bottom.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/front.jpg",
-        "/Users/denghaiyang/OpenGL_TEST/Textures/skybox/back.jpg"
+        ApplicationTexturePath + "skybox/right.jpg",
+        ApplicationTexturePath + "skybox/left.jpg",
+        ApplicationTexturePath + "skybox/top.jpg",
+        ApplicationTexturePath + "skybox/bottom.jpg",
+        ApplicationTexturePath + "skybox/front.jpg",
+        ApplicationTexturePath + "skybox/back.jpg"
     };
     
     // cube VAO
@@ -248,7 +250,7 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glBindVertexArray(0);
     
-    Texture textureLoader;
+    TextureUtilities textureLoader;
     
     // load textures
     // -------------
@@ -264,8 +266,8 @@ int main()
     
     // load models
     // -----------
-//    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
-    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/rock/rock.obj");
+//    Model ourModel(ApplicationPath + "Models/nanosuit/nanosuit.obj");
+    Model ourModel(ApplicationPath + "Models/rock/rock.obj");
     
     // render loop
     // -----------

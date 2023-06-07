@@ -14,8 +14,9 @@
 #include <random>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window,int width,int height);
 void processInput(GLFWwindow *window);
@@ -51,7 +52,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float deltaTime = 0.0f;//当前帧与上一帧的时间差
 float lastFrame = 0.0f;//上一帧的时间
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
 int main(int argc, const char * argv[]) {
     // glfw: initialize and configure
@@ -90,19 +91,19 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
-    ShaderProgram gBUfferShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/gBufferVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/gBufferFragment.glsl");
+    ShaderProgram gBUfferShader(ApplicationPath + "34.环境光遮蔽SSAO/gBufferVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/gBufferFragment.glsl");
         
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/lightingVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/lightingFragment.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "34.环境光遮蔽SSAO/lightingVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/lightingFragment.glsl");
     
-    ShaderProgram lightObjectShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/lightObjectVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/lightObjectFragment.glsl");
+    ShaderProgram lightObjectShader(ApplicationPath + "34.环境光遮蔽SSAO/lightObjectVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/lightObjectFragment.glsl");
     
-    ShaderProgram previewShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/previewVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/previewFragment.glsl");
+    ShaderProgram previewShader(ApplicationPath + "34.环境光遮蔽SSAO/previewVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/previewFragment.glsl");
     
-    ShaderProgram ssaoShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoFragment.glsl");
+    ShaderProgram ssaoShader(ApplicationPath + "34.环境光遮蔽SSAO/ssaoVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/ssaoFragment.glsl");
     
-    ShaderProgram ssaoBlurShader("/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoBlurVertex.glsl","/Users/denghaiyang/OpenGL_TEST/34.环境光遮蔽SSAO/ssaoBlurFragment.glsl");
+    ShaderProgram ssaoBlurShader(ApplicationPath + "34.环境光遮蔽SSAO/ssaoBlurVertex.glsl",ApplicationPath + "34.环境光遮蔽SSAO/ssaoBlurFragment.glsl");
     
-    Model backpack("/Users/denghaiyang/OpenGL_TEST/Models/backpack/backpack.obj");
+    Model backpack(ApplicationPath + "Models/backpack/backpack.obj");
     
     std::vector<glm::vec3> objectPositions;
     objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));

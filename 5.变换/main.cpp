@@ -12,9 +12,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#import "CommonUtilities.hpp"
+#import "TextureUtilities.hpp"
 
 /*
 
@@ -119,68 +118,21 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(2);
     
-    ShaderProgram ourShader("/Users/denghaiyang/OpenGL_TEST/5.变换/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/5.变换/fragment.glsl");
+    ShaderProgram ourShader(ApplicationPath + "5.变换/vertex.glsl",ApplicationPath + "5.变换/fragment.glsl");
 
     //线框模式
 //    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
     
+    TextureUtilities textureUtilities;
+    
     //图像加载时翻转y轴
-    stbi_set_flip_vertically_on_load(true);
+    textureUtilities.SetFlipVertically(true);
     
     unsigned int texture,texture1;
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&texture);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,texture);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    //宽度、高度和颜色通道的个数
-    int width,height,nrChannels;
-    unsigned char *data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/container.jpeg", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载container纹理失败]" << std::endl;
-    }
-    
-    stbi_image_free(data);
-    
-    //用来生成纹理的数量  存储纹理索引的,指向的是个纹理数组
-    glGenTextures(1,&texture1);
-    //绑定纹理索引，让之后任何的纹理指令都可以配置当前绑定的纹理
-    glBindTexture(GL_TEXTURE_2D,texture1);
-    
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texture = textureUtilities.LoadTextureFromPath(ApplicationTexturePath + "container.jpeg");
+    texture1 = textureUtilities.LoadTextureFromPath(ApplicationTexturePath + "awesomeface.png");
     
     
-    data = stbi_load("/Users/denghaiyang/OpenGL_TEST/Textures/awesomeface.png", &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        //绑定的纹理对象就会被附加上纹理图像
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "===> [加载wall纹理失败]" << std::endl;
-    }
-    
-    
-    stbi_image_free(data);
     
     
     //激活这个程序对象

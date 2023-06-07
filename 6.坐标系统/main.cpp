@@ -12,7 +12,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
@@ -179,12 +180,12 @@ int main(int argc, const char * argv[]) {
     //以顶点属性位置值作为参数，启用顶点属性
     glEnableVertexAttribArray(2);
     
-    ShaderProgram ourShader("/Users/denghaiyang/OpenGL_TEST/6.坐标系统/vertex.glsl","/Users/denghaiyang/OpenGL_TEST/6.坐标系统/fragment.glsl");
+    ShaderProgram ourShader(ApplicationPath + "6.坐标系统/vertex.glsl",ApplicationPath + "6.坐标系统/fragment.glsl");
 
-    Texture textureLoader;
+    TextureUtilities textureLoader;
     
-    unsigned int texture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container.jpeg");
-    unsigned int texture1 = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/awesomeface.png");
+    unsigned int texture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "container.jpeg");
+    unsigned int texture1 = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "awesomeface.png");
 
     
     

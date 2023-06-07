@@ -10,6 +10,7 @@
 #import "Shader.hpp"
 #import "Model.hpp"
 #import "Camera.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -79,7 +80,7 @@ int main()
     }
     
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-    Texture texture;
+    TextureUtilities texture;
     texture.SetFlipVertically(true);
     
     // configure global opengl state
@@ -89,14 +90,14 @@ int main()
     // build and compile shaders
     // -------------------------
     
-    ShaderProgram lightingShader("/Users/denghaiyang/OpenGL_TEST/14.模型/lightingVertexWS.glsl","/Users/denghaiyang/OpenGL_TEST/14.模型/lightingFragmentWS.glsl");
+    ShaderProgram lightingShader(ApplicationPath + "14.模型/lightingVertexWS.glsl",ApplicationPath + "14.模型/lightingFragmentWS.glsl");
     
-    ShaderProgram lightShader("/Users/denghaiyang/OpenGL_TEST/14.模型/lightVertex.glsl","/Users/denghaiyang/OpenGL_TEST/14.模型/lightFragment.glsl");
+    ShaderProgram lightShader(ApplicationPath + "14.模型/lightVertex.glsl",ApplicationPath + "14.模型/lightFragment.glsl");
     
     
     // load models
     // -----------
-    Model ourModel("/Users/denghaiyang/OpenGL_TEST/Models/nanosuit/nanosuit.obj");
+    Model ourModel(ApplicationPath + "Models/nanosuit/nanosuit.obj");
     
     
     Mesh lightMesh = creatLightMesh();

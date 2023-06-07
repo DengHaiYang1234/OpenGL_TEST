@@ -14,7 +14,8 @@
 #include <map>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
+#import "CommonUtilities.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -86,7 +87,7 @@ int main()
 
     // build and compile shaders
     // -------------------------
-    ShaderProgram shader("/Users/denghaiyang/OpenGL_TEST/17.混合/vertex.glsl", "/Users/denghaiyang/OpenGL_TEST/17.混合/fragment.glsl");
+    ShaderProgram shader(ApplicationPath + "17.混合/vertex.glsl", ApplicationPath + "17.混合/fragment.glsl");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -189,12 +190,12 @@ int main()
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glBindVertexArray(0);
 
-    Texture textureLoader;
+    TextureUtilities textureLoader;
     // load textures
     // -------------
-    unsigned int cubeTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/container2.png");
-    unsigned int floorTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/wall.jpeg");
-    unsigned int transparentTexture = textureLoader.TextureLoad("/Users/denghaiyang/OpenGL_TEST/Textures/blending_transparent_window.png");
+    unsigned int cubeTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "container2.png");
+    unsigned int floorTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "wall.jpeg");
+    unsigned int transparentTexture = textureLoader.LoadTextureFromPath(ApplicationTexturePath + "blending_transparent_window.png");
 
     // transparent window locations
     // --------------------------------

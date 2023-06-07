@@ -18,8 +18,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #import "Shader.hpp"
 #import "Camera.hpp"
-#import "Texture.hpp"
+#import "TextureUtilities.hpp"
 #import "Model.hpp"
+#import "CommonUtilities.hpp"
 #include "Render.cpp"
 
 using namespace std;
@@ -30,13 +31,13 @@ void renderDefaultTriangle(int width, int height);
 void renderMVPTriangle(int width, int height);
 void renderTexture(int width, int height);
 
-Texture textureLoader;
+TextureUtilities textureLoader;
 
-const char *filename = "/Users/denghaiyang/OpenGL_TEST/Textures/softRenderOutput.bmp";
+string filename;
 
 int main()
 {
-
+    filename = ApplicationPath + "Textures/softRenderOutput.bmp";
     int windowRenderBufferWith = 800;
     int windowRenderBufferHeight = 600;
 
@@ -77,7 +78,7 @@ int main()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     //加载opengl顶点和片段着色器
-    ShaderProgram ourShader("/Users/denghaiyang/OpenGL_TEST/SoftRender/vertex.glsl", "/Users/denghaiyang/OpenGL_TEST/SoftRender/fragment.glsl");
+    ShaderProgram ourShader(ApplicationPath + "SoftRender/vertex.glsl", ApplicationPath + "SoftRender/fragment.glsl");
 
     float vertices[] =
         {
@@ -130,7 +131,7 @@ int main()
     glBindVertexArray(0);
 
     //生成纹理指针
-    unsigned int tex = textureLoader.TextureLoad(filename);
+    unsigned int tex = textureLoader.LoadTextureFromPath(filename);
     
     ourShader.use();
     ourShader.set_uniform("tex", 0);
@@ -219,7 +220,7 @@ void renderDefaultTriangle(int width, int height)
 
     render.SetRenderState(false, true,false);
     render.DrawPrimitiveDX();
-    render.SaveFile(filename);
+    render.SaveFile(const_cast<char*>(filename.c_str()));
 }
 
 void renderMVPTriangle(int width, int height)
@@ -275,7 +276,7 @@ void renderMVPTriangle(int width, int height)
     vs_input[2] = vertex[5];
     render.DrawPrimitiveOpengl();
 
-    render.SaveFile(filename);
+    render.SaveFile(const_cast<char*>(filename.c_str()));
 }
 
 void renderTexture(int width, int height)
@@ -343,5 +344,5 @@ void renderTexture(int width, int height)
     vs_input[2] = vertex[0];
     render.DrawPrimitiveDX();
 
-    render.SaveFile(filename);
+    render.SaveFile(const_cast<char*>(filename.c_str()));
 }
